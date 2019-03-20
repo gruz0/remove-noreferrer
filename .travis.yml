@@ -1,0 +1,20 @@
+sudo: false
+language: php
+
+notifications:
+  on_success: never
+  on_failure: change
+
+php:
+  - nightly
+  - 5.6
+  - 5.5
+  - 5.4
+
+before_script:
+  - git clone https://github.com/squizlabs/PHP_CodeSniffer.git phpcs
+  - git clone -b master https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git rulesets/wpcs
+  - git clone -b master https://github.com/PHPCompatibility/PHPCompatibility.git rulesets/PHPCompatibility
+
+script:
+  - make lint
