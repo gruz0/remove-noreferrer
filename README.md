@@ -9,8 +9,8 @@
 | <img src="assets/screenshots/screenshot-1.png" alt="Before installation" /> |
 
 | After installation |
-| --- | --- |
-| <img src="assets/screenshots/screenshot-2.png" alt="After installation" />
+| --- |
+| <img src="assets/screenshots/screenshot-2.png" alt="After installation" /> |
 
 ## Contributing
 
