@@ -1,4 +1,4 @@
-.PHONY: help dockerize shell install_linters lint
+.PHONY: help dockerize shell install_linters lint release
 
 help:
 	@echo 'Available targets:'
@@ -6,6 +6,7 @@ help:
 	@echo '  make shell'
 	@echo '  make install_linters'
 	@echo '  make lint'
+	@echo '  make release'
 
 dockerize:
 	docker-compose down
@@ -19,3 +20,6 @@ install_linters:
 
 lint:
 	bin/lint.sh
+
+release:
+	bin/release.sh
