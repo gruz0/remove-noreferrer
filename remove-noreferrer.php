@@ -14,7 +14,7 @@ Version: 1.0.0
  * @param string $content Content.
  * @return string
  */
-function gruz0_remove_referrer( $content ) {
+function gruz0_remove_noreferrer( $content ) {
 	// @todo: Add options where filter will be applied (single post, single page, index page)
 	if ( ! is_single() ) {
 		return $content;
@@ -26,5 +26,5 @@ function gruz0_remove_referrer( $content ) {
 
 	return preg_replace_callback( '/rel="([^\"]+)"/i', $replace, $content );
 }
-add_filter( 'the_content', 'gruz0_remove_referrer', 999 );
+add_filter( 'the_content', 'gruz0_remove_noreferrer', 999 );
 
