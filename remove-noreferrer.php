@@ -3,7 +3,7 @@
 Plugin Name: Remove noreferrer
 Description: This plugin removes rel="noreferrer" from post's links on the frontend
 Author: Alexander Kadyrov
-Author URI: http://gruz0.ru/
+Author URI: https://github.com/gruz0
 Text Domain: remove-noreferrer
 Version: 1.0.0
 */
