@@ -3,8 +3,8 @@ Contributors: gruz0
 Donate link: https://www.paypal.me/gruz0
 Tags: post, noreferrer
 Requires at least: 4.9
-Tested up to: 5.1.1
-Stable tag: 1.0.0
+Tested up to: 5.2
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ This plugin removes rel="noreferrer" from post's links on the frontend.
 
 = Docs & Support =
 
-You can find more detailed information about plugin on [GitHub](https://github.com/gruz0/remove-noreferrer).
+This plugin is an open source project and we would love you to help us make it better. If you want a new feature will be implemented in this plugin, you can open a [Github Issue](https://github.com/gruz0/remove-noreferrer/issues/new). If you don't have a GitHub Account you can send me email to [support@gruz0.ru](mailto:support@gruz0.ru). You can find more detailed information about plugin on [GitHub](https://github.com/gruz0/remove-noreferrer).
 
 == Installation ==
 

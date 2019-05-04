@@ -5,7 +5,7 @@ Description: This plugin removes rel="noreferrer" from post's links on the front
 Author: Alexander Kadyrov
 Author URI: https://github.com/gruz0
 Text Domain: remove-noreferrer
-Version: 1.0.0
+Version: 1.0.1
 */
 
 /**
