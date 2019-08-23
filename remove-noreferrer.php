@@ -27,7 +27,7 @@ function gruz0_remove_noreferrer( $content ) {
 	}
 
 	$replace = function( $matches ) {
-		return sprintf( 'rel="%s"', preg_replace( '/noreferrer\s*/i', '', $matches[1] ) );
+		return sprintf( 'rel="%s"', trim( preg_replace( '/noreferrer\s*/i', '', $matches[1] ) ) );
 	};
 
 	return preg_replace_callback( '/rel="([^\"]+)"/i', $replace, $content );
