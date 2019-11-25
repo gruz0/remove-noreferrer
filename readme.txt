@@ -10,9 +10,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-This plugin removes rel="noreferrer" from post's links on the frontend.
-
-It works only on single posts and doesn't work on index page. I think it needs to be updated as soon as possible. Write me a message to [support@gruz0.ru](mailto:support@gruz0.ru) what do you think about it, please.
+This plugin automatically removes `noreferrer` from the links in Posts, Pages and Home Page.
 
 = Docs & Support =
 
