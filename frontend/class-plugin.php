@@ -65,7 +65,7 @@ class Plugin {
 	 * @access private
 	 */
 	private function load_options() {
-		$this->_options = get_option( 'remove_noreferrer', $this->_admin->get_default_options() );
+		$this->_options = get_option( GRN_OPTION_KEY, $this->_admin->get_default_options() );
 	}
 
 	/**

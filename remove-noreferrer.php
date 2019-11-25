@@ -10,6 +10,13 @@ Version: 1.1.1
 
 namespace Remove_Noreferrer;
 
+/**
+ * Plugin's option key
+ *
+ * @since 1.1.1
+ */
+define( 'GRN_OPTION_KEY', 'remove_noreferrer' );
+
 use Remove_Noreferrer\Admin\Plugin as Admin;
 use Remove_Noreferrer\Frontend\Plugin as Frontend;
 
