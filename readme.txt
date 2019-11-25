@@ -28,6 +28,14 @@ This plugin is an open source project and we would love you to help us make it b
 1. Before installation
 2. After installation
 
+== Changelog ==
+
+= 1.1.0 =
+
+* Added plugin's options page
+* Added possibility to remove `noreferrer` from Home and static Pages
+* Removed extra spaces from `rel` attribute
+
 == Donations ===
 
 [PayPal](https://paypal.me/gruz0)
