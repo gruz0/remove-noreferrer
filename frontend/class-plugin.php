@@ -27,6 +27,15 @@ class Plugin {
 	private $_admin = null;
 
 	/**
+	 * Plugin's options
+	 *
+	 * @since 1.1.1
+	 * @access private
+	 * @var array $_options
+	 */
+	private $_options = array();
+
+	/**
 	 * Constructor
 	 *
 	 * @since 1.1.0
@@ -45,7 +54,18 @@ class Plugin {
 	 * @access public
 	 */
 	public function init() {
+		$this->load_options();
 		$this->add_hooks();
+	}
+
+	/**
+	 * Load options
+	 *
+	 * @since 1.1.1
+	 * @access private
+	 */
+	private function load_options() {
+		$this->_options = get_option( 'remove_noreferrer', $this->_admin->get_default_options() );
 	}
 
 	/**
@@ -88,12 +108,24 @@ class Plugin {
 	 * @return bool
 	 */
 	private function is_current_page_allowed() {
-		$options                      = get_option( 'remove_noreferrer', array( $this->_admin, 'get_default_options' ) );
-		$where_should_the_plugin_work = $options['where_should_the_plugin_work'];
+		$where_should_the_plugin_work = $this->get_option( 'where_should_the_plugin_work' );
 
 		return $this->is_single_processable( $where_should_the_plugin_work )
 			|| $this->is_page_processable( $where_should_the_plugin_work )
 			|| $this->is_posts_page_processable( $where_should_the_plugin_work );
+	}
+
+	/**
+	 * Return option's value by key
+	 *
+	 * @since 1.1.1
+	 * @access private
+	 *
+	 * @param string $key Key.
+	 * @return mixed
+	 */
+	private function get_option( $key ) {
+		return $this->_options[ $key ];
 	}
 
 	/**
