@@ -86,6 +86,35 @@ class Options_Page {
 				<p class="submit">
 					<input type="submit" value="<?php _e( 'Save', 'remove-noreferrer' ); ?>" class="button button-primary button-large">
 				</p>
+
+				<hr />
+
+				<h3>Useful links</h3>
+				<p>
+					<ul>
+						<li>
+							* <a href="https://wordpress.org/support/plugin/remove-noreferrer/reviews/" target="_blank" rel="noopener nofollow">
+								Let me know what you think about the plugin with a review
+							</a>
+						</li>
+						<li>
+							* <a href="https://paypal.me/gruz0" target="_blank" rel="noopener nofollow">
+								Support plugin's development with a donation
+							</a>
+						</li>
+						<li>
+							* <a href="mailto:alexander@kadyrov.dev" target="_blank">
+								Write me a message
+							</a>
+						</li>
+						<li>
+							* <a href="https://www.facebook.com/gruz0" target="_blank">My Facebook</a>
+						</li>
+						<li>
+							* <a href="https://twitter.com/gruz0" target="_blank">My Twitter</a>
+						</li>
+					</ul>
+				</p>
 			</form>
 		</div>
 		<?php
