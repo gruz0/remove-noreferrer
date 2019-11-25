@@ -104,7 +104,7 @@ class Plugin {
 			wp_die( __( 'Invalid nonce', 'remove-noreferrer' ) );
 		}
 
-		update_option( 'remove_noreferrer', $this->validate_options() );
+		update_option( GRN_OPTION_KEY, $this->validate_options() );
 
 		wp_redirect( admin_url( self::GRN_PARENT_SLUG . '?page=' . self::GRN_MENU_SLUG ), 303 );
 		exit;
@@ -117,7 +117,7 @@ class Plugin {
 	 * @access public
 	 */
 	public function render_options_page() {
-		$options = get_option( 'remove_noreferrer', $this->get_default_options() );
+		$options = get_option( GRN_OPTION_KEY, $this->get_default_options() );
 		$this->options_page( $options )->render();
 	}
 
