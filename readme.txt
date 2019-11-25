@@ -3,7 +3,7 @@ Contributors: gruz0
 Donate link: https://www.paypal.me/gruz0
 Tags: post, noreferrer
 Requires at least: 4.9
-Tested up to: 5.2
+Tested up to: 5.3
 Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -27,6 +27,14 @@ This plugin is an open source project and we would love you to help us make it b
 == Screenshots ==
 1. Before installation
 2. After installation
+
+== Changelog ==
+
+= 1.1.0 =
+
+* Added plugin's options page
+* Added possibility to remove `noreferrer` from Home and static Pages
+* Removed extra spaces from `rel` attribute
 
 == Donations ===
 
