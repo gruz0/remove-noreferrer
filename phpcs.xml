@@ -5,6 +5,8 @@
 	<config name="installed_paths" value="rulesets/wpcs,rulesets/PHPCompatibility" />
 	<config name="testVersion" value="5.4-" />
 
+	<exclude-pattern>*/**/index.php</exclude-pattern>
+	<exclude-pattern>*/inc/autoloader.php</exclude-pattern>
 	<exclude-pattern>*/phpcs/*</exclude-pattern>
 	<exclude-pattern>*/rulesets/*</exclude-pattern>
 	<exclude-pattern>*/svn/*</exclude-pattern>
