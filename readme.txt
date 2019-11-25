@@ -28,6 +28,11 @@ This plugin is an open source project and we would love you to help us make it b
 
 == Changelog ==
 
+= 1.1.1 =
+
+* [Fix incorrect usage of loading default options](https://github.com/gruz0/remove-noreferrer/pull/15)
+* [Extract plugin's option key to const](https://github.com/gruz0/remove-noreferrer/pull/17)
+
 = 1.1.0 =
 
 * Added plugin's options page
