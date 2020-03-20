@@ -1,20 +1,20 @@
-=== Remove noreferrer from post's links on the frontend ===
+=== Remove noreferrer from the links in posts, pages, comments ===
 Contributors: gruz0
 Donate link: https://www.paypal.me/gruz0
 Tags: post, noreferrer
 Requires at least: 4.9
-Tested up to: 5.3
-Stable tag: 1.1.1
+Tested up to: 5.4
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-This plugin automatically removes `noreferrer` from the links in Posts, Pages and Home Page.
+This plugin automatically removes `noreferrer` from the links in Posts, Pages, Home Page and comments.
 
 = Docs & Support =
 
-This plugin is an open source project and we would love you to help us make it better. If you want a new feature will be implemented in this plugin, you can open a [Github Issue](https://github.com/gruz0/remove-noreferrer/issues/new). If you don't have a GitHub Account you can send me email to [support@gruz0.ru](mailto:support@gruz0.ru). You can find more detailed information about plugin on [GitHub](https://github.com/gruz0/remove-noreferrer).
+This plugin is an open source project and we would love you to help us make it better. If you want a new feature will be implemented in this plugin, you can open a [Github Issue](https://github.com/gruz0/remove-noreferrer/issues/new). If you don't have a GitHub Account you can send me email to [alexander@kadyrov.dev](mailto:alexander@kadyrov.dev). You can find more detailed information about plugin on [GitHub](https://github.com/gruz0/remove-noreferrer).
 
 == Installation ==
 
@@ -27,6 +27,10 @@ This plugin is an open source project and we would love you to help us make it b
 2. After installation
 
 == Changelog ==
+
+= 1.2.0 =
+
+* [Remove links from comments](https://github.com/gruz0/remove-noreferrer/issues/21)
 
 = 1.1.1 =
 

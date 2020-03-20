@@ -76,6 +76,11 @@ class Options_Page {
 											'page',
 											__( 'Single Page', 'remove-noreferrer' )
 										);
+
+										$this->render_where_should_the_plugin_work(
+											'comments',
+											__( 'Comments', 'remove-noreferrer' )
+										);
 									?>
 								</fieldset>
 							</td>

@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Remove noreferrer
-Description: This plugin removes rel="noreferrer" from post's links on the frontend
+Description: This plugin removes rel="noreferrer" from links in Posts, Pages, Home Page and comments
 Author: Alexander Kadyrov
 Author URI: https://github.com/gruz0
 Text Domain: remove-noreferrer
-Version: 1.1.1
+Version: 1.2.0
 */
 
 namespace Remove_Noreferrer;
