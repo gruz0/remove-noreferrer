@@ -30,7 +30,7 @@ This plugin is an open source project and we would love you to help us make it b
 
 = 1.2.0 =
 
-* [Remove links from comments](https://github.com/gruz0/remove-noreferrer/issues/21)
+* [Remove links from comments](https://github.com/gruz0/remove-noreferrer/pull/22)
 
 = 1.1.1 =
 
