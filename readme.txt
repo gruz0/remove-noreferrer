@@ -45,4 +45,4 @@ This plugin is an open source project and we would love you to help us make it b
 
 == Donations ===
 
-[PayPal](https://paypal.me/gruz0)
+[Buy Me a Coffee](https://www.buymeacoffee.com/gruz0)
