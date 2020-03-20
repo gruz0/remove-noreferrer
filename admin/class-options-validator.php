@@ -47,7 +47,7 @@ class Options_Validator {
 		}
 
 		$result         = array();
-		$allowed_values = array( 'post', 'posts_page', 'page' );
+		$allowed_values = array( 'post', 'posts_page', 'page', 'comments' );
 
 		foreach ( $allowed_values as $value ) {
 			if ( ! in_array( $value, $input['where_should_the_plugin_work'], true ) ) {

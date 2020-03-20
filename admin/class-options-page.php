@@ -76,6 +76,11 @@ class Options_Page {
 											'page',
 											__( 'Single Page', 'remove-noreferrer' )
 										);
+
+										$this->render_where_should_the_plugin_work(
+											'comments',
+											__( 'Comments', 'remove-noreferrer' )
+										);
 									?>
 								</fieldset>
 							</td>
@@ -90,6 +95,7 @@ class Options_Page {
 				<hr />
 
 				<h3>Useful links</h3>
+
 				<p>
 					<ul>
 						<li>
@@ -98,14 +104,12 @@ class Options_Page {
 							</a>
 						</li>
 						<li>
-							* <a href="https://paypal.me/gruz0" target="_blank" rel="noopener nofollow">
-								Support plugin's development with a donation
+							* <a href="mailto:alexander@kadyrov.dev" target="_blank">
+								Send me email
 							</a>
 						</li>
 						<li>
-							* <a href="mailto:alexander@kadyrov.dev" target="_blank">
-								Write me a message
-							</a>
+							* <a href="https://t.me/gruz0" target="_blank">My Telegram</a>
 						</li>
 						<li>
 							* <a href="https://www.facebook.com/gruz0" target="_blank">My Facebook</a>
@@ -114,6 +118,10 @@ class Options_Page {
 							* <a href="https://twitter.com/gruz0" target="_blank">My Twitter</a>
 						</li>
 					</ul>
+				</p>
+
+				<p>
+					<style>.bmc-button img{height: 34px !important;width: 35px !important;margin-bottom: 1px !important;box-shadow: none !important;border: none !important;vertical-align: middle !important;}.bmc-button{padding: 7px 10px 7px 10px !important;line-height: 35px !important;height:51px !important;min-width:217px !important;text-decoration: none !important;display:inline-flex !important;color:#ffffff !important;background-color:#FF813F !important;border-radius: 5px !important;border: 1px solid transparent !important;padding: 7px 10px 7px 10px !important;font-size: 28px !important;letter-spacing:0.6px !important;box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;margin: 0 auto !important;font-family:'Cookie', cursive !important;-webkit-box-sizing: border-box !important;box-sizing: border-box !important;-o-transition: 0.3s all linear !important;-webkit-transition: 0.3s all linear !important;-moz-transition: 0.3s all linear !important;-ms-transition: 0.3s all linear !important;transition: 0.3s all linear !important;}.bmc-button:hover, .bmc-button:active, .bmc-button:focus {-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;text-decoration: none !important;box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;opacity: 0.85 !important;color:#ffffff !important;}</style><link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet"><a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/gruz0"><img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="Buy me a coffee"><span style="margin-left:15px;font-size:28px !important;">Buy me a coffee</span></a>
 				</p>
 			</form>
 		</div>

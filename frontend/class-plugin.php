@@ -75,11 +75,12 @@ class Plugin {
 	 * @access private
 	 */
 	private function add_hooks() {
-		add_filter( 'the_content', array( & $this, 'remove_noreferrer' ), 999 );
+		add_filter( 'the_content', array( & $this, 'remove_noreferrer_from_content' ), 999 );
+		add_filter( 'comment_text', array( & $this, 'remove_noreferrer_from_comment' ), 20, 3 );
 	}
 
 	/**
-	 * Remove referrer from "rel" attribute
+	 * Remove referrer from posts, pages and home page
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -87,16 +88,31 @@ class Plugin {
 	 * @param string $content Content.
 	 * @return string
 	 */
-	public function remove_noreferrer( $content ) {
+	public function remove_noreferrer_from_content( $content ) {
 		if ( ! $this->is_current_page_allowed() ) {
 			return $content;
 		}
 
-		$replace = function( $matches ) {
-			return sprintf( 'rel="%s"', trim( preg_replace( '/noreferrer\s*/i', '', $matches[1] ) ) );
-		};
+		return $this->remove_noreferrer( $content );
+	}
 
-		return preg_replace_callback( '/rel="([^\"]+)"/i', $replace, $content );
+	/**
+	 * Remove referrer from comments' links
+	 *
+	 * @since 1.2.0
+	 * @access public
+	 *
+	 * @param string $content Content.
+	 * @param string $comment WP_Comment.
+	 * @param array  $args Args.
+	 * @return string
+	 */
+	public function remove_noreferrer_from_comment( $content, $comment, $args ) {
+		if ( ! $this->is_comments_processable( $this->get_option( 'where_should_the_plugin_work' ) ) ) {
+			return $content;
+		}
+
+		return $this->remove_noreferrer( $content );
 	}
 
 	/**
@@ -165,6 +181,36 @@ class Plugin {
 	 */
 	private function is_posts_page_processable( $options ) {
 		return is_home() && in_array( 'posts_page', $options, true );
+	}
+
+	/**
+	 * Checks if array contains `comments`
+	 *
+	 * @since 1.2.0
+	 * @access private
+	 *
+	 * @param array $options Options array.
+	 * @return bool
+	 */
+	private function is_comments_processable( $options ) {
+		return in_array( 'comments', $options, true );
+	}
+
+	/**
+	 * Remove noreferrer from the links
+	 *
+	 * @since 1.2.0
+	 * @access private
+	 *
+	 * @param string $content Content.
+	 * @return string
+	 */
+	private function remove_noreferrer( $content ) {
+		$replace = function( $matches ) {
+			return sprintf( 'rel="%s"', trim( preg_replace( '/noreferrer\s*/i', '', $matches[1] ) ) );
+		};
+
+		return preg_replace_callback( '/rel="([^\"]+)"/i', $replace, $content );
 	}
 }
 
