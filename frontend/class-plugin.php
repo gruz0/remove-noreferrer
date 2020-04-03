@@ -77,6 +77,7 @@ class Plugin {
 	private function add_hooks() {
 		add_filter( 'the_content', array( & $this, 'remove_noreferrer_from_content' ), 999 );
 		add_filter( 'comment_text', array( & $this, 'remove_noreferrer_from_comment' ), 20, 3 );
+		add_filter( 'widget_display_callback', array( & $this, 'remove_noreferrer_from_text_widget' ), 10, 3 );
 	}
 
 	/**
@@ -113,6 +114,36 @@ class Plugin {
 		}
 
 		return $this->remove_noreferrer( $content );
+	}
+
+	/**
+	 * Remove noreferrer from Text widget's content
+	 *
+	 * @since 1.3.0
+	 * @access public
+	 *
+	 * @param array     $instance The current widget instance's settings.
+	 * @param WP_Widget $widget_class The current widget instance.
+	 * @param array     $args An array of default widget arguments.
+	 * @return mixed
+	 */
+	public function remove_noreferrer_from_text_widget( $instance, $widget_class, $args ) {
+		$is_text_widget = is_a( $widget_class, 'WP_Widget_Text' );
+		$processable    = $this->is_widgets_processable( $this->get_option( 'where_should_the_plugin_work' ) );
+
+		if ( ( ! $is_text_widget ) || ( ! $processable ) ) {
+			return $instance;
+		}
+
+		ob_start();
+
+		$widget_class->widget( $args, $instance );
+
+		$result = $this->remove_noreferrer( ob_get_clean() );
+
+		echo $result;
+
+		return false;
 	}
 
 	/**
@@ -194,6 +225,19 @@ class Plugin {
 	 */
 	private function is_comments_processable( $options ) {
 		return in_array( 'comments', $options, true );
+	}
+
+	/**
+	 * Checks if array contains widgets' options
+	 *
+	 * @since 1.3.0
+	 * @access private
+	 *
+	 * @param array $options Options array.
+	 * @return bool
+	 */
+	private function is_widgets_processable( $options ) {
+		return in_array( 'text_widget', $options, true );
 	}
 
 	/**

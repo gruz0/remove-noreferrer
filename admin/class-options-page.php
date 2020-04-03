@@ -81,6 +81,11 @@ class Options_Page {
 											'comments',
 											__( 'Comments', 'remove-noreferrer' )
 										);
+
+										$this->render_where_should_the_plugin_work(
+											'text_widget',
+											__( 'Text Widget', 'remove-noreferrer' )
+										);
 									?>
 								</fieldset>
 							</td>
