@@ -81,7 +81,7 @@ class Plugin {
 	}
 
 	/**
-	 * Remove referrer from posts, pages and home page
+	 * Remove noreferrer from posts, pages and home page
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -98,7 +98,7 @@ class Plugin {
 	}
 
 	/**
-	 * Remove referrer from comments' links
+	 * Remove noreferrer from comments' links
 	 *
 	 * @since 1.2.0
 	 * @access public
