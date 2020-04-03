@@ -145,7 +145,13 @@ class Plugin {
 	 */
 	public function get_default_options() {
 		return array(
-			'where_should_the_plugin_work' => array( 'post', 'posts_page', 'page', 'comments' ),
+			'where_should_the_plugin_work' => array(
+				'post',
+				'posts_page',
+				'page',
+				'comments',
+				'text_widget',
+			),
 		);
 	}
 
