@@ -103,17 +103,17 @@ class Plugin {
 	 * @since 1.2.0
 	 * @access public
 	 *
-	 * @param string $content Content.
-	 * @param string $comment WP_Comment.
-	 * @param array  $args Args.
+	 * @param string          $comment_text Text of the current comment.
+	 * @param WP_Comment|null $comment The comment object.
+	 * @param array           $args An array of arguments.
 	 * @return string
 	 */
-	public function remove_noreferrer_from_comment( $content, $comment, $args ) {
+	public function remove_noreferrer_from_comment( $comment_text, $comment, $args ) {
 		if ( ! $this->is_comments_processable( $this->get_option( 'where_should_the_plugin_work' ) ) ) {
-			return $content;
+			return $comment_text;
 		}
 
-		return $this->remove_noreferrer( $content );
+		return $this->remove_noreferrer( $comment_text );
 	}
 
 	/**
