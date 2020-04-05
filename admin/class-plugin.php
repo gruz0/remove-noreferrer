@@ -151,6 +151,7 @@ class Plugin {
 				'page',
 				'comments',
 				'text_widget',
+				'custom_html_widget',
 			),
 		);
 	}

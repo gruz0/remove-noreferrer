@@ -78,6 +78,7 @@ class Plugin {
 		add_filter( 'the_content', array( & $this, 'remove_noreferrer_from_content' ), 999 );
 		add_filter( 'comment_text', array( & $this, 'remove_noreferrer_from_comment' ), 20, 3 );
 		add_filter( 'widget_display_callback', array( & $this, 'remove_noreferrer_from_text_widget' ), 10, 3 );
+		add_filter( 'widget_custom_html_content', array( & $this, 'remove_noreferrer_from_custom_html_widget' ), 10, 3 );
 	}
 
 	/**
@@ -128,10 +129,16 @@ class Plugin {
 	 * @return mixed
 	 */
 	public function remove_noreferrer_from_text_widget( $instance, $widget_class, $args ) {
-		$is_text_widget = is_a( $widget_class, 'WP_Widget_Text' );
-		$processable    = $this->is_widgets_processable( $this->get_option( 'where_should_the_plugin_work' ) );
+		if ( ! is_a( $widget_class, 'WP_Widget_Text' ) ) {
+			return $instance;
+		}
 
-		if ( ( ! $is_text_widget ) || ( ! $processable ) ) {
+		$processable = $this->is_widgets_processable(
+			$this->get_option( 'where_should_the_plugin_work' ),
+			'text_widget'
+		);
+
+		if ( ! $processable ) {
 			return $instance;
 		}
 
@@ -144,6 +151,26 @@ class Plugin {
 		echo $result;
 
 		return false;
+	}
+
+	/**
+	 * Remove noreferrer from Custom HTML widget's content
+	 *
+	 * @since 1.3.0
+	 * @access public
+	 *
+	 * @param string                $content The widget content.
+	 * @param array                 $instance Array of settings for the current widget.
+	 * @param WP_Widget_Custom_HTML $widget_class Current Custom HTML widget instance.
+	 * @return mixed
+	 */
+	public function remove_noreferrer_from_custom_html_widget( $content, $instance, $widget_class ) {
+		$processable = $this->is_widgets_processable(
+			$this->get_option( 'where_should_the_plugin_work' ),
+			'custom_html_widget'
+		);
+
+		return $processable ? $this->remove_noreferrer( $content ) : $content;
 	}
 
 	/**
@@ -233,11 +260,12 @@ class Plugin {
 	 * @since 1.3.0
 	 * @access private
 	 *
-	 * @param array $options Options array.
+	 * @param array  $options Options array.
+	 * @param string $key Option key.
 	 * @return bool
 	 */
-	private function is_widgets_processable( $options ) {
-		return in_array( 'text_widget', $options, true );
+	private function is_widgets_processable( $options, $key ) {
+		return in_array( $key, $options, true );
 	}
 
 	/**
