@@ -86,6 +86,11 @@ class Options_Page {
 											'text_widget',
 											__( 'Text Widget', 'remove-noreferrer' )
 										);
+
+										$this->render_where_should_the_plugin_work(
+											'custom_html_widget',
+											__( 'Custom HTML Widget', 'remove-noreferrer' )
+										);
 									?>
 								</fieldset>
 							</td>

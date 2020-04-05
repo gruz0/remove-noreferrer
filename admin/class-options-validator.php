@@ -53,6 +53,7 @@ class Options_Validator {
 			'page',
 			'comments',
 			'text_widget',
+			'custom_html_widget',
 		);
 
 		foreach ( $allowed_values as $value ) {
