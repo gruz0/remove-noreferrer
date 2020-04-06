@@ -27,6 +27,15 @@ class Plugin {
 	private $_admin = null;
 
 	/**
+	 * Remove_Noreferrer\Frontend\Links_Processor instance
+	 *
+	 * @since 1.3.0
+	 * @access private
+	 * @var Remove_Noreferrer\Frontend\Links_Processor $_links_processor
+	 */
+	private $_links_processor = null;
+
+	/**
 	 * Plugin's options
 	 *
 	 * @since 1.1.1
@@ -41,10 +50,12 @@ class Plugin {
 	 * @since 1.1.0
 	 * @access public
 	 *
-	 * @param Remove_Noreferrer\Admin\Plugin $admin Admin class.
+	 * @param Remove_Noreferrer\Admin\Plugin             $admin Admin class.
+	 * @param Remove_Noreferrer\Frontend\Links_Processor $links_processor Links_Processor class.
 	 */
-	public function __construct( $admin ) {
-		$this->_admin = $admin;
+	public function __construct( $admin, $links_processor ) {
+		$this->_admin           = $admin;
+		$this->_links_processor = $links_processor;
 	}
 
 	/**
@@ -278,11 +289,7 @@ class Plugin {
 	 * @return string
 	 */
 	private function remove_noreferrer( $content ) {
-		$replace = function( $matches ) {
-			return sprintf( 'rel="%s"', trim( preg_replace( '/noreferrer\s*/i', '', $matches[1] ) ) );
-		};
-
-		return preg_replace_callback( '/rel="([^\"]+)"/i', $replace, $content );
+		return $this->_links_processor->call( $content );
 	}
 }
 
