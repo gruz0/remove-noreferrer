@@ -19,6 +19,7 @@ define( 'GRN_OPTION_KEY', 'remove_noreferrer' );
 
 use Remove_Noreferrer\Admin\Plugin as Admin;
 use Remove_Noreferrer\Frontend\Plugin as Frontend;
+use Remove_Noreferrer\Frontend\Links_Processor as Links_Processor;
 
 if ( ! defined( 'WPINC' ) ) {
 	die();
@@ -39,7 +40,9 @@ function remove_noreferrer() {
 	if ( is_admin() ) {
 		$admin->init();
 	} else {
-		$frontend = new Frontend( $admin );
+		$links_processor = new Links_Processor();
+
+		$frontend = new Frontend( $admin, $links_processor );
 		$frontend->init();
 	}
 }
