@@ -26,7 +26,7 @@ function remove_noreferrer_autoload( $class_name ) {
 		}
 
 		// Now build a path to the file using mapping to the file location.
-		$filepath  = trailingslashit( dirname( dirname( __FILE__ ) ) . $namespace );
+		$filepath  = dirname( dirname( __FILE__ ) ) . $namespace . '/';
 		$filepath .= $file_name;
 	}
 

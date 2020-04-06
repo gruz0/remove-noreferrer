@@ -13,4 +13,13 @@ echo -e "${red}[PHP Style][Error]: Fix the issues and commit again${NC}"
 exit 1
 fi
 
+echo -e "${green}[PHPUnit][Info]: Checking tests${NC}"
+
+make test
+
+if [ $? -ne 0 ]; then
+echo -e "${red}[PHPUnit][Error]: Fix the issues and commit again${NC}"
+exit 1
+fi
+
 exit 0

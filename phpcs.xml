@@ -3,7 +3,7 @@
 	<description>A custom set of rules to check for a WPized WordPress project</description>
 
 	<config name="installed_paths" value="rulesets/wpcs,rulesets/PHPCompatibility" />
-	<config name="testVersion" value="5.4-" />
+	<config name="testVersion" value="7.0-" />
 
 	<exclude-pattern>*/**/index.php</exclude-pattern>
 	<exclude-pattern>*/inc/autoloader.php</exclude-pattern>
@@ -11,12 +11,25 @@
 	<exclude-pattern>*/rulesets/*</exclude-pattern>
 	<exclude-pattern>*/svn/*</exclude-pattern>
 	<exclude-pattern>*/assets/*</exclude-pattern>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
 
 	<rule ref="WordPress-Core" />
 
 	<rule ref="WordPress-Docs">
 		<exclude name="Squiz.Commenting.FileComment.WrongStyle" />
 		<exclude name="Squiz.Commenting.BlockComment.NoEmptyLineBefore" />
+	</rule>
+
+	<rule ref="Squiz.Commenting.FileComment.Missing">
+		<exclude-pattern>*/tests/*</exclude-pattern>
+	</rule>
+
+	<rule ref="Squiz.Commenting.ClassComment.Missing">
+		<exclude-pattern>*/tests/*</exclude-pattern>
+	</rule>
+
+	<rule ref="PHPCompatibility.FunctionDeclarations.NewReturnTypeDeclarations.voidFound">
+		<exclude-pattern>*/tests/*</exclude-pattern>
 	</rule>
 
 	<rule ref="PHPCompatibility" />

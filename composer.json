@@ -1,0 +1,21 @@
+{
+	"name": "gruz0/remove-noreferrer",
+	"keywords": [ "phpunit" ],
+	"require": {
+		"php": ">=7.0.0"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^7.0 || ^8.0 || ^9.0"
+	},
+	"scripts": {
+		"test": [
+			"vendor/bin/phpunit --no-coverage"
+		],
+		"coverage": [
+			"vendor/bin/phpunit"
+		],
+		"coverage-local": [
+			"vendor/bin/phpunit --coverage-html ./build/coverage-html"
+		]
+	}
+}

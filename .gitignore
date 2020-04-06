@@ -1,9 +1,8 @@
-*.log
-*~
 .data
-.DS_Store
-Desktop.ini
-Thumbs.db
 phpcs
 rulesets
 svn
+vendor/
+composer.lock
+!build/.keep
+build/
