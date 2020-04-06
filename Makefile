@@ -21,5 +21,8 @@ install_linters:
 lint:
 	bin/lint.sh
 
+test:
+	composer test
+
 release:
 	bin/release.sh
