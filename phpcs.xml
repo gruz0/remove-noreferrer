@@ -12,6 +12,7 @@
 	<exclude-pattern>*/svn/*</exclude-pattern>
 	<exclude-pattern>*/assets/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/wp-tests/*</exclude-pattern>
 
 	<rule ref="WordPress-Core" />
 
@@ -28,9 +29,9 @@
 		<exclude-pattern>*/tests/*</exclude-pattern>
 	</rule>
 
+	<rule ref="PHPCompatibility" />
+
 	<rule ref="PHPCompatibility.FunctionDeclarations.NewReturnTypeDeclarations.voidFound">
 		<exclude-pattern>*/tests/*</exclude-pattern>
 	</rule>
-
-	<rule ref="PHPCompatibility" />
 </ruleset>

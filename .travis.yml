@@ -1,22 +1,35 @@
-sudo: false
+os: linux
+dist: xenial
 language: php
 
 notifications:
   on_success: never
   on_failure: change
 
+services:
+  - mysql
+
 php:
-  - nightly
+  - 7.4
   - 7.3
   - 7.2
   - 7.1
-  - 7.0
-  - 5.6
+
+env:
+  global:
+    - TRAVIS_CI_WP_DIRECTORY=/tmp/wordpress WP_PROJECT_TYPE=plugin WP_MULTISITE=0 WP_TEST_URL=http://localhost:12000 WP_TEST_USER=test WP_TEST_USER_PASS=test
+  jobs:
+    - WP_VERSION=latest
+    - WP_VERSION=5.4
+    - WP_VERSION=5.3
+    - WP_VERSION=5.2
+    - WP_VERSION=5.1
 
 before_script:
-  - git clone https://github.com/squizlabs/PHP_CodeSniffer.git phpcs
-  - git clone -b master https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git rulesets/wpcs
-  - git clone -b master https://github.com/PHPCompatibility/PHPCompatibility.git rulesets/PHPCompatibility
+  - make install_linters
+  - git clone https://github.com/Seravo/wordpress-test-template wp-tests
+  - bash wp-tests/bin/install-wp-tests.sh test root '' localhost $WP_VERSION
 
 script:
   - make lint
+  - make test
