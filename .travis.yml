@@ -18,21 +18,16 @@ php:
 env:
   jobs:
     - WP_VERSION=latest
-    # - WP_VERSION=5.4
-    # - WP_VERSION=5.3
-    # - WP_VERSION=5.2
-    # - WP_VERSION=5.1
-
-cache:
-  directories:
-    - /home/travis/build/gruz0/remove-noreferrer/phpcs
-    - /home/travis/build/gruz0/remove-noreferrer/rulesets
-    - /home/travis/build/gruz0/remove-noreferrer/vendor
+    - WP_VERSION=5.4
+    - WP_VERSION=5.3
+    - WP_VERSION=5.2
+    - WP_VERSION=5.1
 
 before_script:
   - make dockerize_test_database
+  - make wait_for_database
   - make install_linters
-  - make install_wordpress_dev
+  - make install_wordpress_dev WP_VERSION=$WP_VERSION
 
 after_script:
   - make shutdown_test_database
