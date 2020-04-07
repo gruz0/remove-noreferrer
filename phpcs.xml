@@ -13,6 +13,7 @@
 	<exclude-pattern>*/assets/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
 	<exclude-pattern>*/wp-tests/*</exclude-pattern>
+	<exclude-pattern>*/tests/wordpress-dev/*</exclude-pattern>
 
 	<rule ref="WordPress-Core" />
 

@@ -17,33 +17,23 @@ namespace Remove_Noreferrer;
  */
 define( 'GRN_OPTION_KEY', 'remove_noreferrer' );
 
-use Remove_Noreferrer\Admin\Plugin as Admin;
-use Remove_Noreferrer\Frontend\Plugin as Frontend;
-use Remove_Noreferrer\Frontend\Links_Processor as Links_Processor;
-
 if ( ! defined( 'WPINC' ) ) {
 	die();
 }
 
 require_once( plugin_dir_path( __FILE__ ) . '/inc/autoloader.php' );
 
-add_action( 'plugins_loaded', 'Remove_Noreferrer\remove_noreferrer' );
+add_action( 'plugins_loaded', 'Remove_Noreferrer\run_plugin' );
 
 /**
- * Load plugin depends on current WordPress's area
+ * Runs plugin
  *
- * @since 1.1.0
+ * @since 1.3.0
+ *
+ * @return Remove_Noreferrer\Plugin
  */
-function remove_noreferrer() {
-	$admin = new Admin();
+function run_plugin() {
+	$plugin = new Plugin();
 
-	if ( is_admin() ) {
-		$admin->init();
-	} else {
-		$links_processor = new Links_Processor();
-
-		$frontend = new Frontend( $admin, $links_processor );
-		$frontend->init();
-	}
+	return $plugin->run();
 }
-

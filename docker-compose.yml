@@ -21,6 +21,11 @@ services:
       - "8000:80"
     volumes:
       - ".:/var/www/html/wp-content/plugins/remove-noreferrer/"
+      - "/var/www/html/wp-content/plugins/remove-noreferrer/build"
+      - "/var/www/html/wp-content/plugins/remove-noreferrer/rulesets"
+      - "/var/www/html/wp-content/plugins/remove-noreferrer/svn"
+      - "/var/www/html/wp-content/plugins/remove-noreferrer/tests"
+      - "/var/www/html/wp-content/plugins/remove-noreferrer/vendor"
     restart: always
     environment:
       WORDPRESS_DB_HOST: db:3306
