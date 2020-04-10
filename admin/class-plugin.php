@@ -54,6 +54,28 @@ class Plugin {
 	const GRN_NONCE_ACTION = 'remove_noreferrer';
 
 	/**
+	 * Remove_Noreferrer\Core\Options instance
+	 *
+	 * @since 1.3.0
+	 * @access private
+	 * @static
+	 * @var Remove_Noreferrer\Core\Options $_options
+	 */
+	private static $_options;
+
+	/**
+	 * Constructor
+	 *
+	 * @since 1.3.0
+	 * @access public
+	 *
+	 * @param Remove_Noreferrer\Core\Options $options Options class.
+	 */
+	public function __construct( $options ) {
+		self::$_options = $options;
+	}
+
+	/**
 	 * Add options page under the Settings menu
 	 *
 	 * @since 1.1.0
@@ -85,7 +107,9 @@ class Plugin {
 			wp_die( __( 'Invalid nonce', 'remove-noreferrer' ) );
 		}
 
-		update_option( GRN_OPTION_KEY, self::validate_options() );
+		$new_values = $_POST['remove_noreferrer'] ?? array();
+
+		update_option( GRN_OPTION_KEY, self::validate_options( $new_values ) );
 
 		wp_redirect( admin_url( self::GRN_PARENT_SLUG . '?page=' . self::GRN_MENU_SLUG ), 303 );
 		exit;
@@ -99,21 +123,7 @@ class Plugin {
 	 * @static
 	 */
 	public static function render_options_page() {
-		$options = get_option( GRN_OPTION_KEY, self::get_default_options() );
-		self::options_page( $options )->render();
-	}
-
-	/**
-	 * Return plugin's default options if options are not found in the database
-	 *
-	 * @since 1.1.0
-	 * @access public
-	 * @static
-	 *
-	 * @return array
-	 */
-	public static function get_default_options() {
-		return array( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => GRN_ALLOWED_VALUES );
+		self::options_page( self::$_options->get_options() )->render();
 	}
 
 	/**
@@ -138,11 +148,11 @@ class Plugin {
 	 * @access private
 	 * @static
 	 *
+	 * @param mixed $new_values New values.
+	 *
 	 * @return array
 	 */
-	private static function validate_options() {
-		$new_values = $_POST['remove_noreferrer'] ?? array();
-
+	private static function validate_options( $new_values ) {
 		return self::options_validator()->call( $new_values );
 	}
 

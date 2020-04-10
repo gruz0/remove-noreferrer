@@ -20,6 +20,27 @@ use Remove_Noreferrer\Frontend\Links_Processor as Links_Processor;
  */
 class Plugin {
 	/**
+	 * Remove_Noreferrer\Core\Options instance
+	 *
+	 * @since 1.3.0
+	 * @access private
+	 * @var Remove_Noreferrer\Core\Options $_options
+	 */
+	private $_options;
+
+	/**
+	 * Constructor
+	 *
+	 * @since 1.3.0
+	 * @access public
+	 *
+	 * @param Remove_Noreferrer\Core\Options $options Options class.
+	 */
+	public function __construct( $options ) {
+		$this->_options = $options;
+	}
+
+	/**
 	 * Loads plugin depends on current WordPress's area
 	 *
 	 * @since 1.3.0
@@ -27,8 +48,10 @@ class Plugin {
 	 * @return Remove_Noreferrer\Core\Plugin
 	 */
 	public function run() {
-		if ( ! is_admin() ) {
-			new Frontend( new Admin(), new Links_Processor() );
+		if ( is_admin() ) {
+			new Admin( $this->_options );
+		} else {
+			new Frontend( $this->_options, new Links_Processor() );
 		}
 
 		return $this;

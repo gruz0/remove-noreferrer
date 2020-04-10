@@ -68,7 +68,8 @@ add_action( 'plugins_loaded', 'Remove_Noreferrer\run_plugin' );
  * @return Remove_Noreferrer\Core\Plugin
  */
 function run_plugin() {
-	$plugin = new \Remove_Noreferrer\Core\Plugin();
+	$options = new \Remove_Noreferrer\Core\Options();
+	$plugin  = new \Remove_Noreferrer\Core\Plugin( $options );
 
 	return $plugin->run();
 }

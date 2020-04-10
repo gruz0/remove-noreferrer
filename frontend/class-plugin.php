@@ -18,6 +18,16 @@ namespace Remove_Noreferrer\Frontend;
  */
 class Plugin {
 	/**
+	 * Remove_Noreferrer\Core\Options instance
+	 *
+	 * @since 1.1.1
+	 * @access private
+	 * @static
+	 * @var Remove_Noreferrer\Core\Options $_options
+	 */
+	private static $_options;
+
+	/**
 	 * Remove_Noreferrer\Frontend\Links_Processor instance
 	 *
 	 * @since 1.3.0
@@ -25,17 +35,7 @@ class Plugin {
 	 * @static
 	 * @var Remove_Noreferrer\Frontend\Links_Processor $_links_processor
 	 */
-	private static $_links_processor = null;
-
-	/**
-	 * Plugin's options
-	 *
-	 * @since 1.1.1
-	 * @access private
-	 * @static
-	 * @var array $_options
-	 */
-	private static $_options = array();
+	private static $_links_processor;
 
 	/**
 	 * Constructor
@@ -43,25 +43,12 @@ class Plugin {
 	 * @since 1.1.0
 	 * @access public
 	 *
-	 * @param Remove_Noreferrer\Admin\Plugin             $admin Admin class.
+	 * @param Remove_Noreferrer\Core\Options             $options Options class.
 	 * @param Remove_Noreferrer\Frontend\Links_Processor $links_processor Links_Processor class.
 	 */
-	public function __construct( $admin, $links_processor ) {
+	public function __construct( $options, $links_processor ) {
+		self::$_options         = $options;
 		self::$_links_processor = $links_processor;
-		self::load_options( $admin );
-	}
-
-	/**
-	 * Load options
-	 *
-	 * @since 1.1.1
-	 * @access private
-	 * @static
-	 *
-	 * @param Remove_Noreferrer\Admin\Plugin $admin Admin class.
-	 */
-	private static function load_options( $admin ) {
-		self::$_options = get_option( GRN_OPTION_KEY, $admin->get_default_options() );
 	}
 
 	/**
@@ -188,7 +175,7 @@ class Plugin {
 	 * @return mixed
 	 */
 	private static function get_option( $key ) {
-		return self::$_options[ $key ];
+		return self::$_options->get_option( $key );
 	}
 
 	/**
