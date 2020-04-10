@@ -27,15 +27,8 @@ class Plugin {
 	 * @return Remove_Noreferrer\Core\Plugin
 	 */
 	public function run() {
-		$admin = new Admin();
-
-		if ( is_admin() ) {
-			$admin->init();
-		} else {
-			$links_processor = new Links_Processor();
-
-			$frontend = new Frontend( $admin, $links_processor );
-			$frontend->init();
+		if ( ! is_admin() ) {
+			new Frontend( new Admin(), new Links_Processor() );
 		}
 
 		return $this;
