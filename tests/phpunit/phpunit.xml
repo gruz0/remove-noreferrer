@@ -6,6 +6,7 @@
 	convertNoticesToExceptions="true"
 	convertWarningsToExceptions="true"
 	beStrictAboutTestsThatDoNotTestAnything="false"
+	executionOrder="random"
 	>
 	<testsuites>
 		<testsuite name="default">
