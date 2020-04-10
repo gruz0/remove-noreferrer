@@ -10,6 +10,12 @@ Version: 1.2.0
 
 namespace Remove_Noreferrer;
 
+if ( ! defined( 'WPINC' ) ) {
+	die();
+}
+
+require_once( plugin_dir_path( __FILE__ ) . '/inc/autoloader.php' );
+
 /**
  * Plugin's option key
  *
@@ -41,12 +47,6 @@ define(
 	)
 );
 
-if ( ! defined( 'WPINC' ) ) {
-	die();
-}
-
-require_once( plugin_dir_path( __FILE__ ) . '/inc/autoloader.php' );
-
 add_action( 'plugins_loaded', 'Remove_Noreferrer\run_plugin' );
 
 /**
@@ -54,10 +54,10 @@ add_action( 'plugins_loaded', 'Remove_Noreferrer\run_plugin' );
  *
  * @since 1.3.0
  *
- * @return Remove_Noreferrer\Plugin
+ * @return Remove_Noreferrer\Core\Plugin
  */
 function run_plugin() {
-	$plugin = new Plugin();
+	$plugin = new \Remove_Noreferrer\Core\Plugin();
 
 	return $plugin->run();
 }

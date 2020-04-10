@@ -3,11 +3,11 @@
  * Core class
  *
  * @package Remove_Noreferrer
- * @subpackage Admin
+ * @subpackage Core
  * @since 1.3.0
  */
 
-namespace Remove_Noreferrer;
+namespace Remove_Noreferrer\Core;
 
 use Remove_Noreferrer\Admin\Plugin as Admin;
 use Remove_Noreferrer\Frontend\Plugin as Frontend;
@@ -24,7 +24,7 @@ class Plugin {
 	 *
 	 * @since 1.3.0
 	 *
-	 * @return Remove_Noreferrer\Plugin
+	 * @return Remove_Noreferrer\Core\Plugin
 	 */
 	public function run() {
 		$admin = new Admin();
