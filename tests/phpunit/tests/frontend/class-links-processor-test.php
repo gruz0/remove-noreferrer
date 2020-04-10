@@ -22,6 +22,8 @@ class Links_Processor_Test extends TestCase {
 	 * @return void
 	 */
 	protected function setUp(): void {
+		parent::setUp();
+
 		$this->_processor = new Links_Processor();
 	}
 

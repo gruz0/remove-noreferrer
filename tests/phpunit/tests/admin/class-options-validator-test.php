@@ -22,6 +22,8 @@ class Options_Validator_Test extends TestCase {
 	 * @return void
 	 */
 	protected function setUp(): void {
+		parent::setUp();
+
 		$this->_validator = new Options_Validator();
 	}
 

@@ -21,6 +21,8 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function setUp(): void {
+		parent::setUp();
+
 		$admin           = new Admin();
 		$links_processor = new Links_Processor();
 

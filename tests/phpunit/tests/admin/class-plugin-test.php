@@ -19,6 +19,8 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function setUp(): void {
+		parent::setUp();
+
 		$this->_plugin = new Plugin();
 	}
 }
