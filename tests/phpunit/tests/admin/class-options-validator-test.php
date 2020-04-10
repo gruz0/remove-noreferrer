@@ -28,8 +28,6 @@ class Options_Validator_Test extends TestCase {
 	}
 
 	/**
-	 * Test the Options_Validator::call() method.
-	 *
 	 * @dataProvider data_call
 	 *
 	 * @covers \Remove_Noreferrer\Admin\Options_Validator::call

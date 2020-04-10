@@ -28,8 +28,6 @@ class Links_Processor_Test extends TestCase {
 	}
 
 	/**
-	 * Test the Links_Processor::call() method.
-	 *
 	 * @dataProvider data_call
 	 *
 	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::call
