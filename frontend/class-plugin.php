@@ -43,10 +43,13 @@ class Plugin {
 	 * @since 1.1.0
 	 * @access public
 	 *
-	 * @param Remove_Noreferrer\Core\Options             $options Options class.
-	 * @param Remove_Noreferrer\Frontend\Links_Processor $links_processor Links_Processor class.
+	 * @param \Remove_Noreferrer\Core\Options             $options Options class.
+	 * @param \Remove_Noreferrer\Frontend\Links_Processor $links_processor Links_Processor class.
 	 */
-	public function __construct( $options, $links_processor ) {
+	public function __construct(
+		\Remove_Noreferrer\Core\Options $options,
+		\Remove_Noreferrer\Frontend\Links_Processor $links_processor
+	) {
 		self::$_options         = $options;
 		self::$_links_processor = $links_processor;
 	}
@@ -96,12 +99,12 @@ class Plugin {
 	 * @access public
 	 * @static
 	 *
-	 * @param array     $instance The current widget instance's settings.
-	 * @param WP_Widget $widget_class The current widget instance.
-	 * @param array     $args An array of default widget arguments.
+	 * @param array      $instance The current widget instance's settings.
+	 * @param \WP_Widget $widget_class The current widget instance.
+	 * @param array      $args An array of default widget arguments.
 	 * @return mixed
 	 */
-	public static function remove_noreferrer_from_text_widget( $instance, $widget_class, $args ) {
+	public static function remove_noreferrer_from_text_widget( $instance, \WP_Widget $widget_class, $args ) {
 		if ( ! is_a( $widget_class, 'WP_Widget_Text' ) ) {
 			return $instance;
 		}
@@ -133,12 +136,12 @@ class Plugin {
 	 * @access public
 	 * @static
 	 *
-	 * @param string                $content The widget content.
-	 * @param array                 $instance Array of settings for the current widget.
-	 * @param WP_Widget_Custom_HTML $widget_class Current Custom HTML widget instance.
+	 * @param string                 $content The widget content.
+	 * @param array                  $instance Array of settings for the current widget.
+	 * @param \WP_Widget_Custom_HTML $widget_class Current Custom HTML widget instance.
 	 * @return mixed
 	 */
-	public static function remove_noreferrer_from_custom_html_widget( $content, $instance, $widget_class ) {
+	public static function remove_noreferrer_from_custom_html_widget( $content, $instance, \WP_Widget_Custom_HTML $widget_class ) {
 		$processable = self::is_widgets_processable(
 			self::get_option( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ),
 			'custom_html_widget'

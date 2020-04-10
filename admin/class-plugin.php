@@ -69,9 +69,9 @@ class Plugin {
 	 * @since 1.3.0
 	 * @access public
 	 *
-	 * @param Remove_Noreferrer\Core\Options $options Options class.
+	 * @param \Remove_Noreferrer\Core\Options $options Options class.
 	 */
-	public function __construct( $options ) {
+	public function __construct( \Remove_Noreferrer\Core\Options $options ) {
 		self::$_options = $options;
 	}
 
