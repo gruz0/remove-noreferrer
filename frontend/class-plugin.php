@@ -121,7 +121,7 @@ class Plugin {
 	 * @return string
 	 */
 	public function remove_noreferrer_from_comment( $comment_text, $comment, $args ) {
-		if ( ! $this->is_comments_processable( $this->get_option( 'where_should_the_plugin_work' ) ) ) {
+		if ( ! $this->is_comments_processable( $this->get_option( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ) ) ) {
 			return $comment_text;
 		}
 
@@ -145,7 +145,7 @@ class Plugin {
 		}
 
 		$processable = $this->is_widgets_processable(
-			$this->get_option( 'where_should_the_plugin_work' ),
+			$this->get_option( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ),
 			'text_widget'
 		);
 
@@ -177,7 +177,7 @@ class Plugin {
 	 */
 	public function remove_noreferrer_from_custom_html_widget( $content, $instance, $widget_class ) {
 		$processable = $this->is_widgets_processable(
-			$this->get_option( 'where_should_the_plugin_work' ),
+			$this->get_option( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ),
 			'custom_html_widget'
 		);
 
@@ -193,7 +193,7 @@ class Plugin {
 	 * @return bool
 	 */
 	private function is_current_page_allowed() {
-		$where_should_the_plugin_work = $this->get_option( 'where_should_the_plugin_work' );
+		$where_should_the_plugin_work = $this->get_option( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY );
 
 		return $this->is_single_processable( $where_should_the_plugin_work )
 			|| $this->is_page_processable( $where_should_the_plugin_work )

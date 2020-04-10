@@ -17,6 +17,30 @@ namespace Remove_Noreferrer;
  */
 define( 'GRN_OPTION_KEY', 'remove_noreferrer' );
 
+/**
+ * Plugin's option key stores `where_should_the_plugin_work` values
+ *
+ * @since 1.3.0
+ */
+define( 'GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY', 'where_should_the_plugin_work' );
+
+/**
+ * Allowed values
+ *
+ * @since 1.3.0
+ */
+define(
+	'GRN_ALLOWED_VALUES',
+	array(
+		'post',
+		'posts_page',
+		'page',
+		'comments',
+		'text_widget',
+		'custom_html_widget',
+	)
+);
+
 if ( ! defined( 'WPINC' ) ) {
 	die();
 }

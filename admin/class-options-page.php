@@ -62,32 +62,32 @@ class Options_Page {
 							<td>
 								<fieldset>
 									<?php
-										$this->render_where_should_the_plugin_work(
+										$this->render_checkbox(
 											'post',
 											__( 'Single Post', 'remove-noreferrer' )
 										);
 
-										$this->render_where_should_the_plugin_work(
+										$this->render_checkbox(
 											'posts_page',
 											__( 'Posts page (Home Page, etc.)', 'remove-noreferrer' )
 										);
 
-										$this->render_where_should_the_plugin_work(
+										$this->render_checkbox(
 											'page',
 											__( 'Single Page', 'remove-noreferrer' )
 										);
 
-										$this->render_where_should_the_plugin_work(
+										$this->render_checkbox(
 											'comments',
 											__( 'Comments', 'remove-noreferrer' )
 										);
 
-										$this->render_where_should_the_plugin_work(
+										$this->render_checkbox(
 											'text_widget',
 											__( 'Text Widget', 'remove-noreferrer' )
 										);
 
-										$this->render_where_should_the_plugin_work(
+										$this->render_checkbox(
 											'custom_html_widget',
 											__( 'Custom HTML Widget', 'remove-noreferrer' )
 										);
@@ -147,14 +147,19 @@ class Options_Page {
 	 * @param string $value Item's value.
 	 * @param string $label Checkbox's label.
 	 */
-	private function render_where_should_the_plugin_work( $value, $label ) {
+	private function render_checkbox( $value, $label ) {
 		?>
 			<label>
 				<input
 					type="checkbox"
-					name="remove_noreferrer[where_should_the_plugin_work][]"
+					name="remove_noreferrer[<?php echo GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY; ?>][]"
 					value="<?php echo esc_attr( $value ); ?>"
-					<?php checked( in_array( $value, $this->_options['where_should_the_plugin_work'], true ), true ); ?>
+					<?php
+						checked(
+							in_array( $value, $this->_options[ GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ], true ),
+							true
+						);
+					?>
 				/>
 				<?php echo esc_html( $label ); ?>
 			</label>

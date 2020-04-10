@@ -22,13 +22,14 @@ class Options_Validator {
 	 *
 	 * @since 1.1.0
 	 * @access public
+	 * @static
 	 *
 	 * @param array $input Input values.
 	 * @return array
 	 */
-	public function validate( $input ) {
+	public static function call( $input ) {
 		return array(
-			'where_should_the_plugin_work' => $this->validate_where_should_the_plugin_work( $input ),
+			GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => self::validate_where_should_the_plugin_work( $input ),
 		);
 	}
 
@@ -37,35 +38,54 @@ class Options_Validator {
 	 *
 	 * @since 1.1.0
 	 * @access private
+	 * @static
 	 *
 	 * @param array $input Input values.
 	 * @return array
 	 */
-	private function validate_where_should_the_plugin_work( $input ) {
-		if ( empty( $input['where_should_the_plugin_work'] ) ) {
+	private static function validate_where_should_the_plugin_work( $input ) {
+		if ( ! self::is_input_valid( $input ) ) {
 			return array();
 		}
 
-		$result         = array();
-		$allowed_values = array(
-			'post',
-			'posts_page',
-			'page',
-			'comments',
-			'text_widget',
-			'custom_html_widget',
+		$result = array_unique(
+			array_filter(
+				array_map( 'trim', $input[ GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ] ),
+				function( $v ) {
+					return in_array( $v, GRN_ALLOWED_VALUES, true );
+				}
+			)
 		);
 
-		foreach ( $allowed_values as $value ) {
-			if ( ! in_array( $value, $input['where_should_the_plugin_work'], true ) ) {
-				continue;
-			}
+		sort( $result );
 
-			$result[] = $value;
+		return $result;
+	}
+
+	/**
+	 * Checks is input valid
+	 *
+	 * @since 1.3.0
+	 * @access private
+	 * @static
+	 *
+	 * @param array $input Input values.
+	 * @return bool
+	 */
+	private static function is_input_valid( $input ) {
+		if ( ! is_array( $input ) ) {
+			return false;
 		}
 
-		// @todo: Add array_unique
-		return $result;
+		if ( empty( $input[ GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ] ) ) {
+			return false;
+		}
+
+		if ( ! is_array( $input[ GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ] ) ) {
+			return false;
+		}
+
+		return true;
 	}
 }
 

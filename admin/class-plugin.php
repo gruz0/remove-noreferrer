@@ -144,16 +144,7 @@ class Plugin {
 	 * @return array
 	 */
 	public function get_default_options() {
-		return array(
-			'where_should_the_plugin_work' => array(
-				'post',
-				'posts_page',
-				'page',
-				'comments',
-				'text_widget',
-				'custom_html_widget',
-			),
-		);
+		return array( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => GRN_ALLOWED_VALUES );
 	}
 
 	/**
@@ -165,11 +156,9 @@ class Plugin {
 	 * @return array
 	 */
 	private function validate_options() {
-		if ( empty( $_POST['remove_noreferrer'] ) ) {
-			return $this->unset_options();
-		}
+		$new_values = $_POST['remove_noreferrer'] ?? array();
 
-		return $this->options_validator()->validate( (array) $_POST['remove_noreferrer'] );
+		return $this->options_validator()->call( $new_values );
 	}
 
 	/**
@@ -182,20 +171,6 @@ class Plugin {
 	 */
 	private function options_validator() {
 		return new Options_Validator();
-	}
-
-	/**
-	 * Return array with empty options
-	 *
-	 * @since 1.1.0
-	 * @access private
-	 *
-	 * @return array
-	 */
-	private function unset_options() {
-		return array(
-			'where_should_the_plugin_work' => array(),
-		);
 	}
 }
 

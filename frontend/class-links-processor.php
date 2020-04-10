@@ -22,6 +22,7 @@ class Links_Processor {
 	 *
 	 * @since 1.3.0
 	 * @access public
+	 * @static
 	 *
 	 * @param string $input Input.
 	 *
@@ -44,6 +45,7 @@ class Links_Processor {
 	 *
 	 * @since 1.3.0
 	 * @access private
+	 * @static
 	 *
 	 * @param string $input Input.
 	 *
@@ -58,6 +60,7 @@ class Links_Processor {
 	 *
 	 * @since 1.3.0
 	 * @access private
+	 * @static
 	 *
 	 * @param string $input Input.
 	 *
@@ -72,6 +75,7 @@ class Links_Processor {
 	 *
 	 * @since 1.3.0
 	 * @access private
+	 * @static
 	 *
 	 * @param string $input Input.
 	 *
@@ -103,6 +107,7 @@ class Links_Processor {
 	 *
 	 * @since 1.3.0
 	 * @access private
+	 * @static
 	 *
 	 * @param string $input Input.
 	 *
