@@ -41,6 +41,45 @@ class Plugin {
 	}
 
 	/**
+	 * Activates plugin
+	 *
+	 * @since 1.3.0
+	 * @access public
+	 * @static
+	 */
+	public static function activate() {
+		if ( ! current_user_can( 'activate_plugins' ) ) {
+			return;
+		}
+	}
+
+	/**
+	 * Deactivates plugin
+	 *
+	 * @since 1.3.0
+	 * @access public
+	 * @static
+	 */
+	public static function deactivate() {
+		if ( ! current_user_can( 'activate_plugins' ) ) {
+			return;
+		}
+	}
+
+	/**
+	 * Uninstalls plugin
+	 *
+	 * @since 1.3.0
+	 * @access public
+	 * @static
+	 */
+	public static function uninstall() {
+		if ( ! current_user_can( 'activate_plugins' ) ) {
+			return;
+		}
+	}
+
+	/**
 	 * Loads plugin depends on current WordPress's area
 	 *
 	 * @since 1.3.0

@@ -50,6 +50,10 @@ define(
 // Load plugin's core.
 add_action( 'plugins_loaded', 'Remove_Noreferrer\run_plugin' );
 
+register_activation_hook( __FILE__, array( 'Remove_Noreferrer\Core\Plugin', 'activate' ) );
+register_deactivation_hook( __FILE__, array( 'Remove_Noreferrer\Core\Plugin', 'deactivate' ) );
+register_uninstall_hook( __FILE__, array( 'Remove_Noreferrer\Core\Plugin', 'uninstall' ) );
+
 /**
  * Runs plugin
  *
