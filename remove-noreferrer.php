@@ -47,16 +47,6 @@ define(
 	)
 );
 
-// Admin part.
-add_action( 'admin_menu', array( 'Remove_Noreferrer\Admin\Plugin', 'add_menu' ) );
-add_action( 'admin_post_remove_noreferrer_update_options', array( 'Remove_Noreferrer\Admin\Plugin', 'update_options' ) );
-
-// Frontend part.
-add_filter( 'the_content', array( 'Remove_Noreferrer\Frontend\Plugin', 'remove_noreferrer_from_content' ), 999 );
-add_filter( 'comment_text', array( 'Remove_Noreferrer\Frontend\Plugin', 'remove_noreferrer_from_comment' ), 20, 3 );
-add_filter( 'widget_display_callback', array( 'Remove_Noreferrer\Frontend\Plugin', 'remove_noreferrer_from_text_widget' ), 10, 3 );
-add_filter( 'widget_custom_html_content', array( 'Remove_Noreferrer\Frontend\Plugin', 'remove_noreferrer_from_custom_html_widget' ), 10, 3 );
-
 // Load plugin's core.
 add_action( 'plugins_loaded', 'Remove_Noreferrer\run_plugin' );
 
@@ -65,7 +55,7 @@ add_action( 'plugins_loaded', 'Remove_Noreferrer\run_plugin' );
  *
  * @since 1.3.0
  *
- * @return Remove_Noreferrer\Core\Plugin
+ * @return Remove_Noreferrer\Admin\Plugin|Remove_Noreferrer\Frontend\Plugin
  */
 function run_plugin() {
 	$options = new \Remove_Noreferrer\Core\Options();

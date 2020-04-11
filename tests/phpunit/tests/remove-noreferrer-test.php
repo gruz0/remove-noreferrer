@@ -51,16 +51,32 @@ class Remove_Noreferrer_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * Test run_plugin() returns plugin's instance
-	 *
-	 * @covers \Remove_Noreferrer\run_plugin()
+	 * @covers \Remove_Noreferrer\Admin\Plugin
 	 *
 	 * @since 1.3.0
 	 * @access public
 	 *
 	 * @return void
 	 */
-	public function test_returns_valid_instance(): void {
-		$this->assertInstanceOf( 'Remove_Noreferrer\Core\Plugin', \Remove_Noreferrer\run_plugin() );
+	public function test_returns_admin_plugin_on_admin_part(): void {
+		global $current_screen;
+
+		set_current_screen( 'dashboard' );
+
+		$this->assertInstanceOf( 'Remove_Noreferrer\Admin\Plugin', \Remove_Noreferrer\run_plugin() );
+
+		$current_screen = null;
+	}
+
+	/**
+	 * @covers \Remove_Noreferrer\Frontend\Plugin
+	 *
+	 * @since 1.3.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_returns_frontend_plugin_on_frontend_part(): void {
+		$this->assertInstanceOf( 'Remove_Noreferrer\Frontend\Plugin', \Remove_Noreferrer\run_plugin() );
 	}
 }

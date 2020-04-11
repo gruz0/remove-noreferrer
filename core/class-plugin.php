@@ -24,7 +24,7 @@ class Plugin {
 	 *
 	 * @since 1.3.0
 	 * @access private
-	 * @var Remove_Noreferrer\Core\Options $_options
+	 * @var \Remove_Noreferrer\Core\Options $_options
 	 */
 	private $_options;
 
@@ -49,11 +49,11 @@ class Plugin {
 	 */
 	public function run() {
 		if ( is_admin() ) {
-			new Admin( $this->_options );
-		} else {
-			new Frontend( $this->_options, new Links_Processor() );
+			$plugin = new Admin( $this->_options );
+			return $plugin->run();
 		}
 
-		return $this;
+		$plugin = new Frontend( $this->_options, new Links_Processor() );
+		return $plugin->run();
 	}
 }
