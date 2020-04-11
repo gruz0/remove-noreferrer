@@ -16,11 +16,15 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * Prepares environment
 	 *
+	 * @since 1.3.0
+	 * @access public
+	 *
 	 * @return void
 	 */
 	public function setUp(): void {
-		parent::setUp();
+		$this->_plugin = new Plugin( new Options() );
 
-		$this->_plugin = new Plugin();
+		parent::setUp();
 	}
 }
+

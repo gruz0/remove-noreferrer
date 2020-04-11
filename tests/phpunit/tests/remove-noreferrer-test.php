@@ -5,6 +5,21 @@ namespace Remove_Noreferrer;
 
 class Remove_Noreferrer_Test extends \WP_UnitTestCase {
 	/**
+	 * Finishes tests
+	 *
+	 * @since 1.3.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function tearDown(): void {
+		unset( $GLOBALS['screen'] );
+		unset( $GLOBALS['current_screen'] );
+
+		parent::tearDown();
+	}
+
+	/**
 	 * Test plugin has GRN_OPTION_KEY constant
 	 *
 	 * @since 1.3.0
@@ -59,13 +74,9 @@ class Remove_Noreferrer_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_returns_admin_plugin_on_admin_part(): void {
-		global $current_screen;
-
 		set_current_screen( 'dashboard' );
 
 		$this->assertInstanceOf( 'Remove_Noreferrer\Admin\Plugin', \Remove_Noreferrer\run_plugin() );
-
-		$current_screen = null;
 	}
 
 	/**
@@ -80,3 +91,4 @@ class Remove_Noreferrer_Test extends \WP_UnitTestCase {
 		$this->assertInstanceOf( 'Remove_Noreferrer\Frontend\Plugin', \Remove_Noreferrer\run_plugin() );
 	}
 }
+

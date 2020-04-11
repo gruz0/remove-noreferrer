@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Remove_Noreferrer\Frontend;
 
-use Remove_Noreferrer\Admin\Plugin as Admin;
-
 class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * Remove_Noreferrer\Frontend\Plugin instance
@@ -18,14 +16,32 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * Prepares environment
 	 *
+	 * @since 1.3.0
+	 * @access public
+	 *
 	 * @return void
 	 */
 	public function setUp(): void {
+		set_current_screen( 'front' );
+
+		$this->_plugin = new Plugin( new \Remove_Noreferrer\Core\Options(), new Links_Processor() );
+
 		parent::setUp();
+	}
 
-		$admin           = new Admin();
-		$links_processor = new Links_Processor();
+	/**
+	 * Finishes tests
+	 *
+	 * @since 1.3.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function tearDown(): void {
+		unset( $GLOBALS['screen'] );
+		unset( $GLOBALS['current_screen'] );
 
-		$this->_plugin = new Plugin( $admin, $links_processor );
+		parent::tearDown();
 	}
 }
+
