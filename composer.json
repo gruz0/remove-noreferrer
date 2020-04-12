@@ -9,13 +9,10 @@
 	},
 	"scripts": {
 		"test": [
-			"vendor/bin/phpunit --no-coverage -c tests/phpunit/phpunit.xml"
+			"vendor/bin/phpunit --colors=always --no-coverage -c tests/phpunit/phpunit.xml"
 		],
 		"coverage": [
-			"vendor/bin/phpunit -c tests/phpunit/phpunit.xml"
-		],
-		"coverage-local": [
-			"vendor/bin/phpunit -c tests/phpunit/phpunit.xml --coverage-html ./build/coverage-html"
+			"vendor/bin/phpunit --colors=always -c tests/phpunit/phpunit.xml"
 		]
 	}
 }

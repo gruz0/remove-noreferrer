@@ -1,7 +1,6 @@
 <phpunit
 	bootstrap="./bootstrap.php"
 	backupGlobals="false"
-	colors="true"
 	convertErrorsToExceptions="true"
 	convertNoticesToExceptions="true"
 	convertWarningsToExceptions="true"
@@ -17,14 +16,24 @@
 		<whitelist>
 			<directory suffix=".php">../../</directory>
 			<exclude>
-				<file>../../remove-noreferrer.php</file>
+				<directory suffix="index.php">../../</directory>
+				<directory>../../assets</directory>
+				<directory>../../build</directory>
+				<directory>../../inc</directory>
+				<directory>../../phpcs</directory>
+				<directory>../../rulesets</directory>
+				<directory>../../svn</directory>
 				<directory>../../tests</directory>
 				<directory>../../vendor</directory>
-				<directory>../../assets</directory>
-				<directory>../../svn</directory>
-				<directory>../../rulesets</directory>
-				<directory>../../phpcs</directory>
 			</exclude>
 		</whitelist>
 	</filter>
+	<logging>
+		<log
+			type="coverage-html"
+			target="../../build/coverage"
+			lowUpperBound="50"
+			highLowerBound="90"
+		/>
+	</logging>
 </phpunit>
