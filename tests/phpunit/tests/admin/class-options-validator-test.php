@@ -6,6 +6,9 @@ namespace Remove_Noreferrer\Backend\Tests;
 use PHPUnit\Framework\TestCase;
 use Remove_Noreferrer\Admin\Options_Validator;
 
+/**
+ * @coversDefaultClass \Remove_Noreferrer\Admin\Options_Validator
+ */
 class Options_Validator_Test extends TestCase {
 	/**
 	 * Remove_Noreferrer\Admin\Options_Validator instance
@@ -30,7 +33,9 @@ class Options_Validator_Test extends TestCase {
 	/**
 	 * @dataProvider data_call
 	 *
-	 * @covers \Remove_Noreferrer\Admin\Options_Validator::call
+	 * @covers ::call
+	 * @covers ::validate_where_should_the_plugin_work
+	 * @covers ::is_input_valid
 	 *
 	 * @since 1.3.0
 	 * @access public

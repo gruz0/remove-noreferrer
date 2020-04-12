@@ -69,10 +69,12 @@ class Plugin {
 	 * @access public
 	 *
 	 * @param \Remove_Noreferrer\Core\Options $options Options class.
-	 * @return \Remove_Noreferrer\Admin\Plugin
 	 */
 	public function __construct( \Remove_Noreferrer\Core\Options $options ) {
 		$this->_options = $options;
+
+		add_action( 'init', array( & $this, 'init' ) );
+		do_action( 'remove_noreferrer_admin_plugin_loaded' );
 	}
 
 	/**
@@ -80,14 +82,10 @@ class Plugin {
 	 *
 	 * @since 1.3.0
 	 * @access public
-	 *
-	 * @return Remove_Noreferrer\Admin\Plugin
 	 */
-	public function run() {
+	public function init() {
 		add_action( 'admin_menu', array( & $this, 'add_menu' ) );
 		add_action( 'admin_post_remove_noreferrer_update_options', array( & $this, 'update_options' ) );
-
-		return $this;
 	}
 
 	/**

@@ -6,6 +6,9 @@ namespace Remove_Noreferrer\Frontend\Tests;
 use PHPUnit\Framework\TestCase;
 use Remove_Noreferrer\Frontend\Links_Processor;
 
+/**
+ * @coversDefaultClass \Remove_Noreferrer\Frontend\Links_Processor
+ */
 class Links_Processor_Test extends TestCase {
 	/**
 	 * Remove_Noreferrer\Frontend\Links_Processor instance
@@ -30,7 +33,11 @@ class Links_Processor_Test extends TestCase {
 	/**
 	 * @dataProvider data_call
 	 *
-	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::call
+	 * @covers ::call
+	 * @covers ::is_links_found
+	 * @covers ::is_noreferrer_found
+	 * @covers ::remove_noreferrer
+	 * @covers ::remove_extra_spaces
 	 *
 	 * @since 1.3.0
 	 * @access public

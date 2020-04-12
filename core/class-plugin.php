@@ -38,6 +38,8 @@ class Plugin {
 	 */
 	public function __construct( \Remove_Noreferrer\Core\Options $options ) {
 		$this->_options = $options;
+
+		do_action( 'remove_noreferrer_core_plugin_loaded' );
 	}
 
 	/**
@@ -51,6 +53,8 @@ class Plugin {
 		if ( ! current_user_can( 'activate_plugins' ) ) {
 			return;
 		}
+
+		do_action( 'remove_noreferrer_core_plugin_activated' );
 	}
 
 	/**
@@ -64,6 +68,8 @@ class Plugin {
 		if ( ! current_user_can( 'activate_plugins' ) ) {
 			return;
 		}
+
+		do_action( 'remove_noreferrer_core_plugin_deactivated' );
 	}
 
 	/**
@@ -77,22 +83,8 @@ class Plugin {
 		if ( ! current_user_can( 'activate_plugins' ) ) {
 			return;
 		}
-	}
 
-	/**
-	 * Loads plugin depends on current WordPress's area
-	 *
-	 * @since 1.3.0
-	 *
-	 * @return Remove_Noreferrer\Core\Plugin
-	 */
-	public function run() {
-		if ( is_admin() ) {
-			$plugin = new Admin( $this->_options );
-			return $plugin->run();
-		}
-
-		$plugin = new Frontend( $this->_options, new Links_Processor() );
-		return $plugin->run();
+		do_action( 'remove_noreferrer_core_plugin_uninstalled' );
 	}
 }
+

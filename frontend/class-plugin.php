@@ -50,6 +50,9 @@ class Plugin {
 	) {
 		$this->_options         = $options;
 		$this->_links_processor = $links_processor;
+
+		add_action( 'init', array( & $this, 'init' ) );
+		do_action( 'remove_noreferrer_frontend_plugin_loaded' );
 	}
 
 	/**
@@ -57,16 +60,12 @@ class Plugin {
 	 *
 	 * @since 1.3.0
 	 * @access public
-	 *
-	 * @return Remove_Noreferrer\Frontend\Plugin
 	 */
-	public function run() {
+	public function init() {
 		add_filter( 'the_content', array( & $this, 'remove_noreferrer_from_content' ), 999 );
 		add_filter( 'comment_text', array( & $this, 'remove_noreferrer_from_comment' ), 20, 3 );
 		add_filter( 'widget_display_callback', array( & $this, 'remove_noreferrer_from_text_widget' ), 10, 3 );
 		add_filter( 'widget_custom_html_content', array( & $this, 'remove_noreferrer_from_custom_html_widget' ), 10, 3 );
-
-		return $this;
 	}
 
 	/**

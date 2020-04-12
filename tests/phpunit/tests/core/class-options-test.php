@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace Remove_Noreferrer\Core;
 
+/**
+ * @coversDefaultClass \Remove_Noreferrer\Core\Options
+ */
 class Options_Test extends \WP_UnitTestCase {
 	/**
 	 * Remove_Noreferrer\Core\Options instance
@@ -25,7 +28,7 @@ class Options_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Core\Options::get_options
+	 * @covers ::get_options
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -37,7 +40,7 @@ class Options_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Core\Options::get_default_options
+	 * @covers ::get_default_options
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -61,7 +64,7 @@ class Options_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Core\Options::get_options
+	 * @covers ::get_options
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -74,7 +77,7 @@ class Options_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Core\Options::get_options
+	 * @covers ::get_options
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -106,9 +109,9 @@ class Options_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Core\Options::get_default_options
-	 * @covers \Remove_Noreferrer\Core\Options::get_options
-	 * @covers \Remove_Noreferrer\Core\Options::get_option
+	 * @covers ::get_default_options
+	 * @covers ::get_options
+	 * @covers ::get_option
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -134,7 +137,7 @@ class Options_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Core\Options::get_option
+	 * @covers ::get_option
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -146,7 +149,7 @@ class Options_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Core\Options::get_option
+	 * @covers ::get_option
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -158,7 +161,7 @@ class Options_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Core\Options::get_option
+	 * @covers ::get_option
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -171,3 +174,4 @@ class Options_Test extends \WP_UnitTestCase {
 		$this->assertEquals( array( 'page' ), $this->_options->get_option( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ) );
 	}
 }
+
