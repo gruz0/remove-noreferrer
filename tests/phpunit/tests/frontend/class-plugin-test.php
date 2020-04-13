@@ -41,10 +41,10 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function tearDown(): void {
+		parent::tearDown();
+
 		unset( $GLOBALS['screen'] );
 		unset( $GLOBALS['current_screen'] );
-
-		parent::tearDown();
 	}
 
 	/**
