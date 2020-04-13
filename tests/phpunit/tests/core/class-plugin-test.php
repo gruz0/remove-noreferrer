@@ -46,7 +46,31 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::__construct
+	 * @coversNothing
+	 *
+	 * @since 1.3.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_plugin_extended_from_base_plugin(): void {
+		$this->assertInstanceOf( 'Remove_Noreferrer\Base\Plugin', $this->_plugin );
+	}
+
+	/**
+	 * @covers \Remove_Noreferrer\Core\Plugin::__construct
+	 *
+	 * @since 1.3.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_construct_has_init_action(): void {
+		$this->assertEquals( 10, has_action( 'init', array( $this->_plugin, 'init' ) ) );
+	}
+
+	/**
+	 * @covers \Remove_Noreferrer\Core\Plugin::__construct
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -55,6 +79,20 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 */
 	public function test_construct_did_remove_noreferrer_core_plugin_loaded_action(): void {
 		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_core_plugin_loaded' ) );
+	}
+
+	/**
+	 * @covers \Remove_Noreferrer\Core\Plugin::init
+	 *
+	 * @since 1.3.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_init_did_remove_noreferrer_core_plugin_initialized_action(): void {
+		do_action( 'init' );
+
+		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_core_plugin_initialized' ) );
 	}
 
 	/**

@@ -16,7 +16,7 @@ namespace Remove_Noreferrer\Frontend;
  *
  * @since 1.1.0
  */
-class Plugin {
+class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	/**
 	 * Remove_Noreferrer\Core\Options instance
 	 *
@@ -51,12 +51,11 @@ class Plugin {
 		$this->_options         = $options;
 		$this->_links_processor = $links_processor;
 
-		add_action( 'init', array( & $this, 'init' ) );
-		do_action( 'remove_noreferrer_frontend_plugin_loaded' );
+		parent::__construct();
 	}
 
 	/**
-	 * Creates actions, filters, hooks and returns plugin's instance
+	 * Initializes plugin
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -66,6 +65,8 @@ class Plugin {
 		add_filter( 'comment_text', array( & $this, 'remove_noreferrer_from_comment' ), 20, 3 );
 		add_filter( 'widget_display_callback', array( & $this, 'remove_noreferrer_from_text_widget' ), 10, 3 );
 		add_filter( 'widget_custom_html_content', array( & $this, 'remove_noreferrer_from_custom_html_widget' ), 10, 3 );
+
+		parent::init();
 	}
 
 	/**

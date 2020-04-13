@@ -16,7 +16,7 @@ namespace Remove_Noreferrer\Admin;
  *
  * @since 1.1.0
  */
-class Plugin {
+class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	/**
 	 * Where should plugin's menu item be located
 	 *
@@ -49,7 +49,7 @@ class Plugin {
 	 *
 	 * @since 1.1.0
 	 * @access public
-	 * @var string GRN_NONCE_ACTIOn
+	 * @var string GRN_NONCE_ACTION
 	 */
 	const GRN_NONCE_ACTION = 'remove_noreferrer';
 
@@ -73,12 +73,11 @@ class Plugin {
 	public function __construct( \Remove_Noreferrer\Core\Options $options ) {
 		$this->_options = $options;
 
-		add_action( 'init', array( & $this, 'init' ) );
-		do_action( 'remove_noreferrer_admin_plugin_loaded' );
+		parent::__construct();
 	}
 
 	/**
-	 * Creates actions, filters, hooks and returns plugin's instance
+	 * Initializes plugin
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -86,6 +85,8 @@ class Plugin {
 	public function init() {
 		add_action( 'admin_menu', array( & $this, 'add_menu' ) );
 		add_action( 'admin_post_remove_noreferrer_update_options', array( & $this, 'update_options' ) );
+
+		parent::init();
 	}
 
 	/**

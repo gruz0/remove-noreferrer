@@ -1,15 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Remove_Noreferrer\Backend\Tests;
-
-use PHPUnit\Framework\TestCase;
-use Remove_Noreferrer\Admin\Options_Validator;
+namespace Remove_Noreferrer\Admin;
 
 /**
  * @coversDefaultClass \Remove_Noreferrer\Admin\Options_Validator
  */
-class Options_Validator_Test extends TestCase {
+class Options_Validator_Test extends \PHPUnit\Framework\TestCase {
 	/**
 	 * Remove_Noreferrer\Admin\Options_Validator instance
 	 *

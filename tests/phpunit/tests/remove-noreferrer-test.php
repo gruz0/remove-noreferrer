@@ -20,6 +20,8 @@ class Remove_Noreferrer_Test extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * @coversNothing
+	 *
 	 * @since 1.3.0
 	 * @access public
 	 *
@@ -30,6 +32,8 @@ class Remove_Noreferrer_Test extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * @coversNothing
+	 *
 	 * @since 1.3.0
 	 * @access public
 	 *
@@ -40,6 +44,8 @@ class Remove_Noreferrer_Test extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * @coversNothing
+	 *
 	 * @since 1.3.0
 	 * @access public
 	 *
@@ -60,7 +66,7 @@ class Remove_Noreferrer_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Admin\Plugin
+	 * @coversNothing
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -74,7 +80,7 @@ class Remove_Noreferrer_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Frontend\Plugin
+	 * @coversNothing
 	 *
 	 * @since 1.3.0
 	 * @access public

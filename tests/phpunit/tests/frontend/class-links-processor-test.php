@@ -1,15 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Remove_Noreferrer\Frontend\Tests;
-
-use PHPUnit\Framework\TestCase;
-use Remove_Noreferrer\Frontend\Links_Processor;
+namespace Remove_Noreferrer\Frontend;
 
 /**
  * @coversDefaultClass \Remove_Noreferrer\Frontend\Links_Processor
  */
-class Links_Processor_Test extends TestCase {
+class Links_Processor_Test extends \PHPUnit\Framework\TestCase {
 	/**
 	 * Remove_Noreferrer\Frontend\Links_Processor instance
 	 *

@@ -46,6 +46,20 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * @coversNothing
+	 *
+	 * @since 1.3.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_plugin_extended_from_base_plugin(): void {
+		$this->assertInstanceOf( 'Remove_Noreferrer\Base\Plugin', $this->_plugin );
+	}
+
+	/**
+	 * @coversNothing
+	 *
 	 * @since 1.3.0
 	 * @access public
 	 *
@@ -56,6 +70,8 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * @coversNothing
+	 *
 	 * @since 1.3.0
 	 * @access public
 	 *
@@ -66,6 +82,8 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * @coversNothing
+	 *
 	 * @since 1.3.0
 	 * @access public
 	 *
@@ -76,6 +94,8 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * @coversNothing
+	 *
 	 * @since 1.3.0
 	 * @access public
 	 *
@@ -86,7 +106,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::__construct
+	 * @covers \Remove_Noreferrer\Admin\Plugin::__construct
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -98,7 +118,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::__construct
+	 * @covers \Remove_Noreferrer\Admin\Plugin::__construct
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -110,7 +130,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::init
+	 * @covers \Remove_Noreferrer\Admin\Plugin::init
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -124,7 +144,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::init
+	 * @covers \Remove_Noreferrer\Admin\Plugin::init
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -141,6 +161,20 @@ class Plugin_Test extends \WP_UnitTestCase {
 				array( $this->_plugin, 'update_options' )
 			)
 		);
+	}
+
+	/**
+	 * @covers \Remove_Noreferrer\Admin\Plugin::init
+	 *
+	 * @since 1.3.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_init_did_remove_noreferrer_admin_plugin_initialized_action(): void {
+		do_action( 'init' );
+
+		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_admin_plugin_initialized' ) );
 	}
 
 	/**

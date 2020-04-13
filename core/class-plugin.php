@@ -9,16 +9,12 @@
 
 namespace Remove_Noreferrer\Core;
 
-use Remove_Noreferrer\Admin\Plugin as Admin;
-use Remove_Noreferrer\Frontend\Plugin as Frontend;
-use Remove_Noreferrer\Frontend\Links_Processor as Links_Processor;
-
 /**
  * Core class
  *
  * @since 1.3.0
  */
-class Plugin {
+class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	/**
 	 * Remove_Noreferrer\Core\Options instance
 	 *
@@ -39,7 +35,17 @@ class Plugin {
 	public function __construct( \Remove_Noreferrer\Core\Options $options ) {
 		$this->_options = $options;
 
-		do_action( 'remove_noreferrer_core_plugin_loaded' );
+		parent::__construct();
+	}
+
+	/**
+	 * Initializes plugin
+	 *
+	 * @since 1.3.0
+	 * @access public
+	 */
+	public function init() {
+		parent::init();
 	}
 
 	/**
