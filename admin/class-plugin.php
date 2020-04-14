@@ -134,7 +134,7 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	 * @access public
 	 */
 	public function render_options_page() {
-		$this->options_page( $this->_options->get_options() )->render();
+		echo $this->options_page()->render( $this->_options->get_options() );
 	}
 
 	/**
@@ -143,12 +143,10 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	 * @since 1.1.0
 	 * @access private
 	 *
-	 * @param array $options Options.
-	 *
 	 * @return Remove_Noreferrer\Admin\Options_Page
 	 */
-	private function options_page( $options ) {
-		return new Options_Page( $options );
+	private function options_page() {
+		return new Options_Page();
 	}
 
 	/**
