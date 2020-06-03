@@ -20,8 +20,6 @@ env:
     - WP_VERSION=latest
     - WP_VERSION=5.4
     - WP_VERSION=5.3
-    - WP_VERSION=5.2
-    - WP_VERSION=5.1
 
 before_script:
   - make dockerize_test_database
