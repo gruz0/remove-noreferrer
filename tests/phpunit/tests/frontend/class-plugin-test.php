@@ -4,7 +4,7 @@
  *
  * @package Remove_Noreferrer
  * @subpackage Frontend
- * @since 1.3.0
+ * @since 2.0.0
  */
 
 namespace Remove_Noreferrer\Frontend;
@@ -22,7 +22,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * Remove_Noreferrer\Frontend\Plugin instance
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 * @var Remove_Noreferrer\Frontend\Plugin $_plugin
 	 */
@@ -31,7 +31,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * Prepares environment
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -47,7 +47,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * Finishes tests
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -62,7 +62,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * @coversNothing
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -74,7 +74,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::__construct
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -86,7 +86,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::__construct
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -98,7 +98,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::init
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -112,7 +112,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::init
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -126,7 +126,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::init
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -140,7 +140,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::init
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -154,7 +154,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::init
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void

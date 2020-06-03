@@ -4,7 +4,7 @@
  *
  * @package Remove_Noreferrer
  * @subpackage Core
- * @since 1.3.0
+ * @since 2.0.0
  */
 
 namespace Remove_Noreferrer\Core;
@@ -12,13 +12,13 @@ namespace Remove_Noreferrer\Core;
 /**
  * Options class
  *
- * @since 1.3.0
+ * @since 2.0.0
  */
 class Options {
 	/**
 	 * Options array
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 * @var array $_options
 	 */
@@ -27,7 +27,7 @@ class Options {
 	/**
 	 * Returns options if exist otherwise returns default options
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return array
@@ -45,7 +45,7 @@ class Options {
 	/**
 	 * Return plugin's default options if options are not found in the database
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 *
 	 * @return array
@@ -57,7 +57,7 @@ class Options {
 	/**
 	 * Return options by key
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @param string $key Option's key.

@@ -4,7 +4,7 @@
  *
  * @package Remove_Noreferrer
  * @subpackage Admin
- * @since 1.3.0
+ * @since 2.0.0
  */
 
 namespace Remove_Noreferrer\Admin;
@@ -22,7 +22,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * Remove_Noreferrer\Admin\Plugin instance
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 * @var Remove_Noreferrer\Admin\Plugin $_plugin
 	 */
@@ -31,7 +31,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * Prepares environment
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -45,7 +45,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * Finishes tests
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -60,7 +60,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * @coversNothing
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -72,7 +72,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * @coversNothing
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -84,7 +84,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * @coversNothing
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -96,7 +96,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * @coversNothing
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -108,7 +108,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * @coversNothing
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -120,7 +120,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::__construct
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -132,7 +132,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::__construct
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -144,7 +144,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::init
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -158,7 +158,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::init
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -178,7 +178,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::init
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -192,7 +192,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::add_menu
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -224,7 +224,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::add_menu
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void

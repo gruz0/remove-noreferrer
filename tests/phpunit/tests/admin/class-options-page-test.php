@@ -4,7 +4,7 @@
  *
  * @package Remove_Noreferrer
  * @subpackage Admin
- * @since 1.3.0
+ * @since 2.0.0
  */
 
 namespace Remove_Noreferrer\Admin;
@@ -19,7 +19,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	/**
 	 * Options_Page's instance
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 * @var \Remove_Noreferrer\Admin\Options_Page $_options_page
 	 */
@@ -28,7 +28,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	/**
 	 * Options
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 * @var array $_options
 	 */
@@ -37,7 +37,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	/**
 	 * Prepares environment
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -62,7 +62,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::render
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -76,7 +76,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::render_nonce
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -93,7 +93,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::render_action
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -110,7 +110,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 * @covers ::render
 	 * @covers ::render_checkbox
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -130,7 +130,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 *
 	 * @covers ::render_checkbox
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @param mixed $input Function's result.
@@ -145,7 +145,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	/**
 	 * Data provider
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return array
@@ -170,7 +170,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	/**
 	 * @coversNothing
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 *
 	 * @param string $value Checkbox value.
@@ -200,7 +200,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	/**
 	 * @coversNothing
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 *
 	 * @param string $value Checkbox value.
@@ -232,7 +232,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	/**
 	 * @coversNothing
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 *
 	 * @param string $content Content.

@@ -4,7 +4,7 @@
  *
  * @package Remove_Noreferrer
  * @subpackage Frontend
- * @since 1.3.0
+ * @since 2.0.0
  */
 
 namespace Remove_Noreferrer\Frontend;
@@ -19,7 +19,7 @@ class Links_Processor_Test extends \PHPUnit\Framework\TestCase {
 	/**
 	 * Remove_Noreferrer\Frontend\Links_Processor instance
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 * @var Remove_Noreferrer\Frontend\Links_Processor $_processor
 	 */
@@ -45,7 +45,7 @@ class Links_Processor_Test extends \PHPUnit\Framework\TestCase {
 	 * @covers ::remove_noreferrer
 	 * @covers ::remove_extra_spaces
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @param string $input The input string.
@@ -62,7 +62,7 @@ class Links_Processor_Test extends \PHPUnit\Framework\TestCase {
 	/**
 	 * Data provider
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return array

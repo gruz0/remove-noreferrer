@@ -4,7 +4,7 @@
  *
  * @package Remove_Noreferrer
  * @subpackage Core
- * @since 1.3.0
+ * @since 2.0.0
  */
 
 namespace Remove_Noreferrer\Core;
@@ -12,13 +12,13 @@ namespace Remove_Noreferrer\Core;
 /**
  * Core class
  *
- * @since 1.3.0
+ * @since 2.0.0
  */
 class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	/**
 	 * Remove_Noreferrer\Core\Options instance
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 * @var \Remove_Noreferrer\Core\Options $_options
 	 */
@@ -27,7 +27,7 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	/**
 	 * Constructor
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @param \Remove_Noreferrer\Core\Options $options Options class.
@@ -41,7 +41,7 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	/**
 	 * Initializes plugin
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 */
 	public function init() {
@@ -51,7 +51,7 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	/**
 	 * Activates plugin
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 * @static
 	 */
@@ -66,7 +66,7 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	/**
 	 * Deactivates plugin
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 * @static
 	 */
@@ -81,7 +81,7 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	/**
 	 * Uninstalls plugin
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 * @static
 	 */

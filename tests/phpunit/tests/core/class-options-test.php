@@ -4,7 +4,7 @@
  *
  * @package Remove_Noreferrer
  * @subpackage Core
- * @since 1.3.0
+ * @since 2.0.0
  */
 
 namespace Remove_Noreferrer\Core;
@@ -19,7 +19,7 @@ class Options_Test extends \WP_UnitTestCase {
 	/**
 	 * Remove_Noreferrer\Core\Options instance
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 * @var Remove_Noreferrer\Core\Options $_options
 	 */
@@ -40,7 +40,7 @@ class Options_Test extends \WP_UnitTestCase {
 	 * @covers ::get_options
 	 * @covers ::get_default_options
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -53,7 +53,7 @@ class Options_Test extends \WP_UnitTestCase {
 	 * @covers ::get_options
 	 * @covers ::get_default_options
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -78,7 +78,7 @@ class Options_Test extends \WP_UnitTestCase {
 	 * @covers ::get_options
 	 * @covers ::get_default_options
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -92,7 +92,7 @@ class Options_Test extends \WP_UnitTestCase {
 	 * @covers ::get_options
 	 * @covers ::get_default_options
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -126,7 +126,7 @@ class Options_Test extends \WP_UnitTestCase {
 	 * @covers ::get_options
 	 * @covers ::get_option
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -154,7 +154,7 @@ class Options_Test extends \WP_UnitTestCase {
 	 * @covers ::get_options
 	 * @covers ::get_default_options
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -168,7 +168,7 @@ class Options_Test extends \WP_UnitTestCase {
 	 * @covers ::get_options
 	 * @covers ::get_default_options
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
@@ -182,7 +182,7 @@ class Options_Test extends \WP_UnitTestCase {
 	 * @covers ::get_options
 	 * @covers ::get_default_options
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void

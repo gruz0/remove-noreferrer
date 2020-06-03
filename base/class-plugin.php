@@ -4,7 +4,7 @@
  *
  * @package Remove_Noreferrer
  * @subpackage Base
- * @since 1.3.0
+ * @since 2.0.0
  */
 
 namespace Remove_Noreferrer\Base;
@@ -12,13 +12,13 @@ namespace Remove_Noreferrer\Base;
 /**
  * Abstract class for the plugins
  *
- * @since 1.3.0
+ * @since 2.0.0
  */
 abstract class Plugin {
 	/**
 	 * Used to format needed action
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 * @var string $_stringified_class
 	 */
@@ -27,7 +27,7 @@ abstract class Plugin {
 	/**
 	 * Constructor
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 */
 	public function __construct() {
@@ -41,7 +41,7 @@ abstract class Plugin {
 	/**
 	 * Initializes plugin
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 */
 	public function init() {
@@ -51,7 +51,7 @@ abstract class Plugin {
 	/**
 	 * Get child class
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 *
 	 * @return array
@@ -63,7 +63,7 @@ abstract class Plugin {
 	/**
 	 * Formats action depends on child class
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 *
 	 * @param string $suffix Action's suffix.

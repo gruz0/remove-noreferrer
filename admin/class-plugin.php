@@ -56,7 +56,7 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	/**
 	 * Remove_Noreferrer\Core\Options instance
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 * @var Remove_Noreferrer\Core\Options $_options
 	 */
@@ -65,7 +65,7 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	/**
 	 * Constructor
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @param \Remove_Noreferrer\Core\Options $options Options class.
@@ -79,7 +79,7 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	/**
 	 * Initializes plugin
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 */
 	public function init() {

@@ -4,7 +4,7 @@
  *
  * @package Remove_Noreferrer
  * @subpackage Admin
- * @since 1.3.0
+ * @since 2.0.0
  */
 
 namespace Remove_Noreferrer\Admin;
@@ -19,7 +19,7 @@ class Options_Validator_Test extends \PHPUnit\Framework\TestCase {
 	/**
 	 * Remove_Noreferrer\Admin\Options_Validator instance
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 * @var Remove_Noreferrer\Admin\Options_Validator $_validator
 	 */
@@ -43,7 +43,7 @@ class Options_Validator_Test extends \PHPUnit\Framework\TestCase {
 	 * @covers ::validate_where_should_the_plugin_work
 	 * @covers ::is_input_valid
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @param string $input The input string.
@@ -60,7 +60,7 @@ class Options_Validator_Test extends \PHPUnit\Framework\TestCase {
 	/**
 	 * Data provider
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return array

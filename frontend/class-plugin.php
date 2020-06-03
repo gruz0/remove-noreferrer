@@ -29,7 +29,7 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	/**
 	 * Remove_Noreferrer\Frontend\Links_Processor instance
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 * @var Remove_Noreferrer\Frontend\Links_Processor $_links_processor
 	 */
@@ -57,7 +57,7 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	/**
 	 * Initializes plugin
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 */
 	public function init() {
@@ -108,7 +108,7 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	/**
 	 * Remove noreferrer from Text widget's content
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @param array      $instance The current widget instance's settings.
@@ -144,7 +144,7 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	/**
 	 * Remove noreferrer from Custom HTML widget's content
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @param string                 $content The widget content.
@@ -245,7 +245,7 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	/**
 	 * Checks if array contains widgets' options
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 *
 	 * @param array  $options Options array.

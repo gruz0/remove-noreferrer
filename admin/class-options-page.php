@@ -131,7 +131,7 @@ class Options_Page {
 	/**
 	 * Render nonce field
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 */
 	private function render_nonce() {
@@ -141,7 +141,7 @@ class Options_Page {
 	/**
 	 * Returns hidden field with hook's action
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 *
 	 * @return string

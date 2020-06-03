@@ -11,7 +11,7 @@
  * Plugin Name:       Remove Noreferrer
  * Plugin URI:        https://wordpress.org/plugins/remove-noreferrer/
  * Description:       This plugin removes rel="noreferrer" from links in Posts, Pages, Home Page and comments
- * Version:           1.3.0
+ * Version:           2.0.0
  * Requires at least: 5.3
  * Requires PHP:      7.1
  * Author:            Alexander Kadyrov
@@ -39,14 +39,14 @@ define( 'GRN_OPTION_KEY', 'remove_noreferrer' );
 /**
  * Plugin's option key stores `where_should_the_plugin_work` values
  *
- * @since 1.3.0
+ * @since 2.0.0
  */
 define( 'GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY', 'where_should_the_plugin_work' );
 
 /**
  * Allowed values
  *
- * @since 1.3.0
+ * @since 2.0.0
  */
 define(
 	'GRN_ALLOWED_VALUES',
@@ -70,7 +70,7 @@ register_uninstall_hook( __FILE__, array( 'Remove_Noreferrer\Core\Plugin', 'unin
 /**
  * Runs plugin
  *
- * @since 1.3.0
+ * @since 2.0.0
  *
  * @return Remove_Noreferrer\Admin\Plugin|Remove_Noreferrer\Frontend\Plugin
  */
