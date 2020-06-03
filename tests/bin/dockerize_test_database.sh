@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eu
+set -euo pipefail
 
 DOCKER_COMPOSE_CONFIG=./tests/docker-compose.yml
 
