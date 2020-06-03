@@ -1,12 +1,25 @@
 <?php
-/*
-Plugin Name: Remove noreferrer
-Description: This plugin removes rel="noreferrer" from links in Posts, Pages, Home Page and comments
-Author: Alexander Kadyrov
-Author URI: https://github.com/gruz0
-Text Domain: remove-noreferrer
-Version: 1.2.0
-*/
+/**
+ * Remove Noreferrer
+ *
+ * @package           Remove_Noreferrer
+ * @author            Alexander Kadyrov
+ * @copyright         2019-2020 Alexander Kadyrov
+ * @license           GPL-2.0-or-later
+ *
+ * @wordpress-plugin
+ * Plugin Name:       Remove Noreferrer
+ * Plugin URI:        https://wordpress.org/plugins/remove-noreferrer/
+ * Description:       This plugin removes rel="noreferrer" from links in Posts, Pages, Home Page and comments
+ * Version:           1.3.0
+ * Requires at least: 5.3
+ * Requires PHP:      7.1
+ * Author:            Alexander Kadyrov
+ * Author URI:        https://kadyrov.dev/
+ * Text Domain:       remove-noreferrer
+ * License:           GPL v2 or later
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ */
 
 namespace Remove_Noreferrer;
 
@@ -68,6 +81,9 @@ function run_plugin() {
 
 	// TODO: Если после запуска Core нет нужных опций, то их надо создать
 	// В этом случае в $options надо перечитать значения, т.к. они будут закешированными.
+	//
+	// TODO: Возможно будет смысл вообще убрать разбиение на фронтовую и админскую части, т.к. сейчас получается,
+	// что после запуска тестов всегда инициализируется фронтендовая часть и аффектит тесты.
 
 	if ( is_admin() ) {
 		return new \Remove_Noreferrer\Admin\Plugin( $options );

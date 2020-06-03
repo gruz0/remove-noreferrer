@@ -1,10 +1,19 @@
 <?php
-declare(strict_types=1);
+/**
+ * Unit tests covering Options functionality.
+ *
+ * @package Remove_Noreferrer
+ * @subpackage Core
+ * @since 1.3.0
+ */
 
 namespace Remove_Noreferrer\Core;
 
 /**
+ * Test core/class-options.php
+ *
  * @coversDefaultClass \Remove_Noreferrer\Core\Options
+ * @group core
  */
 class Options_Test extends \WP_UnitTestCase {
 	/**
@@ -29,6 +38,7 @@ class Options_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::get_options
+	 * @covers ::get_default_options
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -40,6 +50,7 @@ class Options_Test extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers ::get_options
 	 * @covers ::get_default_options
 	 *
 	 * @since 1.3.0
@@ -65,6 +76,7 @@ class Options_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::get_options
+	 * @covers ::get_default_options
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -78,6 +90,7 @@ class Options_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::get_options
+	 * @covers ::get_default_options
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -138,6 +151,8 @@ class Options_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::get_option
+	 * @covers ::get_options
+	 * @covers ::get_default_options
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -150,6 +165,8 @@ class Options_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::get_option
+	 * @covers ::get_options
+	 * @covers ::get_default_options
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -162,6 +179,8 @@ class Options_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::get_option
+	 * @covers ::get_options
+	 * @covers ::get_default_options
 	 *
 	 * @since 1.3.0
 	 * @access public

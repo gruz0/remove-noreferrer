@@ -1,10 +1,22 @@
 <?php
-declare(strict_types=1);
+/**
+ * Unit tests covering Plugin functionality.
+ *
+ * @package Remove_Noreferrer
+ * @subpackage Frontend
+ * @since 1.3.0
+ */
 
 namespace Remove_Noreferrer\Frontend;
 
 /**
+ * Test frontend/class-plugin.php
+ *
  * @coversDefaultClass \Remove_Noreferrer\Frontend\Plugin
+ * @covers \Remove_Noreferrer\Frontend\Plugin::__construct
+ * @group frontend
+ *
+ * @uses \Remove_Noreferrer\Base\Plugin
  */
 class Plugin_Test extends \WP_UnitTestCase {
 	/**
@@ -60,7 +72,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Frontend\Plugin::__construct
+	 * @covers ::__construct
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -72,7 +84,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Frontend\Plugin::__construct
+	 * @covers ::__construct
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -84,7 +96,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Frontend\Plugin::init
+	 * @covers ::init
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -92,13 +104,13 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_init_has_the_content_filter() {
-		do_action( 'init' );
+		$this->_plugin->init();
 
 		$this->assertEquals( 999, has_filter( 'the_content', array( $this->_plugin, 'remove_noreferrer_from_content' ) ) );
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Frontend\Plugin::init
+	 * @covers ::init
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -106,13 +118,13 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_init_has_comment_text_filter() {
-		do_action( 'init' );
+		$this->_plugin->init();
 
 		$this->assertEquals( 20, has_filter( 'comment_text', array( $this->_plugin, 'remove_noreferrer_from_comment' ) ) );
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Frontend\Plugin::init
+	 * @covers ::init
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -120,13 +132,13 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_init_has_widget_display_callback_filter() {
-		do_action( 'init' );
+		$this->_plugin->init();
 
 		$this->assertEquals( 10, has_filter( 'widget_display_callback', array( $this->_plugin, 'remove_noreferrer_from_text_widget' ) ) );
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Frontend\Plugin::init
+	 * @covers ::init
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -134,13 +146,13 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_init_has_widget_custom_html_content_filter() {
-		do_action( 'init' );
+		$this->_plugin->init();
 
 		$this->assertEquals( 10, has_filter( 'widget_custom_html_content', array( $this->_plugin, 'remove_noreferrer_from_custom_html_widget' ) ) );
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Frontend\Plugin::init
+	 * @covers ::init
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -148,7 +160,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_init_did_remove_noreferrer_frontend_plugin_initialized_action(): void {
-		do_action( 'init' );
+		$this->_plugin->init();
 
 		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_frontend_plugin_initialized' ) );
 	}

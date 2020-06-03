@@ -1,10 +1,19 @@
 <?php
-declare(strict_types=1);
+/**
+ * Unit tests covering Options_Validator functionality.
+ *
+ * @package Remove_Noreferrer
+ * @subpackage Admin
+ * @since 1.3.0
+ */
 
 namespace Remove_Noreferrer\Admin;
 
 /**
+ * Test admin/class-options-validator.php
+ *
  * @coversDefaultClass \Remove_Noreferrer\Admin\Options_Validator
+ * @group admin
  */
 class Options_Validator_Test extends \PHPUnit\Framework\TestCase {
 	/**

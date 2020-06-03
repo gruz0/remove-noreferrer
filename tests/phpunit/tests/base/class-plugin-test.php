@@ -1,11 +1,6 @@
 <?php
-declare(strict_types=1);
-
 namespace Remove_Noreferrer\Base;
 
-/**
- * @coversDefaultClass \Remove_Noreferrer\Base\Plugin
- */
 class Plugin_Test extends \PHPUnit\Framework\TestCase {
 	/**
 	 * Remove_Noreferrer\Base\Demo_Plugin instance
@@ -43,7 +38,7 @@ class Plugin_Test extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @covers ::__construct
+	 * @covers \Remove_Noreferrer\Base\Plugin::__construct
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -55,9 +50,9 @@ class Plugin_Test extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @covers ::__construct
-	 * @covers ::stringify_called_class
-	 * @covers ::format_action
+	 * @covers \Remove_Noreferrer\Base\Plugin::__construct
+	 * @covers \Remove_Noreferrer\Base\Plugin::stringify_called_class
+	 * @covers \Remove_Noreferrer\Base\Plugin::format_action
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -69,9 +64,9 @@ class Plugin_Test extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @covers ::init
-	 * @covers ::stringify_called_class
-	 * @covers ::format_action
+	 * @covers \Remove_Noreferrer\Base\Plugin::init
+	 * @covers \Remove_Noreferrer\Base\Plugin::stringify_called_class
+	 * @covers \Remove_Noreferrer\Base\Plugin::format_action
 	 *
 	 * @since 1.3.0
 	 * @access public

@@ -1,10 +1,22 @@
 <?php
-declare(strict_types=1);
+/**
+ * Unit tests covering Plugin functionality.
+ *
+ * @package Remove_Noreferrer
+ * @subpackage Admin
+ * @since 1.3.0
+ */
 
 namespace Remove_Noreferrer\Admin;
 
 /**
+ * Test admin/class-plugin.php
+ *
  * @coversDefaultClass \Remove_Noreferrer\Admin\Plugin
+ * @covers \Remove_Noreferrer\Admin\Plugin::__construct
+ * @group admin
+ *
+ * @uses \Remove_Noreferrer\Base\Plugin
  */
 class Plugin_Test extends \WP_UnitTestCase {
 	/**
@@ -106,7 +118,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Admin\Plugin::__construct
+	 * @covers ::__construct
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -118,7 +130,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Admin\Plugin::__construct
+	 * @covers ::__construct
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -130,7 +142,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Admin\Plugin::init
+	 * @covers ::init
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -138,13 +150,13 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_init_has_admin_menu_action() {
-		do_action( 'init' );
+		$this->_plugin->init();
 
 		$this->assertEquals( 10, has_action( 'admin_menu', array( $this->_plugin, 'add_menu' ) ) );
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Admin\Plugin::init
+	 * @covers ::init
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -152,7 +164,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_init_has_admin_post_remove_noreferrer_update_options_action() {
-		do_action( 'init' );
+		$this->_plugin->init();
 
 		$this->assertEquals(
 			10,
@@ -164,7 +176,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Admin\Plugin::init
+	 * @covers ::init
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -172,7 +184,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_init_did_remove_noreferrer_admin_plugin_initialized_action(): void {
-		do_action( 'init' );
+		$this->_plugin->init();
 
 		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_admin_plugin_initialized' ) );
 	}

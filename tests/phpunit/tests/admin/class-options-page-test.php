@@ -1,10 +1,19 @@
 <?php
-declare(strict_types=1);
+/**
+ * Unit tests covering Options_Page functionality.
+ *
+ * @package Remove_Noreferrer
+ * @subpackage Admin
+ * @since 1.3.0
+ */
 
 namespace Remove_Noreferrer\Admin;
 
 /**
+ * Test admin/class-options-page.php
+ *
  * @coversDefaultClass \Remove_Noreferrer\Admin\Options_Page
+ * @group admin
  */
 class Options_Page_Test extends \WP_UnitTestCase {
 	/**
@@ -36,7 +45,17 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	public function setUp(): void {
 		parent::setUp();
 
-		$this->_options      = ( new \Remove_Noreferrer\Core\Options() )->get_options();
+		$this->_options = array(
+			'where_should_the_plugin_work' => array(
+				'post',
+				'posts_page',
+				'page',
+				'comments',
+				'text_widget',
+				'custom_html_widget',
+			),
+		);
+
 		$this->_options_page = new Options_Page();
 	}
 
@@ -160,7 +179,17 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 * @return mixed
 	 */
 	private function find_checked_checkbox( $value, $label ) {
-		$options = ( new \Remove_Noreferrer\Core\Options() )->get_options();
+		$options = array(
+			'where_should_the_plugin_work' => array(
+				'post',
+				'posts_page',
+				'page',
+				'comments',
+				'text_widget',
+				'custom_html_widget',
+			),
+		);
+
 		$content = ( new Options_Page() )->render( $options );
 
 		$checked = "checked='checked'";
@@ -180,7 +209,16 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 * @return mixed
 	 */
 	private function find_unchecked_checkbox( $value, $label ) {
-		$options = ( new \Remove_Noreferrer\Core\Options() )->get_options();
+		$options = array(
+			'where_should_the_plugin_work' => array(
+				'post',
+				'posts_page',
+				'page',
+				'comments',
+				'text_widget',
+				'custom_html_widget',
+			),
+		);
 
 		$new_options = array_diff( $options['where_should_the_plugin_work'], array( $value ) );
 

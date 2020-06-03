@@ -1,10 +1,22 @@
 <?php
-declare(strict_types=1);
+/**
+ * Unit tests covering Plugin functionality.
+ *
+ * @package Remove_Noreferrer
+ * @subpackage Core
+ * @since 1.3.0
+ */
 
 namespace Remove_Noreferrer\Core;
 
 /**
+ * Test core/class-plugin.php
+ *
  * @coversDefaultClass \Remove_Noreferrer\Core\Plugin
+ * @covers \Remove_Noreferrer\Core\Plugin::__construct
+ * @group core
+ *
+ * @uses \Remove_Noreferrer\Base\Plugin
  */
 class Plugin_Test extends \WP_UnitTestCase {
 	/**
@@ -27,7 +39,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	public function setUp(): void {
 		parent::setUp();
 
-		$this->_plugin = new Plugin( new Options() );
+		$this->_plugin = new \Remove_Noreferrer\Core\Plugin( new \Remove_Noreferrer\Core\Options() );
 	}
 
 	/**
@@ -58,7 +70,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Core\Plugin::__construct
+	 * @covers ::__construct
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -70,7 +82,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Core\Plugin::__construct
+	 * @covers ::__construct
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -82,7 +94,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Core\Plugin::init
+	 * @covers ::init
 	 *
 	 * @since 1.3.0
 	 * @access public
@@ -90,7 +102,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_init_did_remove_noreferrer_core_plugin_initialized_action(): void {
-		do_action( 'init' );
+		$this->_plugin->init();
 
 		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_core_plugin_initialized' ) );
 	}

@@ -1,6 +1,4 @@
 <?php
-declare(strict_types=1);
-
 namespace Remove_Noreferrer;
 
 class Remove_Noreferrer_Test extends \WP_UnitTestCase {

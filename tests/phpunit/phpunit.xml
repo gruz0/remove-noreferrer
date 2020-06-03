@@ -5,6 +5,8 @@
 	convertNoticesToExceptions="true"
 	convertWarningsToExceptions="true"
 	beStrictAboutTestsThatDoNotTestAnything="false"
+	beStrictAboutCoversAnnotation="true"
+	forceCoversAnnotation="true"
 	executionOrder="random"
 	>
 	<testsuites>
@@ -13,7 +15,7 @@
 		</testsuite>
 	</testsuites>
 	<filter>
-		<whitelist>
+		<whitelist addUncoveredFilesFromWhitelist="true">
 			<directory suffix=".php">../../</directory>
 			<exclude>
 				<directory suffix="index.php">../../</directory>

@@ -1,10 +1,19 @@
 <?php
-declare(strict_types=1);
+/**
+ * Unit tests covering Links_Processor functionality.
+ *
+ * @package Remove_Noreferrer
+ * @subpackage Frontend
+ * @since 1.3.0
+ */
 
 namespace Remove_Noreferrer\Frontend;
 
 /**
+ * Test frontend/class-links-processor.php
+ *
  * @coversDefaultClass \Remove_Noreferrer\Frontend\Links_Processor
+ * @group frontend
  */
 class Links_Processor_Test extends \PHPUnit\Framework\TestCase {
 	/**

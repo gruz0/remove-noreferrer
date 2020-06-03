@@ -105,6 +105,9 @@ make install_wordpress_dev
 It will download latest WordPress version to `tests/wordpress-dev`, then it will
 update settings in `tests/wordpress-dev/trunk/wp-tests-config.php`.
 
+If you want to install specific WP version, then pass it as an argument to
+`make install_wordpress_dev WP_VERSION=5.3.0`, for example.
+
 And then run tests:
 
 ```bash
