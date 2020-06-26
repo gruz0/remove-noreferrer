@@ -236,8 +236,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 		$submenu = array();
 		$menu    = array();
 
-		$current_user = get_current_user_id();
-		$editor_user  = self::factory()->user->create( array( 'role' => 'editor' ) );
+		$editor_user = self::factory()->user->create( array( 'role' => 'editor' ) );
 
 		wp_set_current_user( $editor_user );
 		set_current_screen( 'dashboard' );
@@ -247,6 +246,68 @@ class Plugin_Test extends \WP_UnitTestCase {
 		$this->assertEmpty( $submenu );
 
 		wp_delete_user( $editor_user );
+	}
+
+	/**
+	 * @covers ::update_options
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_plugin_throws_exception_when_user_does_not_have_manage_options_capability(): void {
+		$editor_user = self::factory()->user->create( array( 'role' => 'editor' ) );
+
+		wp_set_current_user( $editor_user );
+		set_current_screen( 'dashboard' );
+
+		$this->setExpectedException( '\WPDieException', 'Unauthorized user' );
+		$this->_plugin->update_options();
+
+		wp_delete_user( $editor_user );
+	}
+
+	/**
+	 * @covers ::update_options
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_plugin_throws_exception_when_nonce_is_not_set(): void {
+		$admin_user = self::factory()->user->create( array( 'role' => 'administrator' ) );
+
+		wp_set_current_user( $admin_user );
+		set_current_screen( 'dashboard' );
+
+		$this->setExpectedException( '\WPDieException', 'Nonce must be set' );
+		$this->_plugin->update_options();
+
+		wp_delete_user( $admin_user );
+	}
+
+	/**
+	 * @covers ::update_options
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_plugin_throws_exception_when_nonce_is_invalid(): void {
+		$admin_user = self::factory()->user->create( array( 'role' => 'administrator' ) );
+
+		wp_set_current_user( $admin_user );
+		set_current_screen( 'dashboard' );
+
+		$_POST[ Plugin::GRN_NONCE_VALUE ] = 'invalid';
+
+		$this->setExpectedException( '\WPDieException', 'Invalid nonce' );
+		$this->_plugin->update_options();
+
+		wp_delete_user( $admin_user );
 	}
 }
 

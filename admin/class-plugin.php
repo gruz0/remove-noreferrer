@@ -115,6 +115,10 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 			wp_die( 'Unauthorized user' );
 		}
 
+		if ( empty( $_POST[ self::GRN_NONCE_VALUE ] ) ) {
+			wp_die( __( 'Nonce must be set', 'remove-noreferrer' ) );
+		}
+
 		if ( ! wp_verify_nonce( $_POST[ self::GRN_NONCE_VALUE ], self::GRN_NONCE_ACTION ) ) {
 			wp_die( __( 'Invalid nonce', 'remove-noreferrer' ) );
 		}
@@ -124,6 +128,7 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 		update_option( GRN_OPTION_KEY, $this->validate_options( $new_values ) );
 
 		wp_redirect( admin_url( self::GRN_PARENT_SLUG . '?page=' . self::GRN_MENU_SLUG ), 303 );
+
 		exit;
 	}
 
