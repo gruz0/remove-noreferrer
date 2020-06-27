@@ -6,7 +6,7 @@
  *
  * @package Remove_Noreferrer
  * @subpackage Frontend
- * @since 1.3.0
+ * @since 2.0.0
  */
 
 namespace Remove_Noreferrer\Frontend;
@@ -14,14 +14,15 @@ namespace Remove_Noreferrer\Frontend;
 /**
  * Links Processor
  *
- * @since 1.3.0
+ * @since 2.0.0
  */
 class Links_Processor {
 	/**
 	 * Call
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
+	 * @static
 	 *
 	 * @param string $input Input.
 	 *
@@ -42,8 +43,9 @@ class Links_Processor {
 	/**
 	 * Checks is links found
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
+	 * @static
 	 *
 	 * @param string $input Input.
 	 *
@@ -56,8 +58,9 @@ class Links_Processor {
 	/**
 	 * Checks is noreferrer found
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
+	 * @static
 	 *
 	 * @param string $input Input.
 	 *
@@ -70,8 +73,9 @@ class Links_Processor {
 	/**
 	 * Removes noreferrer
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
+	 * @static
 	 *
 	 * @param string $input Input.
 	 *
@@ -101,8 +105,9 @@ class Links_Processor {
 	/**
 	 * Removes extra spaces from the string
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
+	 * @static
 	 *
 	 * @param string $input Input.
 	 *

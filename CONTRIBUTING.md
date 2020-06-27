@@ -49,7 +49,7 @@ Then use following commands:
 1. `make dockerize` – to run WordPress instance on [http://localhost:8000/](http://localhost:8000/)
 2. `make shell` – to open `bash` inside Docker container
 
-## How to cleanup database
+## How to cleanup development database
 
 Simply delete the `.data` directory from the root directory.
 
@@ -62,9 +62,10 @@ What it does:
 1. Install [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) to `phpcs` directory
 2. Install [WordPress Coding Standards](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards) to `rulesets/wpcs` directory
 3. Install [WordPress Coding Standards](https://github.com/PHPCompatibility/PHPCompatibility) to `rulesets/PHPCompatibility` directory
-4. Install `bin/pre-commit` Git hook to `.git/hooks/pre-commit`.
+4. Install all required composer packages to `vendor` directory
+5. Install `bin/pre-commit` Git hook to `.git/hooks/pre-commit`
 
-On each `git commit` command `phpcs` will started automatically! :-)
+On each `git commit` commands `make lint` and `make test` will started automatically! :-)
 
 Report's example output:
 
@@ -83,4 +84,32 @@ FOUND 1 ERROR AFFECTING 1 LINE
 Time: 165ms; Memory: 8Mb
 
 [PHP Style][Error]: Fix the issues and commit again
+```
+
+## How to run tests
+
+The first one what you need is start testing database:
+
+```bash
+make dockerize_test_database
+```
+
+It will download latest MariaDB Docker image and start it on `127.0.0.1:3307`.
+
+Then open another terminal window and execute in the plugin directory:
+
+```bash
+make install_wordpress_dev
+```
+
+It will download latest WordPress version to `tests/wordpress-dev`, then it will
+update settings in `tests/wordpress-dev/trunk/wp-tests-config.php`.
+
+If you want to install specific WP version, then pass it as an argument to
+`make install_wordpress_dev WP_VERSION=5.3.0`, for example.
+
+And then run tests:
+
+```bash
+make test
 ```

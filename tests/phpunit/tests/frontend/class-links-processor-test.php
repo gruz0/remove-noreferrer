@@ -1,16 +1,25 @@
 <?php
-declare(strict_types=1);
+/**
+ * Unit tests covering Links_Processor functionality.
+ *
+ * @package Remove_Noreferrer
+ * @subpackage Frontend
+ * @since 2.0.0
+ */
 
-namespace Remove_Noreferrer\Frontend\Tests;
+namespace Remove_Noreferrer\Frontend;
 
-use PHPUnit\Framework\TestCase;
-use Remove_Noreferrer\Frontend\Links_Processor;
-
-class Links_Processor_Test extends TestCase {
+/**
+ * Test frontend/class-links-processor.php
+ *
+ * @coversDefaultClass \Remove_Noreferrer\Frontend\Links_Processor
+ * @group frontend
+ */
+class Links_Processor_Test extends \PHPUnit\Framework\TestCase {
 	/**
 	 * Remove_Noreferrer\Frontend\Links_Processor instance
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 * @var Remove_Noreferrer\Frontend\Links_Processor $_processor
 	 */
@@ -22,17 +31,21 @@ class Links_Processor_Test extends TestCase {
 	 * @return void
 	 */
 	protected function setUp(): void {
+		parent::setUp();
+
 		$this->_processor = new Links_Processor();
 	}
 
 	/**
-	 * Test the Links_Processor::call() method.
-	 *
 	 * @dataProvider data_call
 	 *
-	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::call
+	 * @covers ::call
+	 * @covers ::is_links_found
+	 * @covers ::is_noreferrer_found
+	 * @covers ::remove_noreferrer
+	 * @covers ::remove_extra_spaces
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @param string $input The input string.
@@ -49,7 +62,7 @@ class Links_Processor_Test extends TestCase {
 	/**
 	 * Data provider
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return array

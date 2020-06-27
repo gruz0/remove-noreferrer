@@ -7,7 +7,7 @@ notifications:
   on_failure: change
 
 services:
-  - mysql
+  - docker
 
 php:
   - 7.4
@@ -16,19 +16,19 @@ php:
   - 7.1
 
 env:
-  global:
-    - TRAVIS_CI_WP_DIRECTORY=/tmp/wordpress WP_PROJECT_TYPE=plugin WP_MULTISITE=0 WP_TEST_URL=http://localhost:12000 WP_TEST_USER=test WP_TEST_USER_PASS=test
   jobs:
     - WP_VERSION=latest
     - WP_VERSION=5.4
     - WP_VERSION=5.3
-    - WP_VERSION=5.2
-    - WP_VERSION=5.1
 
 before_script:
+  - make dockerize_test_database
+  - make wait_for_database
   - make install_linters
-  - git clone https://github.com/Seravo/wordpress-test-template wp-tests
-  - bash wp-tests/bin/install-wp-tests.sh test root '' localhost $WP_VERSION
+  - make install_wordpress_dev WP_VERSION=$WP_VERSION
+
+after_script:
+  - make shutdown_test_database
 
 script:
   - make lint

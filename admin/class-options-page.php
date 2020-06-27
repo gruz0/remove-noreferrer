@@ -18,40 +18,23 @@ namespace Remove_Noreferrer\Admin;
  */
 class Options_Page {
 	/**
-	 * Options
-	 *
-	 * @since 1.1.0
-	 * @access private
-	 * @var array $_options
-	 */
-	private $_options = array();
-
-	/**
-	 * Constructor
+	 * Render options page
 	 *
 	 * @since 1.1.0
 	 * @access public
 	 *
 	 * @param array $options Options.
+	 * @return string
 	 */
-	public function __construct( $options ) {
-		$this->_options = $options;
-	}
-
-	/**
-	 * Render options page
-	 *
-	 * @since 1.1.0
-	 * @access public
-	 */
-	public function render() {
+	public function render( $options ) {
+		ob_start();
 		?>
 		<div class="wrap">
 			<h1><?php _e( 'Remove Noreferrer', 'remove-noreferrer' ); ?></h1>
 
 			<form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>">
-				<?php wp_nonce_field( Plugin::GRN_NONCE_ACTION, Plugin::GRN_NONCE_VALUE ); ?>
-				<input type="hidden" name="action" value="remove_noreferrer_update_options">
+				<?php $this->render_nonce(); ?>
+				<?php echo $this->render_action(); ?>
 
 				<table class="form-table">
 					<tbody>
@@ -62,32 +45,38 @@ class Options_Page {
 							<td>
 								<fieldset>
 									<?php
-										$this->render_where_should_the_plugin_work(
+										$this->render_checkbox(
+											$options,
 											'post',
 											__( 'Single Post', 'remove-noreferrer' )
 										);
 
-										$this->render_where_should_the_plugin_work(
+										$this->render_checkbox(
+											$options,
 											'posts_page',
 											__( 'Posts page (Home Page, etc.)', 'remove-noreferrer' )
 										);
 
-										$this->render_where_should_the_plugin_work(
+										$this->render_checkbox(
+											$options,
 											'page',
 											__( 'Single Page', 'remove-noreferrer' )
 										);
 
-										$this->render_where_should_the_plugin_work(
+										$this->render_checkbox(
+											$options,
 											'comments',
 											__( 'Comments', 'remove-noreferrer' )
 										);
 
-										$this->render_where_should_the_plugin_work(
+										$this->render_checkbox(
+											$options,
 											'text_widget',
 											__( 'Text Widget', 'remove-noreferrer' )
 										);
 
-										$this->render_where_should_the_plugin_work(
+										$this->render_checkbox(
+											$options,
 											'custom_html_widget',
 											__( 'Custom HTML Widget', 'remove-noreferrer' )
 										);
@@ -136,6 +125,29 @@ class Options_Page {
 			</form>
 		</div>
 		<?php
+			return ob_get_clean();
+	}
+
+	/**
+	 * Render nonce field
+	 *
+	 * @since 2.0.0
+	 * @access private
+	 */
+	private function render_nonce() {
+		wp_nonce_field( Plugin::GRN_NONCE_ACTION, Plugin::GRN_NONCE_VALUE );
+	}
+
+	/**
+	 * Returns hidden field with hook's action
+	 *
+	 * @since 2.0.0
+	 * @access private
+	 *
+	 * @return string
+	 */
+	private function render_action() {
+		return '<input type="hidden" name="action" value="remove_noreferrer_update_options" />';
 	}
 
 	/**
@@ -144,17 +156,23 @@ class Options_Page {
 	 * @since 1.1.0
 	 * @access private
 	 *
+	 * @param array  $options Options.
 	 * @param string $value Item's value.
 	 * @param string $label Checkbox's label.
 	 */
-	private function render_where_should_the_plugin_work( $value, $label ) {
+	private function render_checkbox( $options, $value, $label ) {
 		?>
 			<label>
 				<input
 					type="checkbox"
-					name="remove_noreferrer[where_should_the_plugin_work][]"
+					name="remove_noreferrer[<?php echo GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY; ?>][]"
 					value="<?php echo esc_attr( $value ); ?>"
-					<?php checked( in_array( $value, $this->_options['where_should_the_plugin_work'], true ), true ); ?>
+					<?php
+						checked(
+							in_array( $value, $options[ GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ], true ),
+							true
+						);
+					?>
 				/>
 				<?php echo esc_html( $label ); ?>
 			</label>

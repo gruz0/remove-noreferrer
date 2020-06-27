@@ -16,33 +16,24 @@ namespace Remove_Noreferrer\Frontend;
  *
  * @since 1.1.0
  */
-class Plugin {
+class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	/**
-	 * Remove_Noreferrer\Admin instance
+	 * Remove_Noreferrer\Core\Options instance
 	 *
-	 * @since 1.1.0
+	 * @since 1.1.1
 	 * @access private
-	 * @var Remove_Noreferrer\Admin\Plugin $_admin
+	 * @var Remove_Noreferrer\Core\Options $_options
 	 */
-	private $_admin = null;
+	private $_options;
 
 	/**
 	 * Remove_Noreferrer\Frontend\Links_Processor instance
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 * @var Remove_Noreferrer\Frontend\Links_Processor $_links_processor
 	 */
-	private $_links_processor = null;
-
-	/**
-	 * Plugin's options
-	 *
-	 * @since 1.1.1
-	 * @access private
-	 * @var array $_options
-	 */
-	private $_options = array();
+	private $_links_processor;
 
 	/**
 	 * Constructor
@@ -50,46 +41,32 @@ class Plugin {
 	 * @since 1.1.0
 	 * @access public
 	 *
-	 * @param Remove_Noreferrer\Admin\Plugin             $admin Admin class.
-	 * @param Remove_Noreferrer\Frontend\Links_Processor $links_processor Links_Processor class.
+	 * @param \Remove_Noreferrer\Core\Options             $options Options class.
+	 * @param \Remove_Noreferrer\Frontend\Links_Processor $links_processor Links_Processor class.
 	 */
-	public function __construct( $admin, $links_processor ) {
-		$this->_admin           = $admin;
+	public function __construct(
+		\Remove_Noreferrer\Core\Options $options,
+		\Remove_Noreferrer\Frontend\Links_Processor $links_processor
+	) {
+		$this->_options         = $options;
 		$this->_links_processor = $links_processor;
+
+		parent::__construct();
 	}
 
 	/**
-	 * Initialize
+	 * Initializes plugin
 	 *
-	 * @since 1.1.0
+	 * @since 2.0.0
 	 * @access public
 	 */
 	public function init() {
-		$this->load_options();
-		$this->add_hooks();
-	}
-
-	/**
-	 * Load options
-	 *
-	 * @since 1.1.1
-	 * @access private
-	 */
-	private function load_options() {
-		$this->_options = get_option( GRN_OPTION_KEY, $this->_admin->get_default_options() );
-	}
-
-	/**
-	 * Add hooks
-	 *
-	 * @since 1.1.0
-	 * @access private
-	 */
-	private function add_hooks() {
 		add_filter( 'the_content', array( & $this, 'remove_noreferrer_from_content' ), 999 );
 		add_filter( 'comment_text', array( & $this, 'remove_noreferrer_from_comment' ), 20, 3 );
 		add_filter( 'widget_display_callback', array( & $this, 'remove_noreferrer_from_text_widget' ), 10, 3 );
 		add_filter( 'widget_custom_html_content', array( & $this, 'remove_noreferrer_from_custom_html_widget' ), 10, 3 );
+
+		parent::init();
 	}
 
 	/**
@@ -121,7 +98,7 @@ class Plugin {
 	 * @return string
 	 */
 	public function remove_noreferrer_from_comment( $comment_text, $comment, $args ) {
-		if ( ! $this->is_comments_processable( $this->get_option( 'where_should_the_plugin_work' ) ) ) {
+		if ( ! $this->is_comments_processable( $this->get_option( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ) ) ) {
 			return $comment_text;
 		}
 
@@ -131,21 +108,21 @@ class Plugin {
 	/**
 	 * Remove noreferrer from Text widget's content
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
-	 * @param array     $instance The current widget instance's settings.
-	 * @param WP_Widget $widget_class The current widget instance.
-	 * @param array     $args An array of default widget arguments.
+	 * @param array      $instance The current widget instance's settings.
+	 * @param \WP_Widget $widget_class The current widget instance.
+	 * @param array      $args An array of default widget arguments.
 	 * @return mixed
 	 */
-	public function remove_noreferrer_from_text_widget( $instance, $widget_class, $args ) {
+	public function remove_noreferrer_from_text_widget( $instance, \WP_Widget $widget_class, $args ) {
 		if ( ! is_a( $widget_class, 'WP_Widget_Text' ) ) {
 			return $instance;
 		}
 
 		$processable = $this->is_widgets_processable(
-			$this->get_option( 'where_should_the_plugin_work' ),
+			$this->get_option( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ),
 			'text_widget'
 		);
 
@@ -167,17 +144,17 @@ class Plugin {
 	/**
 	 * Remove noreferrer from Custom HTML widget's content
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access public
 	 *
-	 * @param string                $content The widget content.
-	 * @param array                 $instance Array of settings for the current widget.
-	 * @param WP_Widget_Custom_HTML $widget_class Current Custom HTML widget instance.
+	 * @param string                 $content The widget content.
+	 * @param array                  $instance Array of settings for the current widget.
+	 * @param \WP_Widget_Custom_HTML $widget_class Current Custom HTML widget instance.
 	 * @return mixed
 	 */
-	public function remove_noreferrer_from_custom_html_widget( $content, $instance, $widget_class ) {
+	public function remove_noreferrer_from_custom_html_widget( $content, $instance, \WP_Widget_Custom_HTML $widget_class ) {
 		$processable = $this->is_widgets_processable(
-			$this->get_option( 'where_should_the_plugin_work' ),
+			$this->get_option( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ),
 			'custom_html_widget'
 		);
 
@@ -193,7 +170,7 @@ class Plugin {
 	 * @return bool
 	 */
 	private function is_current_page_allowed() {
-		$where_should_the_plugin_work = $this->get_option( 'where_should_the_plugin_work' );
+		$where_should_the_plugin_work = $this->get_option( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY );
 
 		return $this->is_single_processable( $where_should_the_plugin_work )
 			|| $this->is_page_processable( $where_should_the_plugin_work )
@@ -210,7 +187,7 @@ class Plugin {
 	 * @return mixed
 	 */
 	private function get_option( $key ) {
-		return $this->_options[ $key ];
+		return $this->_options->get_option( $key );
 	}
 
 	/**
@@ -268,7 +245,7 @@ class Plugin {
 	/**
 	 * Checks if array contains widgets' options
 	 *
-	 * @since 1.3.0
+	 * @since 2.0.0
 	 * @access private
 	 *
 	 * @param array  $options Options array.

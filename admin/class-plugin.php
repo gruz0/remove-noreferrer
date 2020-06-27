@@ -16,7 +16,7 @@ namespace Remove_Noreferrer\Admin;
  *
  * @since 1.1.0
  */
-class Plugin {
+class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	/**
 	 * Where should plugin's menu item be located
 	 *
@@ -49,29 +49,44 @@ class Plugin {
 	 *
 	 * @since 1.1.0
 	 * @access public
-	 * @var string GRN_NONCE_ACTIOn
+	 * @var string GRN_NONCE_ACTION
 	 */
 	const GRN_NONCE_ACTION = 'remove_noreferrer';
 
 	/**
-	 * Initialize
+	 * Remove_Noreferrer\Core\Options instance
 	 *
-	 * @since 1.1.0
-	 * @access public
+	 * @since 2.0.0
+	 * @access private
+	 * @var Remove_Noreferrer\Core\Options $_options
 	 */
-	public function init() {
-		$this->add_hooks();
+	private $_options;
+
+	/**
+	 * Constructor
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @param \Remove_Noreferrer\Core\Options $options Options class.
+	 */
+	public function __construct( \Remove_Noreferrer\Core\Options $options ) {
+		$this->_options = $options;
+
+		parent::__construct();
 	}
 
 	/**
-	 * Add hooks
+	 * Initializes plugin
 	 *
-	 * @since 1.1.0
-	 * @access private
+	 * @since 2.0.0
+	 * @access public
 	 */
-	private function add_hooks() {
+	public function init() {
 		add_action( 'admin_menu', array( & $this, 'add_menu' ) );
 		add_action( 'admin_post_remove_noreferrer_update_options', array( & $this, 'update_options' ) );
+
+		parent::init();
 	}
 
 	/**
@@ -100,13 +115,20 @@ class Plugin {
 			wp_die( 'Unauthorized user' );
 		}
 
+		if ( empty( $_POST[ self::GRN_NONCE_VALUE ] ) ) {
+			wp_die( __( 'Nonce must be set', 'remove-noreferrer' ) );
+		}
+
 		if ( ! wp_verify_nonce( $_POST[ self::GRN_NONCE_VALUE ], self::GRN_NONCE_ACTION ) ) {
 			wp_die( __( 'Invalid nonce', 'remove-noreferrer' ) );
 		}
 
-		update_option( GRN_OPTION_KEY, $this->validate_options() );
+		$new_values = $_POST['remove_noreferrer'] ?? array();
+
+		update_option( GRN_OPTION_KEY, $this->validate_options( $new_values ) );
 
 		wp_redirect( admin_url( self::GRN_PARENT_SLUG . '?page=' . self::GRN_MENU_SLUG ), 303 );
+
 		exit;
 	}
 
@@ -117,8 +139,7 @@ class Plugin {
 	 * @access public
 	 */
 	public function render_options_page() {
-		$options = get_option( GRN_OPTION_KEY, $this->get_default_options() );
-		$this->options_page( $options )->render();
+		echo $this->options_page()->render( $this->_options->get_options() );
 	}
 
 	/**
@@ -127,33 +148,10 @@ class Plugin {
 	 * @since 1.1.0
 	 * @access private
 	 *
-	 * @param array $options Options.
-	 *
 	 * @return Remove_Noreferrer\Admin\Options_Page
 	 */
-	private function options_page( $options ) {
-		return new Options_Page( $options );
-	}
-
-	/**
-	 * Return plugin's default options if options are not found in the database
-	 *
-	 * @since 1.1.0
-	 * @access public
-	 *
-	 * @return array
-	 */
-	public function get_default_options() {
-		return array(
-			'where_should_the_plugin_work' => array(
-				'post',
-				'posts_page',
-				'page',
-				'comments',
-				'text_widget',
-				'custom_html_widget',
-			),
-		);
+	private function options_page() {
+		return new Options_Page();
 	}
 
 	/**
@@ -162,14 +160,12 @@ class Plugin {
 	 * @since 1.1.0
 	 * @access private
 	 *
+	 * @param mixed $new_values New values.
+	 *
 	 * @return array
 	 */
-	private function validate_options() {
-		if ( empty( $_POST['remove_noreferrer'] ) ) {
-			return $this->unset_options();
-		}
-
-		return $this->options_validator()->validate( (array) $_POST['remove_noreferrer'] );
+	private function validate_options( $new_values ) {
+		return $this->options_validator()->call( $new_values );
 	}
 
 	/**
@@ -182,20 +178,6 @@ class Plugin {
 	 */
 	private function options_validator() {
 		return new Options_Validator();
-	}
-
-	/**
-	 * Return array with empty options
-	 *
-	 * @since 1.1.0
-	 * @access private
-	 *
-	 * @return array
-	 */
-	private function unset_options() {
-		return array(
-			'where_should_the_plugin_work' => array(),
-		);
 	}
 }
 
