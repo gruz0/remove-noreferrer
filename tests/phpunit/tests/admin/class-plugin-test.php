@@ -256,7 +256,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_plugin_throws_exception_when_user_does_not_have_manage_options_capability(): void {
+	public function test_update_options_throws_exception_when_user_does_not_have_manage_options_capability(): void {
 		$editor_user = self::factory()->user->create( array( 'role' => 'editor' ) );
 
 		wp_set_current_user( $editor_user );
@@ -276,7 +276,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_plugin_throws_exception_when_nonce_is_not_set(): void {
+	public function test_update_options_throws_exception_when_nonce_is_not_set(): void {
 		$admin_user = self::factory()->user->create( array( 'role' => 'administrator' ) );
 
 		wp_set_current_user( $admin_user );
@@ -296,7 +296,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_plugin_throws_exception_when_nonce_is_invalid(): void {
+	public function test_update_options_throws_exception_when_nonce_is_invalid(): void {
 		$admin_user = self::factory()->user->create( array( 'role' => 'administrator' ) );
 
 		wp_set_current_user( $admin_user );

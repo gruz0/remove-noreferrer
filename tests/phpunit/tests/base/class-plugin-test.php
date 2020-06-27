@@ -22,7 +22,7 @@ class Plugin_Test extends \PHPUnit\Framework\TestCase {
 	public function setUp(): void {
 		parent::setUp();
 
-		$this->_plugin = new \Remove_Noreferrer\Base\Demo_Plugin();
+		$this->_plugin = new Demo_Plugin();
 	}
 
 	/**

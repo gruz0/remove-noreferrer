@@ -39,7 +39,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	public function setUp(): void {
 		parent::setUp();
 
-		$this->_plugin = new \Remove_Noreferrer\Core\Plugin( new \Remove_Noreferrer\Core\Options() );
+		$this->_plugin = new Plugin( new \Remove_Noreferrer\Core\Options() );
 	}
 
 	/**
