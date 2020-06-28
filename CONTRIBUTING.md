@@ -49,6 +49,16 @@ Then use following commands:
 1. `make dockerize` – to run WordPress instance on [http://localhost:8000/](http://localhost:8000/)
 2. `make shell` – to open `bash` inside Docker container
 
+After that you can enable Debug mode by running following command
+inside Docker's shell:
+
+```bash
+./wp-content/plugins/remove-noreferrer/bin/activate_debug.sh
+```
+
+It sets `WP_DEBUG`, `WP_DEBUG_DISPLAY` and `WP_DEBUG_LOG` constants to `true`
+in `wp-config.php` and sets right permissions to `/var/www/html` directory.
+
 ## How to cleanup development database
 
 Simply delete the `.data` directory from the root directory.
