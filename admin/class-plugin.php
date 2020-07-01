@@ -127,7 +127,16 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 
 		update_option( GRN_OPTION_KEY, $this->validate_options( $new_values ) );
 
-		wp_redirect( admin_url( self::GRN_PARENT_SLUG . '?page=' . self::GRN_MENU_SLUG ), 303 );
+		wp_redirect(
+			add_query_arg(
+				array(
+					'page'    => self::GRN_MENU_SLUG,
+					'updated' => true,
+				),
+				admin_url( self::GRN_PARENT_SLUG )
+			),
+			303
+		);
 
 		exit;
 	}
