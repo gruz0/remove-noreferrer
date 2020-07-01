@@ -4,6 +4,7 @@ rulesets
 svn
 vendor/
 composer.lock
+archive/
 !build/.keep
 build/
 tests/wordpress-dev/

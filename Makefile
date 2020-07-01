@@ -1,4 +1,4 @@
-.PHONY: help dockerize shell install_linters lint test coverage release install_wordpress_dev dockerize_test_database shutdown_test_database wait_for_database
+.PHONY: help dockerize shell install_linters lint test coverage e2e e2e_single archive release install_wordpress_dev dockerize_test_database shutdown_test_database wait_for_database
 
 help:
 	@echo 'Available targets:'
@@ -8,6 +8,9 @@ help:
 	@echo '  make lint'
 	@echo '  make test'
 	@echo '  make coverage'
+	@echo '  make e2e'
+	@echo '  make e2e_single'
+	@echo '  make archive'
 	@echo '  make release'
 	@echo '  make install_wordpress_dev'
 	@echo '  make dockerize_test_database'
@@ -33,6 +36,15 @@ test:
 coverage:
 	composer coverage
 	open build/coverage/index.html
+
+e2e: archive
+	tests/integration/bin/all.sh
+
+e2e_single: archive
+	tests/integration/bin/run.sh $(WP_VERSION)
+
+archive:
+	bin/archive.sh
 
 release:
 	bin/release.sh
