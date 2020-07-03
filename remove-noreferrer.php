@@ -77,8 +77,6 @@ register_uninstall_hook( __FILE__, array( 'Remove_Noreferrer\Core\Plugin', 'unin
 function run_plugin() {
 	$options = new \Remove_Noreferrer\Core\Options();
 
-	new \Remove_Noreferrer\Core\Plugin( $options );
-
 	// TODO: Если после запуска Core нет нужных опций, то их надо создать
 	// В этом случае в $options надо перечитать значения, т.к. они будут закешированными.
 	//

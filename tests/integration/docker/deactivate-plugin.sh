@@ -2,4 +2,4 @@
 
 set -euo pipefail
 
-wp plugin deactivate remove-noreferrer --allow-root
+wp plugin deactivate remove-noreferrer --user=1 --allow-root

@@ -226,5 +226,29 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 		wp_delete_user( $editor_user );
 	}
+
+	/**
+	 * @covers ::uninstall
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_uninstall_removes_plugin_options(): void {
+		$option = array( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array( 'page' ) );
+
+		add_option( GRN_OPTION_KEY, $option );
+
+		$admin_user = self::factory()->user->create( array( 'role' => 'administrator' ) );
+
+		wp_set_current_user( $admin_user );
+
+		$this->_plugin->uninstall();
+
+		$this->assertEquals( false, get_option( GRN_OPTION_KEY ) );
+
+		wp_delete_user( $admin_user );
+	}
 }
 

@@ -192,5 +192,25 @@ class Options_Test extends \WP_UnitTestCase {
 
 		$this->assertEquals( array( 'page' ), $this->_options->get_option( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ) );
 	}
+
+	/**
+	 * @covers ::delete_options
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_delete_options(): void {
+		$option = array( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array( 'page' ) );
+
+		add_option( GRN_OPTION_KEY, $option );
+
+		$this->assertEquals( $option, get_option( GRN_OPTION_KEY ) );
+
+		$this->_options->delete_options();
+
+		$this->assertEquals( false, get_option( GRN_OPTION_KEY ) );
+	}
 }
 
