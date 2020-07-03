@@ -132,6 +132,7 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 				array(
 					'page'    => self::GRN_MENU_SLUG,
 					'updated' => true,
+					'tab'     => $this->get_current_tab(),
 				),
 				admin_url( self::GRN_PARENT_SLUG )
 			),
@@ -148,7 +149,7 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	 * @access public
 	 */
 	public function render_options_page() {
-		echo $this->options_page()->render( $this->_options->get_options() );
+		echo $this->options_page()->render( $this->_options->get_options(), $this->get_current_tab() );
 	}
 
 	/**
@@ -187,6 +188,18 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	 */
 	private function options_validator() {
 		return new Options_Validator();
+	}
+
+	/**
+	 * Returns current tab
+	 *
+	 * @since 2.0.0
+	 * @access private
+	 *
+	 * @return string
+	 */
+	private function get_current_tab() {
+		return $_GET['tab'] ?? 'general';
 	}
 }
 

@@ -60,6 +60,45 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers ::render_tabs
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_render_tabs_has_valid_tabs(): void {
+		$content = $this->_options_page->render( $this->_options, 'general' );
+
+		$internal_errors = libxml_use_internal_errors( true );
+
+		$dom = new \DOMDocument();
+		$dom->loadHTML( $content );
+
+		$xpath = new \DOMXpath( $dom );
+
+		$nodes = $xpath->query( '//a' );
+
+		// General.
+		$this->assertEquals( __( 'General' ), $nodes[0]->textContent );
+		$this->assertContains( '/wp-admin/options-general.php?page=remove_noreferrer&tab=general', $nodes[0]->attributes[1]->textContent );
+
+		// Additional settings.
+		$this->assertEquals( __( 'Additional settings' ), $nodes[1]->textContent );
+		$this->assertContains( '/wp-admin/options-general.php?page=remove_noreferrer&tab=additional-settings', $nodes[1]->attributes[1]->textContent );
+
+		// Support.
+		$this->assertEquals( __( 'Support' ), $nodes[2]->textContent );
+		$this->assertContains( '/wp-admin/options-general.php?page=remove_noreferrer&tab=support', $nodes[2]->attributes[1]->textContent );
+
+		// Info.
+		$this->assertEquals( __( 'Info' ), $nodes[3]->textContent );
+		$this->assertContains( '/wp-admin/options-general.php?page=remove_noreferrer&tab=info', $nodes[3]->attributes[1]->textContent );
+
+		libxml_use_internal_errors( $internal_errors );
+	}
+
+	/**
 	 * @covers ::render
 	 *
 	 * @since 2.0.0
@@ -68,7 +107,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_render_h1_tag(): void {
-		$content = $this->_options_page->render( $this->_options );
+		$content = $this->_options_page->render( $this->_options, 'general' );
 
 		$this->assertTrue( false !== preg_match( '/<h1>Remove Noreferrer<\/h1>/', $content ) );
 	}
@@ -81,8 +120,8 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_render_has_hidden_nonce_field(): void {
-		$content = $this->_options_page->render( $this->_options );
+	public function test_render_general_tab_has_hidden_nonce_field(): void {
+		$content = $this->_options_page->render( $this->_options, 'general' );
 
 		$nonce = 'gruz0_remove_noreferrer_nonce';
 		$found = preg_match( '/<input type="hidden" id="' . $nonce . '" name="' . $nonce . '" value=".+" \/>/', $content );
@@ -92,14 +131,15 @@ class Options_Page_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::render_action
+	 * @covers ::render_general_tab
 	 *
 	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
 	 */
-	public function test_render_has_hidden_action_field(): void {
-		$content = $this->_options_page->render( $this->_options );
+	public function test_render_general_tab_has_hidden_action_field(): void {
+		$content = $this->_options_page->render( $this->_options, 'general' );
 
 		$found = preg_match( '/<input type="hidden" name="action" value="remove_noreferrer_update_options" \/>/', $content );
 
@@ -107,7 +147,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @covers ::render
+	 * @covers ::render_general_tab
 	 * @covers ::render_checkbox
 	 *
 	 * @since 2.0.0
@@ -115,8 +155,8 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_render_has_valid_checkboxes_count(): void {
-		$content = $this->_options_page->render( $this->_options );
+	public function test_render_general_tab_has_valid_checkboxes_count(): void {
+		$content = $this->_options_page->render( $this->_options, 'general' );
 
 		$matches = array();
 
@@ -152,18 +192,18 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 */
 	public function data_checkboxes(): array {
 		return array(
-			'checked post'                 => array( $this->find_checked_checkbox( 'post', 'Single Post' ), 1 ),
-			'unchecked post'               => array( $this->find_unchecked_checkbox( 'post', 'Single Post' ), 1 ),
-			'checked posts_page'           => array( $this->find_checked_checkbox( 'posts_page', 'Posts page \(Home Page, etc.\)' ), 1 ),
-			'unchecked posts_page'         => array( $this->find_unchecked_checkbox( 'posts_page', 'Posts page \(Home Page, etc.\)' ), 1 ),
-			'checked page'                 => array( $this->find_checked_checkbox( 'page', 'Single Page' ), 1 ),
-			'unchecked page'               => array( $this->find_unchecked_checkbox( 'page', 'Single Page' ), 1 ),
-			'checked comments'             => array( $this->find_checked_checkbox( 'comments', 'Comments' ), 1 ),
-			'unchecked comments'           => array( $this->find_unchecked_checkbox( 'comments', 'Comments' ), 1 ),
-			'checked text_widget'          => array( $this->find_checked_checkbox( 'text_widget', 'Text Widget' ), 1 ),
-			'unchecked text_widget'        => array( $this->find_unchecked_checkbox( 'text_widget', 'Text Widget' ), 1 ),
-			'checked custom_html_widget'   => array( $this->find_checked_checkbox( 'custom_html_widget', 'Custom HTML Widget' ), 1 ),
-			'unchecked custom_html_widget' => array( $this->find_unchecked_checkbox( 'custom_html_widget', 'Custom HTML Widget' ), 1 ),
+			'checked post'                 => array( $this->find_checked_checkbox( 'post', __( 'Post' ) ), 1 ),
+			'unchecked post'               => array( $this->find_unchecked_checkbox( 'post', __( 'Post' ) ), 1 ),
+			'checked posts_page'           => array( $this->find_checked_checkbox( 'posts_page', __( 'Posts Page' ) ), 1 ),
+			'unchecked posts_page'         => array( $this->find_unchecked_checkbox( 'posts_page', __( 'Posts Page' ) ), 1 ),
+			'checked page'                 => array( $this->find_checked_checkbox( 'page', __( 'Single Page' ) ), 1 ),
+			'unchecked page'               => array( $this->find_unchecked_checkbox( 'page', __( 'Single Page' ) ), 1 ),
+			'checked comments'             => array( $this->find_checked_checkbox( 'comments', __( 'Comments' ) ), 1 ),
+			'unchecked comments'           => array( $this->find_unchecked_checkbox( 'comments', __( 'Comments' ) ), 1 ),
+			'checked text_widget'          => array( $this->find_checked_checkbox( 'text_widget', __( 'Text' ) ), 1 ),
+			'unchecked text_widget'        => array( $this->find_unchecked_checkbox( 'text_widget', __( 'Text' ) ), 1 ),
+			'checked custom_html_widget'   => array( $this->find_checked_checkbox( 'custom_html_widget', __( 'Custom HTML' ) ), 1 ),
+			'unchecked custom_html_widget' => array( $this->find_unchecked_checkbox( 'custom_html_widget', __( 'Custom HTML' ) ), 1 ),
 		);
 	}
 
@@ -190,7 +230,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 			),
 		);
 
-		$content = ( new Options_Page() )->render( $options );
+		$content = ( new Options_Page() )->render( $options, 'general' );
 
 		$checked = "checked='checked'";
 
@@ -224,7 +264,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 
 		$options['where_should_the_plugin_work'] = $new_options;
 
-		$content = ( new Options_Page() )->render( $options );
+		$content = ( new Options_Page() )->render( $options, 'general' );
 
 		return $this->regex_match( $content, $value, $label, '' );
 	}
