@@ -1,10 +1,10 @@
 #!/bin/bash
 
-BANNER="Uninstall"
+BANNER="Options deleted"
 
 $ACTIVATE_PLUGIN > /dev/null
 
-docker-compose $COMPOSER_ARGS exec wordpress wp option add remove_noreferrer '{"test":"test"}' --allow-root > /dev/null
+docker-compose $COMPOSER_ARGS exec wordpress wp option add remove_noreferrer '{"remove_settings_on_uninstall":"1"}' --format=json --allow-root > /dev/null
 
 $DEACTIVATE_PLUGIN > /dev/null
 $UNINSTALL_PLUGIN > /dev/null
@@ -16,6 +16,6 @@ if [ $? -ne 1 ]; then
 	exit 1
 fi
 
-echo -e "[${BANNER}]:          ${green}Passed${NC}"
+echo -e "[${BANNER}]:    ${green}Passed${NC}"
 
 exit 0

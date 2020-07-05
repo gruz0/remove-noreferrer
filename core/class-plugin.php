@@ -58,7 +58,10 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 		}
 
 		$options = new Options();
-		$options->delete_options();
+
+		if ( '1' === $options->get_option( 'remove_settings_on_uninstall' ) ) {
+			$options->delete_options();
+		}
 
 		do_action( 'remove_noreferrer_core_plugin_uninstalled' );
 	}
