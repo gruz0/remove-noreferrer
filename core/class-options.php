@@ -72,5 +72,15 @@ class Options {
 
 		return $this->_options[ $key ] ?? $default;
 	}
+
+	/**
+	 * Delete plugin's options
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 */
+	public function delete_options() {
+		delete_option( GRN_OPTION_KEY );
+	}
 }
 

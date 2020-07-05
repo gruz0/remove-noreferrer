@@ -16,39 +16,6 @@ namespace Remove_Noreferrer\Core;
  */
 class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	/**
-	 * Remove_Noreferrer\Core\Options instance
-	 *
-	 * @since 2.0.0
-	 * @access private
-	 * @var \Remove_Noreferrer\Core\Options $_options
-	 */
-	private $_options;
-
-	/**
-	 * Constructor
-	 *
-	 * @since 2.0.0
-	 * @access public
-	 *
-	 * @param \Remove_Noreferrer\Core\Options $options Options class.
-	 */
-	public function __construct( \Remove_Noreferrer\Core\Options $options ) {
-		$this->_options = $options;
-
-		parent::__construct();
-	}
-
-	/**
-	 * Initializes plugin
-	 *
-	 * @since 2.0.0
-	 * @access public
-	 */
-	public function init() {
-		parent::init();
-	}
-
-	/**
 	 * Activates plugin
 	 *
 	 * @since 2.0.0
@@ -88,6 +55,12 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	public static function uninstall() {
 		if ( ! current_user_can( 'activate_plugins' ) ) {
 			return;
+		}
+
+		$options = new Options();
+
+		if ( '1' === $options->get_option( 'remove_settings_on_uninstall' ) ) {
+			$options->delete_options();
 		}
 
 		do_action( 'remove_noreferrer_core_plugin_uninstalled' );
