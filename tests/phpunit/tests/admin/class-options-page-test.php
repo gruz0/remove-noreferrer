@@ -54,6 +54,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 				'text_widget',
 				'custom_html_widget',
 			),
+			'remove_settings_on_uninstall' => false,
 		);
 
 		$this->_options_page = new Options_Page();
@@ -114,6 +115,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::render_nonce
+	 * @covers ::render_general_tab
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -147,8 +149,25 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers ::render_hidden_grn_tab
 	 * @covers ::render_general_tab
-	 * @covers ::render_checkbox
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_render_general_tab_has_hidden_grn_tab_field(): void {
+		$content = $this->_options_page->render( $this->_options, 'general' );
+
+		$found = preg_match( '/<input type="hidden" name="remove_noreferrer\[grn_tab\]" value="general" \/>/', $content );
+
+		$this->assertEquals( 1, $found );
+	}
+
+	/**
+	 * @covers ::render_general_tab
+	 * @covers ::render_checkbox_where_should_the_plugin_work
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -166,9 +185,9 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider data_checkboxes
+	 * @dataProvider data_checkboxes_for_where_should_the_plugin_work
 	 *
-	 * @covers ::render_checkbox
+	 * @covers ::render_checkbox_where_should_the_plugin_work
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -178,7 +197,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_checkboxes( $input, $expected ): void {
+	public function test_checkboxes_where_should_the_plugin_work( $input, $expected ): void {
 		$this->assertEquals( $expected, $input );
 	}
 
@@ -190,20 +209,20 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function data_checkboxes(): array {
+	public function data_checkboxes_for_where_should_the_plugin_work(): array {
 		return array(
-			'checked post'                 => array( $this->find_checked_checkbox( 'post', __( 'Post' ) ), 1 ),
-			'unchecked post'               => array( $this->find_unchecked_checkbox( 'post', __( 'Post' ) ), 1 ),
-			'checked posts_page'           => array( $this->find_checked_checkbox( 'posts_page', __( 'Posts Page' ) ), 1 ),
-			'unchecked posts_page'         => array( $this->find_unchecked_checkbox( 'posts_page', __( 'Posts Page' ) ), 1 ),
-			'checked page'                 => array( $this->find_checked_checkbox( 'page', __( 'Single Page' ) ), 1 ),
-			'unchecked page'               => array( $this->find_unchecked_checkbox( 'page', __( 'Single Page' ) ), 1 ),
-			'checked comments'             => array( $this->find_checked_checkbox( 'comments', __( 'Comments' ) ), 1 ),
-			'unchecked comments'           => array( $this->find_unchecked_checkbox( 'comments', __( 'Comments' ) ), 1 ),
-			'checked text_widget'          => array( $this->find_checked_checkbox( 'text_widget', __( 'Text' ) ), 1 ),
-			'unchecked text_widget'        => array( $this->find_unchecked_checkbox( 'text_widget', __( 'Text' ) ), 1 ),
-			'checked custom_html_widget'   => array( $this->find_checked_checkbox( 'custom_html_widget', __( 'Custom HTML' ) ), 1 ),
-			'unchecked custom_html_widget' => array( $this->find_unchecked_checkbox( 'custom_html_widget', __( 'Custom HTML' ) ), 1 ),
+			'checked post'                 => array( $this->find_checked_checkbox_where_should_the_plugin_work( 'post', __( 'Post' ) ), 1 ),
+			'unchecked post'               => array( $this->find_unchecked_checkbox_where_should_the_plugin_work( 'post', __( 'Post' ) ), 1 ),
+			'checked posts_page'           => array( $this->find_checked_checkbox_where_should_the_plugin_work( 'posts_page', __( 'Posts Page' ) ), 1 ),
+			'unchecked posts_page'         => array( $this->find_unchecked_checkbox_where_should_the_plugin_work( 'posts_page', __( 'Posts Page' ) ), 1 ),
+			'checked page'                 => array( $this->find_checked_checkbox_where_should_the_plugin_work( 'page', __( 'Single Page' ) ), 1 ),
+			'unchecked page'               => array( $this->find_unchecked_checkbox_where_should_the_plugin_work( 'page', __( 'Single Page' ) ), 1 ),
+			'checked comments'             => array( $this->find_checked_checkbox_where_should_the_plugin_work( 'comments', __( 'Comments' ) ), 1 ),
+			'unchecked comments'           => array( $this->find_unchecked_checkbox_where_should_the_plugin_work( 'comments', __( 'Comments' ) ), 1 ),
+			'checked text_widget'          => array( $this->find_checked_checkbox_where_should_the_plugin_work( 'text_widget', __( 'Text' ) ), 1 ),
+			'unchecked text_widget'        => array( $this->find_unchecked_checkbox_where_should_the_plugin_work( 'text_widget', __( 'Text' ) ), 1 ),
+			'checked custom_html_widget'   => array( $this->find_checked_checkbox_where_should_the_plugin_work( 'custom_html_widget', __( 'Custom HTML' ) ), 1 ),
+			'unchecked custom_html_widget' => array( $this->find_unchecked_checkbox_where_should_the_plugin_work( 'custom_html_widget', __( 'Custom HTML' ) ), 1 ),
 		);
 	}
 
@@ -218,7 +237,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 *
 	 * @return mixed
 	 */
-	private function find_checked_checkbox( $value, $label ) {
+	private function find_checked_checkbox_where_should_the_plugin_work( $value, $label ) {
 		$options = array(
 			'where_should_the_plugin_work' => array(
 				'post',
@@ -234,7 +253,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 
 		$checked = "checked='checked'";
 
-		return $this->regex_match( $content, $value, $label, $checked );
+		return $this->regex_match( $content, '\[where_should_the_plugin_work\]\[\]', $value, $label, $checked );
 	}
 
 	/**
@@ -248,7 +267,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 *
 	 * @return mixed
 	 */
-	private function find_unchecked_checkbox( $value, $label ) {
+	private function find_unchecked_checkbox_where_should_the_plugin_work( $value, $label ) {
 		$options = array(
 			'where_should_the_plugin_work' => array(
 				'post',
@@ -266,7 +285,145 @@ class Options_Page_Test extends \WP_UnitTestCase {
 
 		$content = ( new Options_Page() )->render( $options, 'general' );
 
-		return $this->regex_match( $content, $value, $label, '' );
+		return $this->regex_match( $content, '\[where_should_the_plugin_work\]\[\]', $value, $label, '' );
+	}
+
+	/**
+	 * @covers ::render_nonce
+	 * @covers ::render_additional_settings_tab
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_render_additional_settings_tab_has_hidden_nonce_field(): void {
+		$content = $this->_options_page->render( $this->_options, 'additional-settings' );
+
+		$nonce = 'gruz0_remove_noreferrer_nonce';
+		$found = preg_match( '/<input type="hidden" id="' . $nonce . '" name="' . $nonce . '" value=".+" \/>/', $content );
+
+		$this->assertEquals( 1, $found );
+	}
+
+	/**
+	 * @covers ::render_action
+	 * @covers ::render_additional_settings_tab
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_render_additional_settings_tab_has_hidden_action_field(): void {
+		$content = $this->_options_page->render( $this->_options, 'additional-settings' );
+
+		$found = preg_match( '/<input type="hidden" name="action" value="remove_noreferrer_update_options" \/>/', $content );
+
+		$this->assertEquals( 1, $found );
+	}
+
+	/**
+	 * @covers ::render_hidden_grn_tab
+	 * @covers ::render_additional_settings_tab
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_render_additional_settings_tab_has_hidden_grn_tab_field(): void {
+		$content = $this->_options_page->render( $this->_options, 'additional-settings' );
+
+		$found = preg_match( '/<input type="hidden" name="remove_noreferrer\[grn_tab\]" value="additional-settings" \/>/', $content );
+
+		$this->assertEquals( 1, $found );
+	}
+
+	/**
+	 * @covers ::render_additional_settings_tab
+	 * @covers ::render_checkbox_remove_settings_on_uninstall
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_render_additional_settings_tab_has_valid_checkboxes_count(): void {
+		$content = $this->_options_page->render( $this->_options, 'additional-settings' );
+
+		$matches = array();
+
+		preg_match_all( '/<input\s+type="checkbox"\s+name="remove_noreferrer\[.+\]"[^>]*>/', $content, $matches );
+
+		$this->assertCount( 1, $matches[0] );
+	}
+
+	/**
+	 * @dataProvider data_checkboxes_for_additional_settings
+	 *
+	 * @covers ::render_checkbox_remove_settings_on_uninstall
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 * @group current
+	 *
+	 * @param mixed $input Function's result.
+	 * @param int   $expected Expected.
+	 *
+	 * @return void
+	 */
+	public function test_checkboxes_additional_settings( $input, $expected ): void {
+		$this->assertEquals( $expected, $input );
+	}
+
+	/**
+	 * Data provider
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return array
+	 */
+	public function data_checkboxes_for_additional_settings(): array {
+		return array(
+			'checked remove settings'   => array( $this->find_checked_checkbox_remove_settings_on_uninstall(), 1 ),
+			'unchecked remove settings' => array( $this->find_unchecked_checkbox_remove_settings_on_uninstall(), 1 ),
+		);
+	}
+
+	/**
+	 * @coversNothing
+	 *
+	 * @since 2.0.0
+	 * @access private
+	 *
+	 * @return mixed
+	 */
+	private function find_checked_checkbox_remove_settings_on_uninstall() {
+		$options = array( 'remove_settings_on_uninstall' => '1' );
+
+		$content = ( new Options_Page() )->render( $options, 'additional-settings' );
+
+		$checked = "checked='checked'";
+
+		return $this->regex_match( $content, '\[remove_settings_on_uninstall\]', '1', '', $checked );
+	}
+
+	/**
+	 * @coversNothing
+	 *
+	 * @since 2.0.0
+	 * @access private
+	 *
+	 * @return mixed
+	 */
+	private function find_unchecked_checkbox_remove_settings_on_uninstall() {
+		$options = array( 'remove_settings_on_uninstall' => '0' );
+
+		$content = ( new Options_Page() )->render( $options, 'additional-settings' );
+
+		return $this->regex_match( $content, '\[remove_settings_on_uninstall\]', '1', '', '' );
 	}
 
 	/**
@@ -276,15 +433,16 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 * @access private
 	 *
 	 * @param string $content Content.
+	 * @param string $key Checkbox key.
 	 * @param string $value Checkbox value.
 	 * @param string $label Label.
 	 * @param string $checked Checked attribute.
 	 *
 	 * @return mixed
 	 */
-	private function regex_match( $content, $value, $label, $checked ) {
-		$regex = '/<label>\s+<input\s+type="checkbox"\s+name="remove_noreferrer\[where_should_the_plugin_work\]\[\]"\s+value="%s"\s+%s\s+\/>\s+%s\s+<\/label>/';
-		$regex = sprintf( $regex, $value, $checked, $label );
+	private function regex_match( $content, $key, $value, $label, $checked ) {
+		$regex = '/<label>\s+<input\s+type="checkbox"\s+name="remove_noreferrer%s"\s+value="%s"\s+%s\s+\/>\s+%s\s+<\/label>/';
+		$regex = sprintf( $regex, $key, $value, $checked, $label );
 
 		return preg_match( $regex, $content );
 	}

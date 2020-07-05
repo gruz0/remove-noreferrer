@@ -123,9 +123,10 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 			wp_die( __( 'Invalid nonce', 'remove-noreferrer' ) );
 		}
 
-		$new_values = $_POST['remove_noreferrer'] ?? array();
+		$options     = $this->_options->get_options();
+		$new_options = array_merge( $options, $this->validate_options( $_POST['remove_noreferrer'] ) );
 
-		update_option( GRN_OPTION_KEY, $this->validate_options( $new_values ) );
+		update_option( GRN_OPTION_KEY, $new_options );
 
 		wp_redirect(
 			add_query_arg(

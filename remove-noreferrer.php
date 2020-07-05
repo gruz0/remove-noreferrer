@@ -44,6 +44,13 @@ define( 'GRN_OPTION_KEY', 'remove_noreferrer' );
 define( 'GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY', 'where_should_the_plugin_work' );
 
 /**
+ * Plugin's option key stores `remove_settings_on_uninstall` value
+ *
+ * @since 2.0.0
+ */
+define( 'GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY', 'remove_settings_on_uninstall' );
+
+/**
  * Allowed values
  *
  * @since 2.0.0

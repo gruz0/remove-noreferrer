@@ -28,9 +28,29 @@ class Options_Validator {
 	 * @return array
 	 */
 	public static function call( $input ) {
-		return array(
-			GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => self::validate_where_should_the_plugin_work( $input ),
-		);
+		$result = array();
+
+		if ( ! is_array( $input ) ) {
+			return $result;
+		}
+
+		$grn_tab = $input['grn_tab'] ?? false;
+
+		switch ( $grn_tab ) {
+			case 'general':
+				$result[ GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ]
+					= self::validate_where_should_the_plugin_work( $input );
+
+				break;
+
+			case 'additional-settings':
+				$result[ GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY ]
+					= self::validate_remove_settings_on_uninstall( $input );
+
+				break;
+		}
+
+		return $result;
 	}
 
 	/**
@@ -44,7 +64,11 @@ class Options_Validator {
 	 * @return array
 	 */
 	private static function validate_where_should_the_plugin_work( $input ) {
-		if ( ! self::is_input_valid( $input ) ) {
+		if ( empty( $input[ GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ] ) ) {
+			return array();
+		}
+
+		if ( ! is_array( $input[ GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ] ) ) {
 			return array();
 		}
 
@@ -63,29 +87,21 @@ class Options_Validator {
 	}
 
 	/**
-	 * Checks is input valid
+	 * Validate `remove_settings_on_uninstall` option
 	 *
 	 * @since 2.0.0
 	 * @access private
 	 * @static
 	 *
 	 * @param array $input Input values.
-	 * @return bool
+	 * @return boolean
 	 */
-	private static function is_input_valid( $input ) {
-		if ( ! is_array( $input ) ) {
-			return false;
+	private static function validate_remove_settings_on_uninstall( $input ) {
+		if ( empty( $input[ GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY ] ) ) {
+			return '0';
 		}
 
-		if ( empty( $input[ GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ] ) ) {
-			return false;
-		}
-
-		if ( ! is_array( $input[ GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ] ) ) {
-			return false;
-		}
-
-		return true;
+		return '1' === $input[ GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY ] ? '1' : '0';
 	}
 }
 

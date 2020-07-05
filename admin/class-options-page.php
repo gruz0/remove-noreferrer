@@ -38,7 +38,7 @@ class Options_Page {
 
 			switch ( $tab ) {
 				case 'additional-settings':
-					$this->render_additional_settings_tab( $options );
+					$this->render_additional_settings_tab( $tab, $options );
 
 					break;
 
@@ -53,7 +53,7 @@ class Options_Page {
 					break;
 
 				default:
-					$this->render_general_tab( $options );
+					$this->render_general_tab( $tab, $options );
 
 					break;
 			}
@@ -110,13 +110,16 @@ class Options_Page {
 	 * @since 2.0.0
 	 * @access private
 	 *
-	 * @param array $options Options.
+	 * @param string $tab     Current tab.
+	 * @param array  $options Options.
 	 */
-	private function render_general_tab( $options ) {
+	private function render_general_tab( $tab, $options ) {
+		$url = add_query_arg( array( 'tab' => $tab ), admin_url( 'admin-post.php' ) );
 		?>
-		<form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>">
+		<form method="post" action="<?php echo $url; ?>">
 			<?php $this->render_nonce(); ?>
-			<?php echo $this->render_action(); ?>
+			<?php $this->render_action(); ?>
+			<?php $this->render_hidden_grn_tab( $tab ); ?>
 
 			<table class="form-table">
 				<tbody>
@@ -127,25 +130,25 @@ class Options_Page {
 						<td>
 							<fieldset>
 								<?php
-									$this->render_checkbox(
+									$this->render_checkbox_where_should_the_plugin_work(
 										$options,
 										'post',
 										__( 'Post' )
 									);
 
-									$this->render_checkbox(
+									$this->render_checkbox_where_should_the_plugin_work(
 										$options,
 										'posts_page',
 										__( 'Posts Page' )
 									);
 
-									$this->render_checkbox(
+									$this->render_checkbox_where_should_the_plugin_work(
 										$options,
 										'page',
 										__( 'Single Page' )
 									);
 
-									$this->render_checkbox(
+									$this->render_checkbox_where_should_the_plugin_work(
 										$options,
 										'comments',
 										__( 'Comments' )
@@ -162,13 +165,13 @@ class Options_Page {
 						<td>
 							<fieldset>
 								<?php
-									$this->render_checkbox(
+									$this->render_checkbox_where_should_the_plugin_work(
 										$options,
 										'text_widget',
 										__( 'Text' )
 									);
 
-									$this->render_checkbox(
+									$this->render_checkbox_where_should_the_plugin_work(
 										$options,
 										'custom_html_widget',
 										__( 'Custom HTML' )
@@ -193,9 +196,37 @@ class Options_Page {
 	 * @since 2.0.0
 	 * @access private
 	 *
-	 * @param array $options Options.
+	 * @param string $tab     Current tab.
+	 * @param array  $options Options.
 	 */
-	private function render_additional_settings_tab( $options ) {
+	private function render_additional_settings_tab( $tab, $options ) {
+		$url = add_query_arg( array( 'tab' => $tab ), admin_url( 'admin-post.php' ) );
+		?>
+		<form method="post" action="<?php echo $url; ?>">
+			<?php $this->render_nonce(); ?>
+			<?php $this->render_action(); ?>
+			<?php $this->render_hidden_grn_tab( $tab ); ?>
+
+			<table class="form-table">
+				<tbody>
+					<tr>
+						<th scope="row">
+							<?php echo esc_html__( 'Remove Settings on Uninstall', 'remove-noreferrer' ); ?>
+						</th>
+						<td>
+							<fieldset>
+								<?php $this->render_checkbox_remove_settings_on_uninstall( $options, '1' ); ?>
+							</fieldset>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<p class="submit">
+				<input type="submit" value="<?php _e( 'Save Changes' ); ?>" class="button button-primary button-large">
+			</p>
+		</form>
+		<?php
 	}
 
 	/**
@@ -266,15 +297,25 @@ class Options_Page {
 	}
 
 	/**
-	 * Returns hidden field with hook's action
+	 * Renders hidden field with hook's action
+	 *
+	 * @since 2.0.0
+	 * @access private
+	 */
+	private function render_action() {
+		echo '<input type="hidden" name="action" value="remove_noreferrer_update_options" />';
+	}
+
+	/**
+	 * Renders hidden field with current tab value
 	 *
 	 * @since 2.0.0
 	 * @access private
 	 *
-	 * @return string
+	 * @param string $tab Current tab.
 	 */
-	private function render_action() {
-		return '<input type="hidden" name="action" value="remove_noreferrer_update_options" />';
+	private function render_hidden_grn_tab( $tab ) {
+		echo '<input type="hidden" name="remove_noreferrer[grn_tab]" value="' . $tab . '" />';
 	}
 
 	/**
@@ -287,7 +328,7 @@ class Options_Page {
 	 * @param string $value Item's value.
 	 * @param string $label Checkbox's label.
 	 */
-	private function render_checkbox( $options, $value, $label ) {
+	private function render_checkbox_where_should_the_plugin_work( $options, $value, $label ) {
 		?>
 			<label>
 				<input
@@ -304,6 +345,28 @@ class Options_Page {
 				<?php echo esc_html( $label ); ?>
 			</label>
 			<br />
+		<?php
+	}
+
+	/**
+	 * Render checkbox for option `remove_settings_on_uninstall`
+	 *
+	 * @since 1.1.0
+	 * @access private
+	 *
+	 * @param array  $options Options.
+	 * @param string $value Item's value.
+	 */
+	private function render_checkbox_remove_settings_on_uninstall( $options, $value ) {
+		?>
+			<label>
+				<input
+					type="checkbox"
+					name="remove_noreferrer[<?php echo GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY; ?>]"
+					value="<?php echo esc_attr( $value ); ?>"
+					<?php checked( $value === $options[ GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY ], true ); ?>
+				/>
+			</label>
 		<?php
 	}
 }
