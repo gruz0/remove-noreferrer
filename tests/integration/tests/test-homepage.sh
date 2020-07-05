@@ -11,6 +11,10 @@ if [ $? -ne 0 ]; then
 	exit 1
 fi
 
+$DELETE_OPTIONS > /dev/null
+
+docker-compose $COMPOSER_ARGS exec wordpress wp option add remove_noreferrer '{"where_should_the_plugin_work":["posts_page"]}' --format=json --allow-root > /dev/null
+
 $ACTIVATE_PLUGIN > /dev/null
 
 curl -XGET $WP_HOST --silent | grep post_link | grep noreferrer > /dev/null

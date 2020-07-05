@@ -84,12 +84,6 @@ register_uninstall_hook( __FILE__, array( 'Remove_Noreferrer\Core\Plugin', 'unin
 function run_plugin() {
 	$options = new \Remove_Noreferrer\Core\Options();
 
-	// TODO: Если после запуска Core нет нужных опций, то их надо создать
-	// В этом случае в $options надо перечитать значения, т.к. они будут закешированными.
-	//
-	// TODO: Возможно будет смысл вообще убрать разбиение на фронтовую и админскую части, т.к. сейчас получается,
-	// что после запуска тестов всегда инициализируется фронтендовая часть и аффектит тесты.
-
 	if ( is_admin() ) {
 		return new \Remove_Noreferrer\Admin\Plugin( $options );
 	}

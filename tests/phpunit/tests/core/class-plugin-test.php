@@ -148,6 +148,58 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers ::activate
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_activate_creates_default_options_if_options_are_not_exist(): void {
+		$admin_user = self::factory()->user->create( array( 'role' => 'administrator' ) );
+
+		wp_set_current_user( $admin_user );
+
+		$this->_plugin->activate();
+
+		$expected = array(
+			GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array(),
+			GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY => '0',
+		);
+
+		$this->assertEquals( $expected, get_option( GRN_OPTION_KEY ) );
+
+		wp_delete_user( $admin_user );
+	}
+
+	/**
+	 * @covers ::activate
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_activate_does_not_change_existed_options(): void {
+		$admin_user = self::factory()->user->create( array( 'role' => 'administrator' ) );
+
+		wp_set_current_user( $admin_user );
+
+		$options = array(
+			GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array( 'post' ),
+			GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY => '1',
+		);
+
+		add_option( GRN_OPTION_KEY, $options );
+
+		$this->_plugin->activate();
+
+		$this->assertEquals( $options, get_option( GRN_OPTION_KEY ) );
+
+		wp_delete_user( $admin_user );
+	}
+
+	/**
 	 * @covers ::deactivate
 	 *
 	 * @since 2.0.0
