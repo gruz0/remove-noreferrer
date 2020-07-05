@@ -4,6 +4,8 @@ BANNER="Options deleted"
 
 $ACTIVATE_PLUGIN > /dev/null
 
+$DELETE_OPTIONS > /dev/null
+
 docker-compose $COMPOSER_ARGS exec wordpress wp option add remove_noreferrer '{"remove_settings_on_uninstall":"1"}' --format=json --allow-root > /dev/null
 
 $DEACTIVATE_PLUGIN > /dev/null
