@@ -1,10 +1,9 @@
 .data
 phpcs
 rulesets
-svn
 vendor/
 composer.lock
-archive/
+dist/
 !build/.keep
 build/
 tests/wordpress-dev/

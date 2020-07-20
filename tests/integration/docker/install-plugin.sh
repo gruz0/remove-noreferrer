@@ -2,4 +2,6 @@
 
 set -euo pipefail
 
-wp plugin install /archive/remove-noreferrer.zip --allow-root
+PLUGIN_VERSION=$1
+
+wp plugin install /dist/remove-noreferrer-$PLUGIN_VERSION.zip --allow-root
