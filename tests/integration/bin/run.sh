@@ -4,6 +4,7 @@ set -euo pipefail
 
 export BIN=$(dirname $0)
 WP_VERSION=$1
+export PLUGIN_VERSION=$2
 
 . $BIN/variables.sh
 

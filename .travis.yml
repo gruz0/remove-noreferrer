@@ -34,3 +34,4 @@ script:
   - make lint
   - make test
   - make e2e_single WP_VERSION=$WP_VERSION
+  - make zip

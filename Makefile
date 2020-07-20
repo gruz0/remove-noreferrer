@@ -1,4 +1,6 @@
-.PHONY: help dockerize shell install_linters lint test coverage e2e e2e_single archive release install_wordpress_dev dockerize_test_database shutdown_test_database wait_for_database
+.PHONY: help dockerize shell install_linters lint test coverage e2e e2e_single zip install_wordpress_dev dockerize_test_database shutdown_test_database wait_for_database
+
+PLUGIN_VERSION=$(shell grep -r ' \* Version:' remove-noreferrer.php | egrep -o '([0-9]{1,}\.)+[0-9]{1,}')
 
 help:
 	@echo 'Available targets:'
@@ -10,8 +12,7 @@ help:
 	@echo '  make coverage'
 	@echo '  make e2e'
 	@echo '  make e2e_single'
-	@echo '  make archive'
-	@echo '  make release'
+	@echo '  make zip'
 	@echo '  make install_wordpress_dev'
 	@echo '  make dockerize_test_database'
 	@echo '  make shutdown_test_database'
@@ -37,17 +38,14 @@ coverage:
 	composer coverage
 	open build/coverage/index.html
 
-e2e: archive
-	tests/integration/bin/all.sh
+e2e: zip
+	tests/integration/bin/all.sh $(PLUGIN_VERSION)
 
-e2e_single: archive
-	tests/integration/bin/run.sh $(WP_VERSION)
+e2e_single: zip
+	tests/integration/bin/run.sh $(WP_VERSION) $(PLUGIN_VERSION)
 
-archive:
-	bin/archive.sh
-
-release:
-	bin/release.sh
+zip:
+	bin/zip.sh $(PLUGIN_VERSION)
 
 install_wordpress_dev:
 	tests/bin/install_wordpress_dev.sh $(WP_VERSION)
