@@ -42,7 +42,7 @@ e2e: zip
 	tests/integration/bin/all.sh $(PLUGIN_VERSION)
 
 e2e_single: zip
-	tests/integration/bin/run.sh $(WP_VERSION) $(PLUGIN_VERSION)
+	tests/integration/bin/run.sh $(WP_VERSION) $(PLUGIN_VERSION) $(IS_GITHUB_ACTIONS)
 
 zip:
 	bin/zip.sh $(PLUGIN_VERSION)
