@@ -2,6 +2,10 @@
 
 set -euo pipefail
 
+export red='\033[0;31m'
+export green='\033[0;32m'
+export NC='\033[0m'
+
 BANNER="debug.log"
 DEBUG_LOG="debug.log"
 

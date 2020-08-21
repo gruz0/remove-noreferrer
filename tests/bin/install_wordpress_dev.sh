@@ -5,7 +5,7 @@ set -euo pipefail
 
 WORDPRESS_DEV_DIR=./tests/wordpress-dev
 
-rm -rf $WORDPRESS_DEV_DIR/*
+rm -rf ${WORDPRESS_DEV_DIR:?}/*
 mkdir -p $WORDPRESS_DEV_DIR
 
 cd $WORDPRESS_DEV_DIR

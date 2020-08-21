@@ -1,12 +1,14 @@
 #!/bin/bash
 
+export red='\033[0;31m'
+export green='\033[0;32m'
+export NC='\033[0m'
+
 BANNER="Widget Text"
 
 $DEACTIVATE_PLUGIN > /dev/null
 
-curl -XGET $WP_HOST --silent | grep widget_text_link | grep noreferrer > /dev/null
-
-if [ $? -ne 0 ]; then
+if ! curl -XGET $WP_HOST --silent | grep widget_text_link | grep noreferrer > /dev/null; then
 	echo -e "[${BANNER}]: ${red}Noreferrer must be exist${NC}"
 	exit 1
 fi
@@ -17,9 +19,7 @@ docker-compose $COMPOSER_ARGS exec wordpress wp option add remove_noreferrer '{"
 
 $ACTIVATE_PLUGIN > /dev/null
 
-curl -XGET $WP_HOST --silent | grep widget_text_link | grep noreferrer > /dev/null
-
-if [ $? -ne 1 ]; then
+if curl -XGET $WP_HOST --silent | grep widget_text_link | grep noreferrer > /dev/null; then
 	echo -e "[${BANNER}]: ${red}Noreferrer must not be exist${NC}"
 	exit 1
 fi
