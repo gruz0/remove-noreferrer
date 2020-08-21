@@ -3,7 +3,7 @@
 set -euo pipefail
 
 docker-compose $COMPOSER_ARGS down
-docker-compose $COMPOSER_ARGS up --build -d
+docker-compose $COMPOSER_ARGS up --build -d --remove-orphans
 
 while ! curl -L $WP_HOST --silent | grep 'Continue' > /dev/null; do
 	sleep 1
