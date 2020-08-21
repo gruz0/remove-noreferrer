@@ -1,0 +1,4 @@
+disable=SC1090 # Can't follow non-constant source. Use a directive to specify location.
+disable=SC1091 # Not following: ./variables.sh was not specified as input (see shellcheck -x)
+disable=SC2086 # Double quote to prevent globbing
+disable=SC2143 # Use grep -q instead of comparing output with [ -n .. ]

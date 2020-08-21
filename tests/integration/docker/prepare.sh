@@ -7,7 +7,7 @@ WP_HOST=$1
 #
 # Install clean WP
 #
-if ! $(wp core is-installed --allow-root); then
+if ! wp core is-installed --allow-root; then
   wp core install \
     --allow-root \
 	--url=$WP_HOST \
@@ -57,8 +57,9 @@ wp widget add custom_html sidebar-1 2 \
 #
 # Delete all posts and pages
 #
-if [ $(wp post list --allow-root --format=ids) != "" ]; then
-  wp post delete $(wp post list --post_type='page,post' --format=ids --allow-root) \
+if [ "$(wp post list --allow-root --format=ids)" != "" ]; then
+  post_ids=$(wp post list --post_type='page,post' --format=ids --allow-root)
+  wp post delete $post_ids \
     --force \
     --allow-root \
     > /dev/null

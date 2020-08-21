@@ -15,7 +15,7 @@ TARGET_DIR="$DIST/$SLUG"
 
 ARCHIVE_NAME="remove-noreferrer-${PLUGIN_VERSION}.zip"
 
-rm -rf $DIST/
+rm -rf ${DIST:?}/
 mkdir -p $TARGET_DIR
 
 cp index.php $TARGET_DIR/
@@ -51,14 +51,14 @@ declare -a FilesArray=(
 	"inc/index.php"
 )
 
-if [[ `unzip -Z1 $ARCHIVE_NAME | egrep -v "\/$" | wc -l` -ne ${#FilesArray[@]} ]]; then
+if [[ $(unzip -Z1 $ARCHIVE_NAME | grep -c -E -v "\/$") -ne ${#FilesArray[@]} ]]; then
 	echo "Unmatched archive's files count"
 	exit 1
 fi
 
-for file in ${FilesArray[@]}; do
-	if [[ ! `unzip -Z1 $ARCHIVE_NAME | grep $SLUG/$file` ]]; then
-		echo "File ${file} does not exist in the archive"
+for file in "${FilesArray[@]}"; do
+	if [[ ! $(unzip -Z1 $ARCHIVE_NAME | grep $SLUG/$file) ]]; then
+		echo "File $SLUG/${file} does not exist in the archive"
 		exit 1
 	fi
 done
