@@ -3,7 +3,6 @@
 .data
 .git
 .gitignore
-.travis.yml
 .DS_Store
 Thumbs.db
 composer.json
