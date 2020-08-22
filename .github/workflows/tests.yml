@@ -1,0 +1,51 @@
+name: Tests
+
+on:
+  pull_request:
+    branches:
+      - "*"
+  push:
+    branches:
+      - "*"
+
+jobs:
+  phpunit:
+    name: Tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['7.1', '7.2', '7.3', '7.4']
+        wp_version: ['5.3', '5.4', '5.5', 'latest']
+    steps:
+    - name: Stop the GitHub Actions MySQL instance.
+      run: sudo service mysql stop
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Install linters
+      run: make install_linters
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v1
+      with:
+        php-version: ${{ matrix.php }}
+        extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, mysql, mysqli, pdo_mysql, bcmath, soap, intl, gd, exif, iconv, imagick
+        coverage: none
+
+    # Prepare
+    - name: Dockerize database
+      run: make dockerize_test_database
+    - name: Wait for database
+      run: make wait_for_database
+    - name: Install WordPress
+      run: make install_wordpress_dev WP_VERSION=${{ matrix.wp_version }}
+
+    # Tests
+    - name: Lint
+      run: make lint
+    - name: PHPUnit
+      run: make test
+    - name: Test ZIP
+      run: make zip
+
+    # Cleanup
+    - name: Shutdown database
+      run: make shutdown_test_database

@@ -15,7 +15,7 @@ fi
 
 $DELETE_OPTIONS > /dev/null
 
-docker-compose $COMPOSER_ARGS exec wordpress wp option add remove_noreferrer '{"where_should_the_plugin_work":["custom_html_widget"]}' --format=json --allow-root > /dev/null
+docker-compose $COMPOSER_ARGS exec $TTY wordpress wp option add remove_noreferrer '{"where_should_the_plugin_work":["custom_html_widget"]}' --format=json --allow-root > /dev/null
 
 $ACTIVATE_PLUGIN > /dev/null
 

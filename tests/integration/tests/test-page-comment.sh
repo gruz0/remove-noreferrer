@@ -6,7 +6,7 @@ export NC='\033[0m'
 
 BANNER="Page Comment"
 
-PAGE_ID=$(docker-compose $COMPOSER_ARGS exec wordpress wp post list --allow-root --post_type='page' --format=ids)
+PAGE_ID=$(docker-compose $COMPOSER_ARGS exec $TTY wordpress wp post list --allow-root --post_type='page' --format=ids)
 
 URL="$WP_HOST/?page_id=$PAGE_ID"
 
@@ -19,7 +19,7 @@ fi
 
 $DELETE_OPTIONS > /dev/null
 
-docker-compose $COMPOSER_ARGS exec wordpress wp option add remove_noreferrer '{"where_should_the_plugin_work":["comments"]}' --format=json --allow-root > /dev/null
+docker-compose $COMPOSER_ARGS exec $TTY wordpress wp option add remove_noreferrer '{"where_should_the_plugin_work":["comments"]}' --format=json --allow-root > /dev/null
 
 $ACTIVATE_PLUGIN > /dev/null
 
