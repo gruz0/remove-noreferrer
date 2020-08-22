@@ -7,9 +7,6 @@
   <a href="http://www.gnu.org/licenses/gpl-2.0.txt" target="_blank">
     <img alt="License: GPLv2" src="https://img.shields.io/badge/License-GPLv2-yellow.svg" />
   </a>
-  <a href="https://travis-ci.org/gruz0/remove-noreferrer" target="_blank">
-    <img alt="Build Status" src="https://travis-ci.org/gruz0/remove-noreferrer.svg?branch=master" />
-  </a>
   <a href="https://twitter.com/gruz0" target="_blank">
     <img alt="Twitter: gruz0" src="https://img.shields.io/twitter/follow/gruz0.svg?style=social" />
   </a>
