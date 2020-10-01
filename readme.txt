@@ -1,36 +1,68 @@
-=== Remove noreferrer from the links in posts, pages, comments ===
+=== Remove noreferrer ===
 Contributors: gruz0
-Donate link: https://www.paypal.me/gruz0
-Tags: post, noreferrer
-Requires at least: 4.9
-Tested up to: 5.3
+Donate link: https://www.buymeacoffee.com/gruz0
+Tags: post, page, widgets, comments, noreferrer, affiliate, marketing
+Requires at least: 5.3
+Requires PHP: 7.1
+Tested up to: 5.5
 Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-This plugin automatically removes `noreferrer` from the links in Posts, Pages, Home Page and comments.
+**"Remove noreferrer" automatically removes <code>rel="noreferrer"</code> attribute from links on your website on-the-fly.**
+
+Plugin does not modify original links or content in the database.
+
+### Which kind of content supported?
+
+* Posts
+* Pages
+* Blog page (homepage, etc.)
+* Comments
+
+Also it supports standard WordPress widgets:
+
+* "Text"
+* "Custom HTML"
 
 = Docs & Support =
 
-This plugin is an open source project and we would love you to help us make it better. If you want a new feature will be implemented in this plugin, you can open a [Github Issue](https://github.com/gruz0/remove-noreferrer/issues/new). If you don't have a GitHub Account you can send me email to [alexander@kadyrov.dev](mailto:alexander@kadyrov.dev). You can find more detailed information about plugin on [GitHub](https://github.com/gruz0/remove-noreferrer).
+This plugin is an open source project and we would love you to help us make it better. If you want a new feature will be implemented in this plugin, you can open a [GitHub Issue](https://github.com/gruz0/remove-noreferrer/issues/new). If you don't have a GitHub Account you can send me email to [alexander@kadyrov.dev](mailto:alexander@kadyrov.dev). You can find more detailed information about plugin on [GitHub](https://github.com/gruz0/remove-noreferrer).
 
 == Installation ==
 
-1. Download the plugin from wordpress.org
-2. Upload it to your site (if you've installed it through WordPress Admin Dashboard skip this step)
-3. Activate the plugin through "Plugins" menu in WordPress
+### Install Remove Noreferrer within WordPress
+
+1. Visit the plugins page within your dashboard and select "Add New"
+2. Search for "remove noreferrer"
+3. Activate plugin from your Plugins page
+
+### Install Remove Noreferrer manually
+
+1. Upload the "remove-noreferrer" folder to the <code>/wp-content/plugins/</code> directory
+2. Activate the plugin through the "Plugins" menu in WordPress
 
 == Screenshots ==
 1. Before installation
 2. After installation
+3. Plugin's settings
 
 == Changelog ==
 
+= 2.0.0 =
+
+* [Remove noreferrer from "Text" widgets](https://github.com/gruz0/remove-noreferrer/pull/29)
+* [Remove noreferrer from "Custom HTML" widgets](https://github.com/gruz0/remove-noreferrer/pull/37)
+* [Do not modify content if links or `noreferrer` attributes are not found](https://github.com/gruz0/remove-noreferrer/pull/37)
+* [Add notice after settings saved](https://github.com/gruz0/remove-noreferrer/pull/44)
+* [Remove plugin settings on uninstall](https://github.com/gruz0/remove-noreferrer/pull/52)
+* [Initialize plugin with default options on activation](https://github.com/gruz0/remove-noreferrer/pull/53)
+
 = 1.2.0 =
 
-* [Remove links from comments](https://github.com/gruz0/remove-noreferrer/pull/22)
+* [Remove noreferrer from comments](https://github.com/gruz0/remove-noreferrer/pull/22)
 
 = 1.1.1 =
 
