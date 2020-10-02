@@ -53,7 +53,7 @@ This plugin is an open source project and we would love you to help us make it b
 
 = 2.0.0 =
 
-* [Add support for PHP 5.6 and WordPress 5.1]()
+* [Add support for PHP 5.6 and WordPress 5.1](https://github.com/gruz0/remove-noreferrer/pull/74)
 * [Remove noreferrer from "Text" widgets](https://github.com/gruz0/remove-noreferrer/pull/29)
 * [Remove noreferrer from "Custom HTML" widgets](https://github.com/gruz0/remove-noreferrer/pull/37)
 * [Do not modify content if links or `noreferrer` attributes are not found](https://github.com/gruz0/remove-noreferrer/pull/37)
