@@ -3,21 +3,22 @@
  * Remove Noreferrer
  *
  * @package           Remove_Noreferrer
- * @author            Alexander Kadyrov
+ * @author            Alexander Kadyrov <alexander@kadyrov.dev>
  * @copyright         2019-2020 Alexander Kadyrov
  * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
  * Plugin Name:       Remove Noreferrer
  * Plugin URI:        https://wordpress.org/plugins/remove-noreferrer/
- * Description:       This plugin removes rel="noreferrer" from links in Posts, Pages, Home Page and comments
+ * Github URI:        https://github.com/gruz0/remove-noreferrer
+ * Description:       Removes rel="noreferrer" attribute from links on your website on-the-fly
  * Version:           2.0.0
  * Requires at least: 5.3
  * Requires PHP:      7.1
  * Author:            Alexander Kadyrov
  * Author URI:        https://kadyrov.dev/
  * Text Domain:       remove-noreferrer
- * License:           GPL v2 or later
+ * License:           GPLv2 or later
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
