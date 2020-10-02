@@ -10,7 +10,7 @@ class Remove_Noreferrer_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function tearDown(): void {
+	public function tearDown() {
 		parent::tearDown();
 
 		unset( $GLOBALS['screen'] );
@@ -25,7 +25,7 @@ class Remove_Noreferrer_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_has_grn_option_key_constant(): void {
+	public function test_has_grn_option_key_constant() {
 		$this->assertSame( 'remove_noreferrer', GRN_OPTION_KEY );
 	}
 
@@ -37,7 +37,7 @@ class Remove_Noreferrer_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_has_grn_where_should_the_plugin_work_key_constant(): void {
+	public function test_has_grn_where_should_the_plugin_work_key_constant() {
 		$this->assertSame( 'where_should_the_plugin_work', GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY );
 	}
 
@@ -49,7 +49,7 @@ class Remove_Noreferrer_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_has_grn_allowed_values_constant(): void {
+	public function test_has_grn_allowed_values_function() {
 		$this->assertSame(
 			array(
 				'post',
@@ -59,7 +59,7 @@ class Remove_Noreferrer_Test extends \WP_UnitTestCase {
 				'text_widget',
 				'custom_html_widget',
 			),
-			GRN_ALLOWED_VALUES
+			\Remove_Noreferrer\grn_allowed_values()
 		);
 	}
 
@@ -71,7 +71,7 @@ class Remove_Noreferrer_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_returns_admin_plugin_on_admin_part(): void {
+	public function test_returns_admin_plugin_on_admin_part() {
 		set_current_screen( 'dashboard' );
 
 		$this->assertInstanceOf( 'Remove_Noreferrer\Admin\Plugin', \Remove_Noreferrer\run_plugin() );
@@ -85,7 +85,7 @@ class Remove_Noreferrer_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_returns_frontend_plugin_on_frontend_part(): void {
+	public function test_returns_frontend_plugin_on_frontend_part() {
 		$this->assertInstanceOf( 'Remove_Noreferrer\Frontend\Plugin', \Remove_Noreferrer\run_plugin() );
 	}
 }

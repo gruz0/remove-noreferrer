@@ -36,7 +36,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function setUp(): void {
+	public function setUp() {
 		parent::setUp();
 
 		set_current_screen( 'front' );
@@ -52,7 +52,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function tearDown(): void {
+	public function tearDown() {
 		parent::tearDown();
 
 		unset( $GLOBALS['screen'] );
@@ -67,7 +67,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_plugin_extended_from_base_plugin(): void {
+	public function test_plugin_extended_from_base_plugin() {
 		$this->assertInstanceOf( 'Remove_Noreferrer\Base\Plugin', $this->_plugin );
 	}
 
@@ -79,7 +79,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_construct_has_init_action(): void {
+	public function test_construct_has_init_action() {
 		$this->assertEquals( 10, has_action( 'init', array( $this->_plugin, 'init' ) ) );
 	}
 
@@ -91,7 +91,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_construct_did_remove_noreferrer_frontend_plugin_loaded_action(): void {
+	public function test_construct_did_remove_noreferrer_frontend_plugin_loaded_action() {
 		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_frontend_plugin_loaded' ) );
 	}
 
@@ -159,7 +159,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_init_did_remove_noreferrer_frontend_plugin_initialized_action(): void {
+	public function test_init_did_remove_noreferrer_frontend_plugin_initialized_action() {
 		$this->_plugin->init();
 
 		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_frontend_plugin_initialized' ) );

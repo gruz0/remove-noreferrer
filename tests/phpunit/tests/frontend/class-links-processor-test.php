@@ -30,7 +30,7 @@ class Links_Processor_Test extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return void
 	 */
-	protected function setUp(): void {
+	protected function setUp() {
 		parent::setUp();
 
 		$this->_processor = new Links_Processor();

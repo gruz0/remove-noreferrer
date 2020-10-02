@@ -30,7 +30,7 @@ class Options_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function setUp(): void {
+	public function setUp() {
 		parent::setUp();
 
 		$this->_options = new Options();
@@ -44,7 +44,7 @@ class Options_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_add_default_options_did_remove_noreferrer_options_created_action(): void {
+	public function test_add_default_options_did_remove_noreferrer_options_created_action() {
 		$this->_options->add_default_options();
 
 		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_options_created' ) );
@@ -58,7 +58,7 @@ class Options_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_add_default_options_creates_default_options(): void {
+	public function test_add_default_options_creates_default_options() {
 		$this->_options->add_default_options();
 
 		$expected = array(
@@ -77,7 +77,7 @@ class Options_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_get_options_returns_empty_array_if_options_are_not_exist(): void {
+	public function test_get_options_returns_empty_array_if_options_are_not_exist() {
 		$this->assertEquals( array(), $this->_options->get_options() );
 	}
 
@@ -89,7 +89,7 @@ class Options_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_get_options_returns_existed_options(): void {
+	public function test_get_options_returns_existed_options() {
 		$options = array(
 			GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array(),
 			GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY => '0',
@@ -109,7 +109,7 @@ class Options_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_get_option_executes_get_options_if_options_are_empty(): void {
+	public function test_get_option_executes_get_options_if_options_are_empty() {
 		$this->_options->get_option( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY );
 
 		$this->assertEquals( array(), $this->_options->get_options() );
@@ -124,7 +124,7 @@ class Options_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_get_option_throws_invalid_argument_exception_if_key_is_not_exists(): void {
+	public function test_get_option_throws_invalid_argument_exception_if_key_is_not_exists() {
 		$this->setExpectedException( '\InvalidArgumentException', 'Key some_key does not exist' );
 
 		$this->_options->get_option( 'some_key' );
@@ -139,7 +139,7 @@ class Options_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_get_option_returns_valid_option(): void {
+	public function test_get_option_returns_valid_option() {
 		add_option( GRN_OPTION_KEY, array( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array( 'page' ) ) );
 
 		$this->assertEquals( array( 'page' ), $this->_options->get_option( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ) );
@@ -153,7 +153,7 @@ class Options_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_delete_options(): void {
+	public function test_delete_options() {
 		$option = array( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array( 'page' ) );
 
 		add_option( GRN_OPTION_KEY, $option );

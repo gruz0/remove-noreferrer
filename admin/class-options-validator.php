@@ -34,7 +34,7 @@ class Options_Validator {
 			return $result;
 		}
 
-		$grn_tab = $input['grn_tab'] ?? false;
+		$grn_tab = ( ! empty( $input['grn_tab'] ) ) ? $input['grn_tab'] : false;
 
 		switch ( $grn_tab ) {
 			case 'general':
@@ -76,7 +76,7 @@ class Options_Validator {
 			array_filter(
 				array_map( 'trim', $input[ GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ] ),
 				function( $v ) {
-					return in_array( $v, GRN_ALLOWED_VALUES, true );
+					return in_array( $v, \Remove_Noreferrer\grn_allowed_values(), true );
 				}
 			)
 		);

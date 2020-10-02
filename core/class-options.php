@@ -83,7 +83,7 @@ class Options {
 			$this->get_options();
 		}
 
-		return $this->_options[ $key ] ?? $default;
+		return ( ! empty( $this->_options[ $key ] ) ) ? $this->_options[ $key ] : $default;
 	}
 
 	/**

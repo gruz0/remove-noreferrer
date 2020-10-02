@@ -13,8 +13,8 @@
  * Github URI:        https://github.com/gruz0/remove-noreferrer
  * Description:       Removes rel="noreferrer" attribute from links on your website on-the-fly
  * Version:           2.0.0
- * Requires at least: 5.3
- * Requires PHP:      7.1
+ * Requires at least: 5.1
+ * Requires PHP:      5.6
  * Author:            Alexander Kadyrov
  * Author URI:        https://kadyrov.dev/
  * Text Domain:       remove-noreferrer
@@ -56,17 +56,16 @@ define( 'GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY', 'remove_settings_on_uninstall' )
  *
  * @since 2.0.0
  */
-define(
-	'GRN_ALLOWED_VALUES',
-	array(
+function grn_allowed_values() {
+	return array(
 		'post',
 		'posts_page',
 		'page',
 		'comments',
 		'text_widget',
 		'custom_html_widget',
-	)
-);
+	);
+}
 
 // Load plugin's core.
 add_action( 'plugins_loaded', 'Remove_Noreferrer\run_plugin' );

@@ -30,7 +30,7 @@ class Options_Validator_Test extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return void
 	 */
-	protected function setUp(): void {
+	protected function setUp() {
 		parent::setUp();
 
 		$this->_validator = new Options_Validator();
