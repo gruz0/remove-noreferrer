@@ -200,7 +200,7 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	 * @return string
 	 */
 	private function get_current_tab() {
-		return $_GET['tab'] ?? 'general';
+		return ( ! empty( $_GET['tab'] ) ) ? $_GET['tab'] : 'general';
 	}
 }
 

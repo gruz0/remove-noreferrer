@@ -28,7 +28,7 @@ class Links_Processor {
 	 *
 	 * @return string
 	 */
-	public static function call( $input ): string {
+	public static function call( $input ) {
 		if ( ! self::is_links_found( $input ) ) {
 			return $input;
 		}
@@ -51,7 +51,7 @@ class Links_Processor {
 	 *
 	 * @return bool
 	 */
-	private static function is_links_found( $input ): bool {
+	private static function is_links_found( $input ) {
 		return ! ( false === stripos( $input, '<a ' ) );
 	}
 
@@ -66,7 +66,7 @@ class Links_Processor {
 	 *
 	 * @return bool
 	 */
-	private static function is_noreferrer_found( $input ): bool {
+	private static function is_noreferrer_found( $input ) {
 		return ! ( false === stripos( $input, 'noreferrer' ) );
 	}
 
@@ -81,7 +81,7 @@ class Links_Processor {
 	 *
 	 * @return string
 	 */
-	private static function remove_noreferrer( $input ): string {
+	private static function remove_noreferrer( $input ) {
 		// phpcs:disable Squiz.Commenting.InlineComment.InvalidEndChar
 		$replace = function( $matches ) {
 			// For input string '<a class="test"   rel="nofollow noreferrer" name="test">test</a>' it returns:
