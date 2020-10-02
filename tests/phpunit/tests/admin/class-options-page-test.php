@@ -92,10 +92,6 @@ class Options_Page_Test extends \WP_UnitTestCase {
 		$this->assertEquals( __( 'Support' ), $nodes[2]->textContent );
 		$this->assertContains( '/wp-admin/options-general.php?page=remove_noreferrer&tab=support', $nodes[2]->attributes[1]->textContent );
 
-		// Info.
-		$this->assertEquals( __( 'Info' ), $nodes[3]->textContent );
-		$this->assertContains( '/wp-admin/options-general.php?page=remove_noreferrer&tab=info', $nodes[3]->attributes[1]->textContent );
-
 		libxml_use_internal_errors( $internal_errors );
 	}
 

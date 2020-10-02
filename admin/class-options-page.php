@@ -42,11 +42,6 @@ class Options_Page {
 
 					break;
 
-				case 'info':
-					$this->render_info_tab( $options );
-
-					break;
-
 				case 'support':
 					$this->render_support_tab( $options );
 
@@ -82,7 +77,6 @@ class Options_Page {
 			'general'             => __( 'General' ),
 			'additional-settings' => __( 'Additional settings' ),
 			'support'             => __( 'Support' ),
-			'info'                => __( 'Info' ),
 		);
 
 		echo '<h2 class="nav-tab-wrapper">';
@@ -230,20 +224,6 @@ class Options_Page {
 	}
 
 	/**
-	 * Render Info tab
-	 *
-	 * @since 2.0.0
-	 * @access private
-	 *
-	 * @param array $options Options.
-	 */
-	private function render_info_tab( $options ) {
-		?>
-		<h2><?php echo _x( 'Changelog', 'Plugin installer section title' ); ?></h2>
-		<?php
-	}
-
-	/**
 	 * Render Support tab
 	 *
 	 * @since 2.0.0
@@ -260,15 +240,6 @@ class Options_Page {
 		<p>If you want a new feature will be implemented in this plugin, you can open a <a href="https://github.com/gruz0/remove-noreferrer/issues/new" target="_blank" rel="noreferrer noopener">GitHub Issue</a>.<br />If you don't have a GitHub Account you can send me email to <a href="mailto:alexander@kadyrov.dev" target="_blank">alexander@kadyrov.dev</a>.</p>
 
 		<p>You can find more detailed information about the plugin on <a href="https://wordpress.org/plugins/remove-noreferrer/" target="_blank" rel="noreferrer nofollow">WordPress website</a>.</p>
-
-		<h2><?php echo __( 'Contact Me', 'remove-noreferrer' ); ?></h2>
-
-		<ul>
-			<li><a href="https://t.me/gruz0" target="_blank">Telegram</a></li>
-			<li><a href="https://www.facebook.com/gruz0" target="_blank">Facebook</a></li>
-			<li><a href="https://twitter.com/gruz0" target="_blank">Twitter</a></li>
-			<li><a href="https://vk.com/gruz0" target="_blank">VK.com</a></li>
-		</ul>
 		<?php
 	}
 
