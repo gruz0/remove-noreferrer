@@ -7,9 +7,6 @@
   <a href="http://www.gnu.org/licenses/gpl-2.0.txt" target="_blank">
     <img alt="License: GPLv2" src="https://img.shields.io/badge/License-GPLv2-yellow.svg" />
   </a>
-  <a href="https://twitter.com/gruz0" target="_blank">
-    <img alt="Twitter: gruz0" src="https://img.shields.io/twitter/follow/gruz0.svg?style=social" />
-  </a>
 </p>
 
 > This WordPress plugin removes rel=&#34;noreferrer&#34; from links in Posts, Pages, comments and widgets
@@ -29,7 +26,6 @@ make test
 👤 **Alexander Kadyrov**
 
 * Website: https://kadyrov.dev/
-* Twitter: [@gruz0](https://twitter.com/gruz0)
 * Github: [@gruz0](https://github.com/gruz0)
 * LinkedIn: [@alexanderkadyrov](https://linkedin.com/in/alexanderkadyrov)
 
