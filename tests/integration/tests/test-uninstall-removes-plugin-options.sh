@@ -4,7 +4,7 @@ export red='\033[0;31m'
 export green='\033[0;32m'
 export NC='\033[0m'
 
-BANNER="Options deleted"
+BANNER="[${WP_VERSION}][Options Deleted]"
 
 $ACTIVATE_PLUGIN > /dev/null
 
@@ -16,10 +16,10 @@ $DEACTIVATE_PLUGIN > /dev/null
 $UNINSTALL_PLUGIN > /dev/null
 
 if docker-compose $COMPOSER_ARGS exec $TTY wordpress wp option get remove_noreferrer --allow-root > /dev/null; then
-	echo -e "[${BANNER}]: ${red}Option remove_noreferrer must be deleted${NC}"
+	echo -e "${BANNER}: ${red}Option remove_noreferrer must be deleted${NC}"
 	exit 1
 fi
 
-echo -e "[${BANNER}]:    ${green}Passed${NC}"
+echo -e "${BANNER}:    ${green}Passed${NC}"
 
 exit 0

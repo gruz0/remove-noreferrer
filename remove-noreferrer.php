@@ -28,7 +28,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die();
 }
 
-require_once( plugin_dir_path( __FILE__ ) . '/inc/autoloader.php' );
+require_once plugin_dir_path( __FILE__ ) . '/inc/autoloader.php';
 
 /**
  * Plugin's option key
@@ -88,6 +88,9 @@ function run_plugin() {
 		return new \Remove_Noreferrer\Admin\Plugin( $options );
 	}
 
-	return new \Remove_Noreferrer\Frontend\Plugin( $options, new \Remove_Noreferrer\Frontend\Links_Processor() );
+	$links_processor = new \Remove_Noreferrer\Frontend\Links_Processor();
+	$adapter         = new \Remove_Noreferrer\Core\Adapter();
+
+	return new \Remove_Noreferrer\Frontend\Plugin( $options, $links_processor, $adapter );
 }
 

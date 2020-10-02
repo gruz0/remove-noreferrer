@@ -21,18 +21,18 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 * @var \Remove_Noreferrer\Admin\Options_Page $_options_page
+	 * @var \Remove_Noreferrer\Admin\Options_Page $options_page
 	 */
-	private $_options_page;
+	private $options_page;
 
 	/**
 	 * Options
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 * @var array $_options
+	 * @var array $options
 	 */
-	private $_options;
+	private $options;
 
 	/**
 	 * Prepares environment
@@ -45,7 +45,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->_options = array(
+		$this->options = array(
 			'where_should_the_plugin_work' => array(
 				'post',
 				'posts_page',
@@ -57,7 +57,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 			'remove_settings_on_uninstall' => false,
 		);
 
-		$this->_options_page = new Options_Page();
+		$this->options_page = new Options_Page();
 	}
 
 	/**
@@ -69,7 +69,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_render_tabs_has_valid_tabs() {
-		$content = $this->_options_page->render( $this->_options, 'general' );
+		$content = $this->options_page->render( $this->options, 'general' );
 
 		$internal_errors = libxml_use_internal_errors( true );
 
@@ -104,7 +104,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_render_h1_tag() {
-		$content = $this->_options_page->render( $this->_options, 'general' );
+		$content = $this->options_page->render( $this->options, 'general' );
 
 		$this->assertTrue( false !== preg_match( '/<h1>Remove Noreferrer<\/h1>/', $content ) );
 	}
@@ -119,7 +119,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_render_general_tab_has_hidden_nonce_field() {
-		$content = $this->_options_page->render( $this->_options, 'general' );
+		$content = $this->options_page->render( $this->options, 'general' );
 
 		$nonce = 'gruz0_remove_noreferrer_nonce';
 		$found = preg_match( '/<input type="hidden" id="' . $nonce . '" name="' . $nonce . '" value=".+" \/>/', $content );
@@ -137,7 +137,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_render_general_tab_has_hidden_action_field() {
-		$content = $this->_options_page->render( $this->_options, 'general' );
+		$content = $this->options_page->render( $this->options, 'general' );
 
 		$found = preg_match( '/<input type="hidden" name="action" value="remove_noreferrer_update_options" \/>/', $content );
 
@@ -154,7 +154,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_render_general_tab_has_hidden_grn_tab_field() {
-		$content = $this->_options_page->render( $this->_options, 'general' );
+		$content = $this->options_page->render( $this->options, 'general' );
 
 		$found = preg_match( '/<input type="hidden" name="remove_noreferrer\[grn_tab\]" value="general" \/>/', $content );
 
@@ -171,7 +171,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_render_general_tab_has_valid_checkboxes_count() {
-		$content = $this->_options_page->render( $this->_options, 'general' );
+		$content = $this->options_page->render( $this->options, 'general' );
 
 		$matches = array();
 
@@ -294,7 +294,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_render_additional_settings_tab_has_hidden_nonce_field() {
-		$content = $this->_options_page->render( $this->_options, 'additional-settings' );
+		$content = $this->options_page->render( $this->options, 'additional-settings' );
 
 		$nonce = 'gruz0_remove_noreferrer_nonce';
 		$found = preg_match( '/<input type="hidden" id="' . $nonce . '" name="' . $nonce . '" value=".+" \/>/', $content );
@@ -312,7 +312,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_render_additional_settings_tab_has_hidden_action_field() {
-		$content = $this->_options_page->render( $this->_options, 'additional-settings' );
+		$content = $this->options_page->render( $this->options, 'additional-settings' );
 
 		$found = preg_match( '/<input type="hidden" name="action" value="remove_noreferrer_update_options" \/>/', $content );
 
@@ -329,7 +329,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_render_additional_settings_tab_has_hidden_grn_tab_field() {
-		$content = $this->_options_page->render( $this->_options, 'additional-settings' );
+		$content = $this->options_page->render( $this->options, 'additional-settings' );
 
 		$found = preg_match( '/<input type="hidden" name="remove_noreferrer\[grn_tab\]" value="additional-settings" \/>/', $content );
 
@@ -346,7 +346,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_render_additional_settings_tab_has_valid_checkboxes_count() {
-		$content = $this->_options_page->render( $this->_options, 'additional-settings' );
+		$content = $this->options_page->render( $this->options, 'additional-settings' );
 
 		$matches = array();
 

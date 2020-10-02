@@ -4,6 +4,7 @@ set -euo pipefail
 
 TESTS="${BIN}/../tests"
 
+$TESTS/test-without-options.sh
 $TESTS/test-widget-text.sh
 $TESTS/test-widget-custom-html.sh
 $TESTS/test-homepage.sh

@@ -14,8 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['7.1', '7.2', '7.3', '7.4']
-        wp_version: ['5.3', '5.4', '5.5', 'latest']
+        php: ['5.6', '7.0', '7.1', '7.2', '7.3', '7.4']
+        wp_version: ['5.1', '5.2', '5.3', '5.4', '5.5', 'latest']
     steps:
     - name: Stop the GitHub Actions MySQL instance.
       run: sudo service mysql stop

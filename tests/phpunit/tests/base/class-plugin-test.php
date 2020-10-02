@@ -7,9 +7,9 @@ class Plugin_Test extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 * @var Remove_Noreferrer\Base\Demo_Plugin $_plugin
+	 * @var Remove_Noreferrer\Base\Demo_Plugin $plugin
 	 */
-	private $_plugin;
+	private $plugin;
 
 	/**
 	 * Prepares environment
@@ -22,7 +22,7 @@ class Plugin_Test extends \PHPUnit\Framework\TestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->_plugin = new Demo_Plugin();
+		$this->plugin = new Demo_Plugin();
 	}
 
 	/**
@@ -34,7 +34,7 @@ class Plugin_Test extends \PHPUnit\Framework\TestCase {
 	 * @return void
 	 */
 	public function test_plugin_extended_from_base_plugin() {
-		$this->assertInstanceOf( 'Remove_Noreferrer\Base\Plugin', $this->_plugin );
+		$this->assertInstanceOf( 'Remove_Noreferrer\Base\Plugin', $this->plugin );
 	}
 
 	/**
@@ -46,7 +46,7 @@ class Plugin_Test extends \PHPUnit\Framework\TestCase {
 	 * @return void
 	 */
 	public function test_construct_has_init_action() {
-		$this->assertEquals( 10, has_action( 'init', array( $this->_plugin, 'init' ) ) );
+		$this->assertEquals( 10, has_action( 'init', array( $this->plugin, 'init' ) ) );
 	}
 
 	/**
@@ -80,5 +80,7 @@ class Plugin_Test extends \PHPUnit\Framework\TestCase {
 	}
 }
 
+// phpcs:disable Generic.Files.OneObjectStructurePerFile.MultipleFound
 class Demo_Plugin extends Plugin {}
+// phpcs:enable Generic.Files.OneObjectStructurePerFile.MultipleFound
 

@@ -1,6 +1,4 @@
 .data
-phpcs
-rulesets
 vendor/
 composer.lock
 dist/

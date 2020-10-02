@@ -9,7 +9,7 @@ export NC='\033[0m'
 BIN=$(dirname $0)
 export BIN
 
-WP_VERSION=${1:?}
+export WP_VERSION=${1:?}
 export PLUGIN_VERSION=${2:?}
 export IS_GITHUB_ACTIONS=${3-""}
 

@@ -24,9 +24,9 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 * @var Remove_Noreferrer\Core\Plugin $_plugin
+	 * @var Remove_Noreferrer\Core\Plugin $plugin
 	 */
-	private $_plugin;
+	private $plugin;
 
 	/**
 	 * Prepares environment
@@ -39,7 +39,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->_plugin = new Plugin( new \Remove_Noreferrer\Core\Options() );
+		$this->plugin = new Plugin( new \Remove_Noreferrer\Core\Options() );
 	}
 
 	/**
@@ -66,7 +66,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_plugin_extended_from_base_plugin() {
-		$this->assertInstanceOf( 'Remove_Noreferrer\Base\Plugin', $this->_plugin );
+		$this->assertInstanceOf( 'Remove_Noreferrer\Base\Plugin', $this->plugin );
 	}
 
 	/**
@@ -78,7 +78,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_construct_has_init_action() {
-		$this->assertEquals( 10, has_action( 'init', array( $this->_plugin, 'init' ) ) );
+		$this->assertEquals( 10, has_action( 'init', array( $this->plugin, 'init' ) ) );
 	}
 
 	/**
@@ -102,7 +102,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_init_did_remove_noreferrer_core_plugin_initialized_action() {
-		$this->_plugin->init();
+		$this->plugin->init();
 
 		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_core_plugin_initialized' ) );
 	}
@@ -120,7 +120,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 		wp_set_current_user( $admin_user );
 
-		$this->_plugin->activate();
+		$this->plugin->activate();
 
 		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_core_plugin_activated' ) );
 
@@ -140,7 +140,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 		wp_set_current_user( $editor_user );
 
-		$this->_plugin->activate();
+		$this->plugin->activate();
 
 		$this->assertEquals( 0, did_action( 'remove_noreferrer_core_plugin_activated' ) );
 
@@ -160,7 +160,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 		wp_set_current_user( $admin_user );
 
-		$this->_plugin->activate();
+		$this->plugin->activate();
 
 		$expected = array(
 			GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array(),
@@ -192,7 +192,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 		add_option( GRN_OPTION_KEY, $options );
 
-		$this->_plugin->activate();
+		$this->plugin->activate();
 
 		$this->assertEquals( $options, get_option( GRN_OPTION_KEY ) );
 
@@ -212,7 +212,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 		wp_set_current_user( $admin_user );
 
-		$this->_plugin->deactivate();
+		$this->plugin->deactivate();
 
 		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_core_plugin_deactivated' ) );
 
@@ -232,7 +232,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 		wp_set_current_user( $editor_user );
 
-		$this->_plugin->deactivate();
+		$this->plugin->deactivate();
 
 		$this->assertEquals( 0, did_action( 'remove_noreferrer_core_plugin_deactivated' ) );
 
@@ -252,7 +252,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 		wp_set_current_user( $admin_user );
 
-		$this->_plugin->uninstall();
+		$this->plugin->uninstall();
 
 		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_core_plugin_uninstalled' ) );
 
@@ -272,7 +272,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 		wp_set_current_user( $editor_user );
 
-		$this->_plugin->uninstall();
+		$this->plugin->uninstall();
 
 		$this->assertEquals( 0, did_action( 'remove_noreferrer_core_plugin_uninstalled' ) );
 
@@ -296,7 +296,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 		wp_set_current_user( $admin_user );
 
-		$this->_plugin->uninstall();
+		$this->plugin->uninstall();
 
 		$this->assertEquals( false, get_option( GRN_OPTION_KEY ) );
 
@@ -320,7 +320,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 		wp_set_current_user( $admin_user );
 
-		$this->_plugin->uninstall();
+		$this->plugin->uninstall();
 
 		$this->assertEquals( $option, get_option( GRN_OPTION_KEY ) );
 
