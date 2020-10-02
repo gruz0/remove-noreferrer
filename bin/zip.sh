@@ -18,6 +18,7 @@ ARCHIVE_NAME="remove-noreferrer-${PLUGIN_VERSION}.zip"
 rm -rf ${DIST:?}/
 mkdir -p $TARGET_DIR
 
+cp readme.txt $TARGET_DIR/
 cp index.php $TARGET_DIR/
 cp remove-noreferrer.php $TARGET_DIR/
 cp -R admin $TARGET_DIR/
@@ -33,6 +34,7 @@ zip -r $ARCHIVE_NAME $SLUG > /dev/null
 rm -rf $SLUG
 
 declare -a FilesArray=(
+	"readme.txt"
 	"index.php"
 	"remove-noreferrer.php"
 	"admin/class-options-page.php"
