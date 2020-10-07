@@ -50,11 +50,12 @@ class Links_Processor_Test extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @param string $input The input string.
 	 * @param string $expected The expected function output.
+	 * @param string $attribute_to_remove The attribute to remove.
 	 *
 	 * @return void
 	 */
-	public function test_call( $input, $expected ) {
-		$result = $this->_processor->call( $input );
+	public function test_call( $input, $expected, $attribute_to_remove ) {
+		$result = $this->_processor->call( $input, $attribute_to_remove );
 
 		$this->assertSame( $expected, $result );
 	}
@@ -73,39 +74,89 @@ class Links_Processor_Test extends \PHPUnit\Framework\TestCase {
 			'no links found' => array(
 				'test',
 				'test',
+				'',
 			),
 			'no noreferrer found' => array(
 				'<a rel="nofollow">test</a>',
 				'<a rel="nofollow">test</a>',
+				'',
 			),
 			'noreferrer found' => array(
 				'<a rel="nofollow noreferrer">test</a>',
 				'<a rel="nofollow">test</a>',
+				'',
 			),
 			'rel values inside single quotes' => array(
 				'<a class="test"   rel=\'nofollow noreferrer\' name="test">test</a>',
 				'<a class="test"   rel=\'nofollow\' name="test">test</a>',
+				'',
 			),
 			'link has attributes before rel' => array(
 				'<a class="test"   rel="nofollow noreferrer">test</a>',
 				'<a class="test"   rel="nofollow">test</a>',
+				'',
 			),
 			'link has attributes after rel' => array(
 				'<a rel="nofollow noreferrer" name="test">test</a>',
 				'<a rel="nofollow" name="test">test</a>',
+				'',
 			),
 			'removes extra spaces in rel' => array(
 				'<a rel="  nofollow   noreferrer   ugc ">test</a>',
 				'<a rel="nofollow ugc">test</a>',
+				'',
 			),
 			'two links' => array(
 				'<a rel="nofollow noreferrer">test</a> <a rel="ugc noreferrer nofollow">test2</a>',
 				'<a rel="nofollow">test</a> <a rel="ugc nofollow">test2</a>',
+				'',
 			),
 			'rel="nofollow" exists outside the link' => array(
 				'<a rel="nofollow noreferrer">rel="noreferrer"</a>',
 				'<a rel="nofollow">rel="noreferrer"</a>',
+				'',
 			),
+			'no target blank found' => array(
+				'<a rel="nofollow">test</a>',
+				'<a rel="nofollow">test</a>',
+				'target',
+			),
+			'target blank found' => array(
+				'<a target="_blank">test</a>',
+				'<a target="">test</a>',
+				'target',
+			),
+			'target values inside single quotes' => array(
+				'<a class="test"   target=\'_blank\' name="test">test</a>',
+				'<a class="test"   target=\'\' name="test">test</a>',
+				'target',
+			),
+			'link has attributes before target' => array(
+				'<a class="test"   target="_blank">test</a>',
+				'<a class="test"   target="">test</a>',
+				'target',
+			),
+			'link has attributes after target' => array(
+				'<a target="_blank" name="test">test</a>',
+				'<a target="" name="test">test</a>',
+				'target',
+			),
+			'removes extra spaces in target' => array(
+				'<a target=" _blank  ">test</a>',
+				'<a target="">test</a>',
+				'target',
+			),
+			'target two links' => array(
+				'<a target="_blank">test</a> <a target="_blank">test2</a>',
+				'<a target="">test</a> <a target="">test2</a>',
+				'target',
+			),
+			'target="_blank" exists outside the link' => array(
+				'<a target="_blank">target="_blank"</a>',
+				'<a target="">target="_blank"</a>',
+				'target',
+			),
+
 		);
 		// phpcs:enable WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned
 	}
