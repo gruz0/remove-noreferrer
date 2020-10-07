@@ -177,7 +177,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 
 		preg_match_all( '/<input\s+type="checkbox"\s+name="remove_noreferrer\[where_should_the_plugin_work\]\[\]"[^>]*>/', $content, $matches );
 
-		$this->assertCount( 6, $matches[0] );
+		$this->assertCount( 7, $matches[0] );
 	}
 
 	/**
