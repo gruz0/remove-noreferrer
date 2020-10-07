@@ -83,7 +83,11 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 			return $content;
 		}
 
-		return $this->remove_noreferrer( $content );
+		$filtered_content = $this->remove_noreferrer( $content );
+		if ( $this->can_remove_target_blank() ) {
+			$filtered_content = $this->remove_target_blank( $filtered_content );
+		}
+		return $filtered_content;
 	}
 
 	/**
@@ -178,6 +182,20 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	}
 
 	/**
+	 * Checks if the target blank attribute can be removed
+	 *
+	 * @since 2.0.1
+	 * @access private
+	 *
+	 * @return bool
+	 */
+	private function can_remove_target_blank() {
+		$where_should_the_plugin_work = $this->get_option( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY );
+
+		return in_array( 'target_blank', $where_should_the_plugin_work, true );
+	}
+
+	/**
 	 * Return option's value by key
 	 *
 	 * @since 1.1.1
@@ -267,6 +285,19 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	 */
 	private function remove_noreferrer( $content ) {
 		return $this->_links_processor->call( $content );
+	}
+
+	/**
+	 * Remove target blank attribute from the links
+	 *
+	 * @since 2.0.1
+	 * @access private
+	 *
+	 * @param string $content Content.
+	 * @return string
+	 */
+	private function remove_target_blank( $content ) {
+		return $this->_links_processor->call( $content, 'target' );
 	}
 }
 
