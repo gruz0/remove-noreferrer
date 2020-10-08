@@ -57,6 +57,7 @@ class Remove_Noreferrer_Test extends \WP_UnitTestCase {
 				'page',
 				'comments',
 				'text_widget',
+				'target_blank',
 				'custom_html_widget',
 			),
 			\Remove_Noreferrer\grn_allowed_values()

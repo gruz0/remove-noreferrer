@@ -154,6 +154,24 @@ class Options_Page {
 
 					<tr>
 						<th scope="row">
+							<?php _e( 'Additional attributes', 'remove-noreferrer' ); ?>
+						</th>
+						<td>
+							<fieldset>
+								<?php
+									$this->render_checkbox_where_should_the_plugin_work(
+										$options,
+										'target_blank',
+										__( 'Remove target blank', 'remove-noreferrer' )
+									);
+
+								?>
+							</fieldset>
+						</td>
+					</tr>
+
+					<tr>
+						<th scope="row">
 							<?php _e( 'Widgets' ); ?>
 						</th>
 						<td>

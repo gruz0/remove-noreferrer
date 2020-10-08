@@ -63,6 +63,7 @@ function grn_allowed_values() {
 		'page',
 		'comments',
 		'text_widget',
+		'target_blank',
 		'custom_html_widget',
 	);
 }
