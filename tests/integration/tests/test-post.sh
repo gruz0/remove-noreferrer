@@ -10,29 +10,39 @@ POST_ID=$(docker-compose $COMPOSER_ARGS exec $TTY wordpress wp post list --allow
 
 URL="$WP_HOST/?p=$POST_ID"
 
-$DEACTIVATE_PLUGIN > /dev/null
+$INSTALL_PLUGIN > /dev/null
 
-if ! curl -XGET $URL --silent | grep post_link | grep noreferrer > /dev/null; then
-	echo -e "${BANNER}: ${red}Noreferrer must be exist${NC}"
+if ! $PLUGIN_IS_INSTALLED; then
+	echo -e "${BANNER}:               ${red}Plugin is not installed${red}"
 	exit 1
 fi
 
-$DELETE_OPTIONS > /dev/null
-
-docker-compose $COMPOSER_ARGS exec $TTY wordpress wp option add remove_noreferrer '{"where_should_the_plugin_work":["post"]}' --format=json --allow-root > /dev/null
+if ! curl -XGET $URL --silent | grep post_link | grep noreferrer > /dev/null; then
+	echo -e "${BANNER}:               ${red}Noreferrer must be exist${NC}"
+	exit 1
+fi
 
 $ACTIVATE_PLUGIN > /dev/null
 
 if ! $PLUGIN_IS_ACTIVE; then
-	echo -e "${BANNER}:        ${red}Plugin is not active${red}"
+	echo -e "${BANNER}:               ${red}Plugin is not active${red}"
 	exit 1
 fi
 
+docker-compose $COMPOSER_ARGS exec $TTY wordpress wp option update remove_noreferrer '{"where_should_the_plugin_work":["post"]}' --format=json --allow-root > /dev/null
+
 if curl -XGET $URL --silent | grep post_link | grep noreferrer > /dev/null; then
-	echo -e "${BANNER}: ${red}Noreferrer must not be exist${NC}"
+	echo -e "${BANNER}:               ${red}Noreferrer must not be exist${NC}"
 	exit 1
 fi
 
 echo -e "${BANNER}:               ${green}Passed${NC}"
+
+#
+# CLEANUP
+#
+$DELETE_OPTIONS > /dev/null
+$DEACTIVATE_PLUGIN > /dev/null
+$UNINSTALL_PLUGIN > /dev/null
 
 exit 0

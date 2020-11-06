@@ -10,28 +10,23 @@ WP_HOST=$1
 if ! wp core is-installed --allow-root; then
   wp core install \
     --allow-root \
-	--url=$WP_HOST \
-	--title=Example \
-	--admin_user=admin \
-	--admin_password=password \
-	--admin_email=me@domain.tld
+    --url=$WP_HOST \
+    --title=Example \
+    --admin_user=admin \
+    --admin_password=password \
+    --admin_email=me@domain.tld \
+    --quiet
 fi
 
 #
 # Activate TwentySeventeen theme
 #
-wp theme install twentyseventeen \
-  --activate \
-  --allow-root \
-  > /dev/null
+wp theme install twentyseventeen --activate --allow-root --quiet
 
 #
 # Remove all widgets
 #
-wp widget reset \
-  --all \
-  --allow-root \
-  > /dev/null
+wp widget reset --all --allow-root --quiet
 
 #
 # Create a Text widget
@@ -43,7 +38,7 @@ wp widget add text sidebar-1 1 \
   --filter=true \
   --visual=true \
   --raw \
-  > /dev/null
+  --quiet
 
 #
 # Create a Custom HTML widget
@@ -52,17 +47,14 @@ wp widget add custom_html sidebar-1 2 \
   --allow-root \
   --title='Custom HTML Widget' \
   --content='<a href="https://domain.tld/" target="_blank" rel="noopener noreferrer">widget_custom_html_link</a>' \
-  > /dev/null
+  --quiet
 
 #
 # Delete all posts and pages
 #
 if [ "$(wp post list --allow-root --format=ids)" != "" ]; then
   post_ids=$(wp post list --post_type='page,post' --format=ids --allow-root)
-  wp post delete $post_ids \
-    --force \
-    --allow-root \
-    > /dev/null
+  wp post delete $post_ids --force --allow-root --quiet
 fi
 
 #
@@ -74,7 +66,7 @@ wp post create \
   --post_title='Post' \
   --post_content='<a href="https://domain.tld/" target="_blank" rel="noopener noreferrer">post_link</a>' \
   --post_status='publish' \
-  > /dev/null
+  --quiet
 
 POST_ID=$(wp post list --allow-root --post_type='post' --format=ids)
 
@@ -86,7 +78,7 @@ wp comment create \
   --comment_post_ID=$POST_ID \
   --comment_content='<a href="https://domain.tld/" target="_blank" rel="noopener noreferrer">post_comment_link</a>' \
   --comment_author='wp-cli' \
-  > /dev/null
+  --quiet
 
 #
 # Create a page
@@ -97,7 +89,7 @@ wp post create \
   --post_title='Page' \
   --post_content='<a href="https://domain.tld/" target="_blank" rel="noopener noreferrer">page_link</a>' \
   --post_status='publish' \
-  > /dev/null
+  --quiet
 
 PAGE_ID=$(wp post list --allow-root --post_type='page' --format=ids)
 
@@ -109,4 +101,4 @@ wp comment create \
   --comment_post_ID=$PAGE_ID \
   --comment_content='<a href="https://domain.tld/" target="_blank" rel="noopener noreferrer">page_comment_link</a>' \
   --comment_author='wp-cli' \
-  > /dev/null
+  --quiet

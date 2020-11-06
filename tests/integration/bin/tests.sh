@@ -14,4 +14,6 @@ $TESTS/test-page.sh
 $TESTS/test-page-comment.sh
 $TESTS/test-uninstall-removes-plugin-options.sh
 $TESTS/test-uninstall-does-not-remove-plugin-options.sh
+
+# NOTE: Keep this test last
 $TESTS/test-debug-log.sh
