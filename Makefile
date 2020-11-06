@@ -1,4 +1,4 @@
-.PHONY: help dockerize shell install_linters lint test coverage e2e e2e_single zip install_wordpress_dev dockerize_test_database shutdown_test_database wait_for_database
+.PHONY: help dockerize shell setup lint test coverage e2e e2e_single zip install_wordpress_dev dockerize_test_database shutdown_test_database wait_for_database
 
 PLUGIN_VERSION=$(shell grep -r ' \* Version:' remove-noreferrer.php | egrep -o '([0-9]{1,}\.)+[0-9]{1,}')
 
@@ -6,7 +6,7 @@ help:
 	@echo 'Available targets:'
 	@echo '  make dockerize'
 	@echo '  make shell'
-	@echo '  make install_linters'
+	@echo '  make setup'
 	@echo '  make lint'
 	@echo '  make test'
 	@echo '  make coverage'
@@ -25,8 +25,8 @@ dockerize:
 shell:
 	docker-compose exec wordpress bash
 
-install_linters:
-	bin/install_linters.sh
+setup:
+	bin/setup.sh
 
 lint:
 	bin/lint.sh

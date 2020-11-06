@@ -15,10 +15,51 @@
 
 ## Run tests
 
+### Unit tests
+
+Run database inside Docker:
+
 ```sh
 make dockerize_test_database
+```
+
+Fetch and extract WordPress sources:
+
+```sh
 make install_wordpress_dev
+```
+
+By default it uses `latest` WordPress version. If you want run tests on
+specific WordPress version, then pass it as an environment variable:
+
+```sh
+make install_wordpress_dev WP_VERSION=5.3
+```
+
+Run PHPUnit:
+
+```sh
 make test
+```
+
+Shutdown database:
+
+```sh
+make shutdown_test_database
+```
+
+### End-to-End tests
+
+Run e2e tests on all version specified in `./tests/integration/docker-compose`:
+
+```sh
+make e2e
+```
+
+Run e2e tests on specific WordPress version:
+
+```sh
+make e2e_single WP_VERSION=5.3
 ```
 
 ## Author
@@ -26,7 +67,7 @@ make test
 👤 **Alexander Kadyrov**
 
 * Website: https://kadyrov.dev/
-* Github: [@gruz0](https://github.com/gruz0)
+* GitHub: [@gruz0](https://github.com/gruz0)
 * LinkedIn: [@alexanderkadyrov](https://linkedin.com/in/alexanderkadyrov)
 
 ## 🤝 Contributing
