@@ -78,7 +78,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_has_grn_parent_slug_constant() {
-		$this->assertSame( 'options-general.php', $this->plugin::GRN_PARENT_SLUG );
+		$this->assertSame( 'options-general.php', Plugin::GRN_PARENT_SLUG );
 	}
 
 	/**
@@ -90,7 +90,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_has_grn_menu_slug_constant() {
-		$this->assertSame( 'remove_noreferrer', $this->plugin::GRN_MENU_SLUG );
+		$this->assertSame( 'remove_noreferrer', Plugin::GRN_MENU_SLUG );
 	}
 
 	/**
@@ -102,7 +102,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_has_grn_nonce_value_constant() {
-		$this->assertSame( 'gruz0_remove_noreferrer_nonce', $this->plugin::GRN_NONCE_VALUE );
+		$this->assertSame( 'gruz0_remove_noreferrer_nonce', Plugin::GRN_NONCE_VALUE );
 	}
 
 	/**
@@ -114,7 +114,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_has_grn_nonce_action_constant() {
-		$this->assertSame( 'remove_noreferrer', $this->plugin::GRN_NONCE_ACTION );
+		$this->assertSame( 'remove_noreferrer', Plugin::GRN_NONCE_ACTION );
 	}
 
 	/**
@@ -211,7 +211,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 		$this->plugin->add_menu();
 
-		list( $menu_title, $capability, $menu_slug, $page_title ) = $submenu[ $this->plugin::GRN_PARENT_SLUG ][0];
+		list( $menu_title, $capability, $menu_slug, $page_title ) = $submenu[ Plugin::GRN_PARENT_SLUG ][0];
 
 		$this->assertEquals( 'Remove Noreferrer', $menu_title );
 		$this->assertEquals( 'manage_options', $capability );
