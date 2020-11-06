@@ -58,9 +58,9 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 * @var Remove_Noreferrer\Core\Options $_options
+	 * @var Remove_Noreferrer\Core\Options $options
 	 */
-	private $_options;
+	private $options;
 
 	/**
 	 * Constructor
@@ -71,7 +71,7 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	 * @param \Remove_Noreferrer\Core\Options $options Options class.
 	 */
 	public function __construct( \Remove_Noreferrer\Core\Options $options ) {
-		$this->_options = $options;
+		$this->options = $options;
 
 		parent::__construct();
 	}
@@ -116,19 +116,19 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 		}
 
 		if ( empty( $_POST[ self::GRN_NONCE_VALUE ] ) ) {
-			wp_die( __( 'Nonce must be set', 'remove-noreferrer' ) );
+			wp_die( 'Nonce must be set' );
 		}
 
 		if ( ! wp_verify_nonce( $_POST[ self::GRN_NONCE_VALUE ], self::GRN_NONCE_ACTION ) ) {
-			wp_die( __( 'Invalid nonce', 'remove-noreferrer' ) );
+			wp_die( 'Invalid nonce' );
 		}
 
-		$options     = $this->_options->get_options();
+		$options     = $this->options->get_options();
 		$new_options = array_merge( $options, $this->validate_options( $_POST['remove_noreferrer'] ) );
 
 		update_option( GRN_OPTION_KEY, $new_options );
 
-		wp_redirect(
+		wp_safe_redirect(
 			add_query_arg(
 				array(
 					'page'    => self::GRN_MENU_SLUG,
@@ -150,7 +150,9 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	 * @access public
 	 */
 	public function render_options_page() {
-		echo $this->options_page()->render( $this->_options->get_options(), $this->get_current_tab() );
+		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo $this->options_page()->render( $this->options->get_options(), $this->get_current_tab() );
+		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	/**
@@ -200,7 +202,9 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	 * @return string
 	 */
 	private function get_current_tab() {
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended
 		return ( ! empty( $_GET['tab'] ) ) ? $_GET['tab'] : 'general';
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
 	}
 }
 

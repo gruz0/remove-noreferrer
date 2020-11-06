@@ -20,18 +20,18 @@ class Options {
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 * @var array $_options
+	 * @var array $options
 	 */
-	private $_options = array();
+	private $options = array();
 
 	/**
 	 * Allowed options keys
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 * @var array $_allowed_options_keys
+	 * @var array $allowed_options_keys
 	 */
-	private $_allowed_options_keys = array(
+	private $allowed_options_keys = array(
 		GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY,
 		GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY,
 	);
@@ -57,9 +57,9 @@ class Options {
 	 * @return array
 	 */
 	public function get_options() {
-		$this->_options = get_option( GRN_OPTION_KEY, array() );
+		$this->options = get_option( GRN_OPTION_KEY, array() );
 
-		return $this->_options;
+		return $this->options;
 	}
 
 	/**
@@ -75,15 +75,15 @@ class Options {
 	 * @throws \InvalidArgumentException If key does not exist.
 	 */
 	public function get_option( $key, $default = null ) {
-		if ( ! in_array( $key, $this->_allowed_options_keys, true ) ) {
+		if ( ! in_array( $key, $this->allowed_options_keys, true ) ) {
 			throw new \InvalidArgumentException( "Key ${key} does not exist" );
 		}
 
-		if ( empty( $this->_options ) ) {
+		if ( empty( $this->options ) ) {
 			$this->get_options();
 		}
 
-		return ( ! empty( $this->_options[ $key ] ) ) ? $this->_options[ $key ] : $default;
+		return ( ! empty( $this->options[ $key ] ) ) ? $this->options[ $key ] : $default;
 	}
 
 	/**

@@ -21,9 +21,9 @@ class Options_Test extends \WP_UnitTestCase {
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 * @var Remove_Noreferrer\Core\Options $_options
+	 * @var Remove_Noreferrer\Core\Options $options
 	 */
-	private $_options;
+	private $options;
 
 	/**
 	 * Prepares environment
@@ -33,7 +33,7 @@ class Options_Test extends \WP_UnitTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->_options = new Options();
+		$this->options = new Options();
 	}
 
 	/**
@@ -45,7 +45,7 @@ class Options_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_add_default_options_did_remove_noreferrer_options_created_action() {
-		$this->_options->add_default_options();
+		$this->options->add_default_options();
 
 		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_options_created' ) );
 	}
@@ -59,7 +59,7 @@ class Options_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_add_default_options_creates_default_options() {
-		$this->_options->add_default_options();
+		$this->options->add_default_options();
 
 		$expected = array(
 			GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array(),
@@ -78,7 +78,7 @@ class Options_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_get_options_returns_empty_array_if_options_are_not_exist() {
-		$this->assertEquals( array(), $this->_options->get_options() );
+		$this->assertEquals( array(), $this->options->get_options() );
 	}
 
 	/**
@@ -97,7 +97,7 @@ class Options_Test extends \WP_UnitTestCase {
 
 		add_option( GRN_OPTION_KEY, $options );
 
-		$this->assertEquals( $options, $this->_options->get_options() );
+		$this->assertEquals( $options, $this->options->get_options() );
 	}
 
 	/**
@@ -110,9 +110,9 @@ class Options_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_get_option_executes_get_options_if_options_are_empty() {
-		$this->_options->get_option( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY );
+		$this->options->get_option( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY );
 
-		$this->assertEquals( array(), $this->_options->get_options() );
+		$this->assertEquals( array(), $this->options->get_options() );
 	}
 
 	/**
@@ -127,7 +127,7 @@ class Options_Test extends \WP_UnitTestCase {
 	public function test_get_option_throws_invalid_argument_exception_if_key_is_not_exists() {
 		$this->setExpectedException( '\InvalidArgumentException', 'Key some_key does not exist' );
 
-		$this->_options->get_option( 'some_key' );
+		$this->options->get_option( 'some_key' );
 	}
 
 	/**
@@ -142,7 +142,7 @@ class Options_Test extends \WP_UnitTestCase {
 	public function test_get_option_returns_valid_option() {
 		add_option( GRN_OPTION_KEY, array( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array( 'page' ) ) );
 
-		$this->assertEquals( array( 'page' ), $this->_options->get_option( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ) );
+		$this->assertEquals( array( 'page' ), $this->options->get_option( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ) );
 	}
 
 	/**
@@ -160,7 +160,7 @@ class Options_Test extends \WP_UnitTestCase {
 
 		$this->assertEquals( $option, get_option( GRN_OPTION_KEY ) );
 
-		$this->_options->delete_options();
+		$this->options->delete_options();
 
 		$this->assertEquals( false, get_option( GRN_OPTION_KEY ) );
 	}

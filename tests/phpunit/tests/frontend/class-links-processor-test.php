@@ -21,9 +21,9 @@ class Links_Processor_Test extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 * @var Remove_Noreferrer\Frontend\Links_Processor $_processor
+	 * @var Remove_Noreferrer\Frontend\Links_Processor $processor
 	 */
-	private $_processor;
+	private $processor;
 
 	/**
 	 * Prepares environment
@@ -33,7 +33,7 @@ class Links_Processor_Test extends \PHPUnit\Framework\TestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->_processor = new Links_Processor();
+		$this->processor = new Links_Processor();
 	}
 
 	/**
@@ -54,7 +54,7 @@ class Links_Processor_Test extends \PHPUnit\Framework\TestCase {
 	 * @return void
 	 */
 	public function test_call( $input, $expected ) {
-		$result = $this->_processor->call( $input );
+		$result = $this->processor->call( $input );
 
 		$this->assertSame( $expected, $result );
 	}

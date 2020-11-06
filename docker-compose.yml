@@ -21,8 +21,12 @@ services:
       - "8000:80"
     volumes:
       - ".:/var/www/html/wp-content/plugins/remove-noreferrer/"
+      - "/var/www/html/wp-content/plugins/remove-noreferrer/.data"
+      - "/var/www/html/wp-content/plugins/remove-noreferrer/.git"
+      - "/var/www/html/wp-content/plugins/remove-noreferrer/.github"
+      - "/var/www/html/wp-content/plugins/remove-noreferrer/.wordpress-org"
       - "/var/www/html/wp-content/plugins/remove-noreferrer/build"
-      - "/var/www/html/wp-content/plugins/remove-noreferrer/rulesets"
+      - "/var/www/html/wp-content/plugins/remove-noreferrer/dist"
       - "/var/www/html/wp-content/plugins/remove-noreferrer/tests"
       - "/var/www/html/wp-content/plugins/remove-noreferrer/vendor"
     restart: always

@@ -21,9 +21,9 @@ class Options_Validator_Test extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 * @var Remove_Noreferrer\Admin\Options_Validator $_validator
+	 * @var Remove_Noreferrer\Admin\Options_Validator $validator
 	 */
-	private $_validator;
+	private $validator;
 
 	/**
 	 * Prepares environment
@@ -33,7 +33,7 @@ class Options_Validator_Test extends \PHPUnit\Framework\TestCase {
 	protected function setUp() {
 		parent::setUp();
 
-		$this->_validator = new Options_Validator();
+		$this->validator = new Options_Validator();
 	}
 
 	/**
@@ -51,7 +51,7 @@ class Options_Validator_Test extends \PHPUnit\Framework\TestCase {
 	 * @return void
 	 */
 	public function test_call_validates_where_should_the_plugin_work( $input, $expected ) {
-		$result = $this->_validator->call( $input );
+		$result = $this->validator->call( $input );
 
 		$this->assertSame( $expected, $result );
 	}
@@ -175,7 +175,7 @@ class Options_Validator_Test extends \PHPUnit\Framework\TestCase {
 	 * @return void
 	 */
 	public function test_call_validates_remove_settings_on_uninstall( $input, $expected ) {
-		$result = $this->_validator->call( $input );
+		$result = $this->validator->call( $input );
 
 		$this->assertSame( $expected, $result );
 	}

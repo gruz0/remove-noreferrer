@@ -2,7 +2,10 @@
 .editorconfig
 .data
 .git
+.github
 .gitignore
+.shellcheckrc
+.wordpress-org
 .DS_Store
 Thumbs.db
 composer.json
@@ -17,12 +20,8 @@ README.md
 TODO
 CONTRIBUTING.md
 yarn.lock
-assets/
 bin/
 build/
 dist/
-node_modules/
-phpcs/
-rulesets/
 tests/
 vendor/

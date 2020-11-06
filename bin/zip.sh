@@ -43,6 +43,7 @@ declare -a FilesArray=(
 	"admin/index.php"
 	"base/class-plugin.php"
 	"base/index.php"
+	"core/class-adapter.php"
 	"core/class-options.php"
 	"core/class-plugin.php"
 	"core/index.php"
