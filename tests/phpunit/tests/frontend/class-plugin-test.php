@@ -387,7 +387,11 @@ class Plugin_Test extends \WP_UnitTestCase {
 		$widget   = new \WP_Widget_Text();
 		$args     = $this->get_widget_default_args();
 
+		ob_start();
+
 		$result = $this->plugin->remove_noreferrer_from_widgets( $instance, $widget, $args );
+
+		ob_get_clean();
 
 		$this->assertEquals( false, $result );
 	}

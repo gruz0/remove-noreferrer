@@ -15,7 +15,7 @@
 	"prefer-stable" : true,
 	"scripts": {
 		"test": [
-			"vendor/bin/phpunit -v --debug --colors=always --no-coverage -c tests/phpunit/phpunit.xml"
+			"vendor/bin/phpunit --colors=always --no-coverage -c tests/phpunit/phpunit.xml"
 		],
 		"coverage": [
 			"vendor/bin/phpunit -v --debug --colors=always -c tests/phpunit/phpunit.xml"
