@@ -12,7 +12,7 @@ namespace Remove_Noreferrer\Admin;
 /**
  * Test admin/class-options-validator.php
  *
- * @coversDefaultClass \Remove_Noreferrer\Admin\Options_Validator
+ * @coversDefaultClass Remove_Noreferrer\Admin\Options_Validator
  * @group admin
  */
 class Options_Validator_Test extends \PHPUnit\Framework\TestCase {
@@ -41,6 +41,7 @@ class Options_Validator_Test extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @covers ::call
 	 * @covers ::validate_where_should_the_plugin_work
+	 * @covers Remove_Noreferrer\grn_allowed_values
 	 *
 	 * @since 2.0.0
 	 * @access public

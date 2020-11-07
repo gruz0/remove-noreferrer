@@ -12,7 +12,7 @@ namespace Remove_Noreferrer\Admin;
 /**
  * Test admin/class-options-page.php
  *
- * @coversDefaultClass \Remove_Noreferrer\Admin\Options_Page
+ * @coversDefaultClass Remove_Noreferrer\Admin\Options_Page
  * @group admin
  */
 class Options_Page_Test extends \WP_UnitTestCase {
@@ -21,7 +21,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 * @var \Remove_Noreferrer\Admin\Options_Page $options_page
+	 * @var Remove_Noreferrer\Admin\Options_Page $options_page
 	 */
 	private $options_page;
 
@@ -62,6 +62,14 @@ class Options_Page_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::render_tabs
+	 * @covers ::render
+	 * @covers ::render_action
+	 * @covers ::render_buy_me_a_coffee
+	 * @covers ::render_checkbox_where_should_the_plugin_work
+	 * @covers ::render_form
+	 * @covers ::render_general_tab
+	 * @covers ::render_hidden_grn_tab
+	 * @covers ::render_nonce
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -97,6 +105,14 @@ class Options_Page_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::render
+	 * @covers ::render_action
+	 * @covers ::render_buy_me_a_coffee
+	 * @covers ::render_checkbox_where_should_the_plugin_work
+	 * @covers ::render_form
+	 * @covers ::render_general_tab
+	 * @covers ::render_hidden_grn_tab
+	 * @covers ::render_nonce
+	 * @covers ::render_tabs
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -112,6 +128,13 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::render_nonce
 	 * @covers ::render_general_tab
+	 * @covers ::render
+	 * @covers ::render_action
+	 * @covers ::render_buy_me_a_coffee
+	 * @covers ::render_checkbox_where_should_the_plugin_work
+	 * @covers ::render_form
+	 * @covers ::render_hidden_grn_tab
+	 * @covers ::render_tabs
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -130,6 +153,13 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::render_action
 	 * @covers ::render_general_tab
+	 * @covers ::render
+	 * @covers ::render_buy_me_a_coffee
+	 * @covers ::render_checkbox_where_should_the_plugin_work
+	 * @covers ::render_form
+	 * @covers ::render_hidden_grn_tab
+	 * @covers ::render_nonce
+	 * @covers ::render_tabs
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -147,6 +177,13 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::render_hidden_grn_tab
 	 * @covers ::render_general_tab
+	 * @covers ::render
+	 * @covers ::render_action
+	 * @covers ::render_buy_me_a_coffee
+	 * @covers ::render_checkbox_where_should_the_plugin_work
+	 * @covers ::render_form
+	 * @covers ::render_nonce
+	 * @covers ::render_tabs
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -164,6 +201,13 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::render_general_tab
 	 * @covers ::render_checkbox_where_should_the_plugin_work
+	 * @covers ::render
+	 * @covers ::render_action
+	 * @covers ::render_buy_me_a_coffee
+	 * @covers ::render_form
+	 * @covers ::render_hidden_grn_tab
+	 * @covers ::render_nonce
+	 * @covers ::render_tabs
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -287,6 +331,13 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::render_nonce
 	 * @covers ::render_additional_settings_tab
+	 * @covers ::render
+	 * @covers ::render_action
+	 * @covers ::render_buy_me_a_coffee
+	 * @covers ::render_checkbox_remove_settings_on_uninstall
+	 * @covers ::render_form
+	 * @covers ::render_hidden_grn_tab
+	 * @covers ::render_tabs
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -305,6 +356,13 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::render_action
 	 * @covers ::render_additional_settings_tab
+	 * @covers ::render
+	 * @covers ::render_buy_me_a_coffee
+	 * @covers ::render_checkbox_remove_settings_on_uninstall
+	 * @covers ::render_form
+	 * @covers ::render_hidden_grn_tab
+	 * @covers ::render_nonce
+	 * @covers ::render_tabs
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -322,6 +380,14 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::render_hidden_grn_tab
 	 * @covers ::render_additional_settings_tab
+	 * @covers ::render
+	 * @covers ::render_action
+	 * @covers ::render_buy_me_a_coffee
+	 * @covers ::render_checkbox_remove_settings_on_uninstall
+	 * @covers ::render_form
+	 * @covers ::render_hidden_grn_tab
+	 * @covers ::render_tabs
+	 * @covers ::render_nonce
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -339,6 +405,13 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::render_additional_settings_tab
 	 * @covers ::render_checkbox_remove_settings_on_uninstall
+	 * @covers ::render
+	 * @covers ::render_action
+	 * @covers ::render_buy_me_a_coffee
+	 * @covers ::render_form
+	 * @covers ::render_hidden_grn_tab
+	 * @covers ::render_nonce
+	 * @covers ::render_tabs
 	 *
 	 * @since 2.0.0
 	 * @access public
