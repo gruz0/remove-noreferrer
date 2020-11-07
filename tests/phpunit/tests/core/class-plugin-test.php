@@ -12,11 +12,10 @@ namespace Remove_Noreferrer\Core;
 /**
  * Test core/class-plugin.php
  *
- * @coversDefaultClass \Remove_Noreferrer\Core\Plugin
- * @covers \Remove_Noreferrer\Core\Plugin::__construct
+ * @coversDefaultClass Remove_Noreferrer\Core\Plugin
  * @group core
  *
- * @uses \Remove_Noreferrer\Base\Plugin
+ * @uses Remove_Noreferrer\Base\Plugin
  */
 class Plugin_Test extends \WP_UnitTestCase {
 	/**
@@ -109,6 +108,10 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::activate
+	 * @covers Remove_Noreferrer\Core\Options::add_default_options
+	 * @covers Remove_Noreferrer\Core\Options::get_default_options
+	 * @covers Remove_Noreferrer\Core\Options::get_options
+	 * @covers Remove_Noreferrer\Core\Options::migrate_options
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -149,6 +152,10 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::activate
+	 * @covers Remove_Noreferrer\Core\Options::add_default_options
+	 * @covers Remove_Noreferrer\Core\Options::get_default_options
+	 * @covers Remove_Noreferrer\Core\Options::get_options
+	 * @covers Remove_Noreferrer\Core\Options::migrate_options
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -169,6 +176,10 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::activate
+	 * @covers Remove_Noreferrer\Core\Options::add_default_options
+	 * @covers Remove_Noreferrer\Core\Options::get_default_options
+	 * @covers Remove_Noreferrer\Core\Options::get_options
+	 * @covers Remove_Noreferrer\Core\Options::migrate_options
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -189,6 +200,9 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::activate
+	 * @covers Remove_Noreferrer\Core\Options::get_options
+	 * @covers Remove_Noreferrer\Core\Options::migrate_options
+	 * @covers Remove_Noreferrer\Core\Options::migrate
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -251,6 +265,8 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::uninstall
+	 * @covers Remove_Noreferrer\Core\Options::get_option
+	 * @covers Remove_Noreferrer\Core\Options::get_options
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -291,6 +307,9 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::uninstall
+	 * @covers Remove_Noreferrer\Core\Options::delete_options
+	 * @covers Remove_Noreferrer\Core\Options::get_option
+	 * @covers Remove_Noreferrer\Core\Options::get_options
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -313,6 +332,8 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::uninstall
+	 * @covers Remove_Noreferrer\Core\Options::get_option
+	 * @covers Remove_Noreferrer\Core\Options::get_options
 	 *
 	 * @since 2.0.0
 	 * @access public

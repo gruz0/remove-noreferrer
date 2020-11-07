@@ -12,7 +12,7 @@ namespace Remove_Noreferrer\Frontend;
 /**
  * Test frontend/class-links-processor.php
  *
- * @coversDefaultClass \Remove_Noreferrer\Frontend\Links_Processor
+ * @coversDefaultClass Remove_Noreferrer\Frontend\Links_Processor
  * @group frontend
  */
 class Links_Processor_Test extends \PHPUnit\Framework\TestCase {

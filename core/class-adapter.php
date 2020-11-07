@@ -16,6 +16,18 @@ namespace Remove_Noreferrer\Core;
  */
 class Adapter {
 	/**
+	 * Checks if it is an admin area
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return boolean
+	 */
+	public function is_admin() {
+		return \is_admin();
+	}
+
+	/**
 	 * Checks if it is a single post
 	 *
 	 * @since 2.0.0

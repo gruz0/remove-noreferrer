@@ -55,6 +55,8 @@ define( 'GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY', 'remove_settings_on_uninstall' )
  * Allowed values
  *
  * @since 2.0.0
+ *
+ * @return array
  */
 function grn_allowed_values() {
 	return array(
@@ -83,13 +85,13 @@ register_uninstall_hook( __FILE__, array( 'Remove_Noreferrer\Core\Plugin', 'unin
  */
 function run_plugin() {
 	$options = new \Remove_Noreferrer\Core\Options();
+	$adapter = new \Remove_Noreferrer\Core\Adapter();
 
-	if ( is_admin() ) {
+	if ( $adapter->is_admin() ) {
 		return new \Remove_Noreferrer\Admin\Plugin( $options );
 	}
 
 	$links_processor = new \Remove_Noreferrer\Frontend\Links_Processor();
-	$adapter         = new \Remove_Noreferrer\Core\Adapter();
 
 	return new \Remove_Noreferrer\Frontend\Plugin( $options, $links_processor, $adapter );
 }

@@ -12,7 +12,7 @@ namespace Remove_Noreferrer\Core;
 /**
  * Test core/class-options.php
  *
- * @coversDefaultClass \Remove_Noreferrer\Core\Options
+ * @coversDefaultClass Remove_Noreferrer\Core\Options
  * @group core
  */
 class Options_Test extends \WP_UnitTestCase {
@@ -162,6 +162,8 @@ class Options_Test extends \WP_UnitTestCase {
 	/**
 	 * @covers ::migrate_options
 	 * @covers ::get_options
+	 * @covers ::add_default_options
+	 * @covers ::get_default_options
 	 *
 	 * @since 2.0.0
 	 * @access public

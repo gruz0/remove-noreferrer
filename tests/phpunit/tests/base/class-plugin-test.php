@@ -1,6 +1,12 @@
 <?php
 namespace Remove_Noreferrer\Base;
 
+/**
+ * Test base/class-plugin.php
+ *
+ * @coversDefaultClass Remove_Noreferrer\Base\Plugin
+ * @group base
+ */
 class Plugin_Test extends \PHPUnit\Framework\TestCase {
 	/**
 	 * Remove_Noreferrer\Base\Demo_Plugin instance
@@ -38,7 +44,9 @@ class Plugin_Test extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Base\Plugin::__construct
+	 * @covers ::__construct
+	 * @covers ::format_action
+	 * @covers ::stringify_called_class
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -50,9 +58,9 @@ class Plugin_Test extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Base\Plugin::__construct
-	 * @covers \Remove_Noreferrer\Base\Plugin::stringify_called_class
-	 * @covers \Remove_Noreferrer\Base\Plugin::format_action
+	 * @covers ::__construct
+	 * @covers ::stringify_called_class
+	 * @covers ::format_action
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -64,9 +72,11 @@ class Plugin_Test extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @covers \Remove_Noreferrer\Base\Plugin::init
-	 * @covers \Remove_Noreferrer\Base\Plugin::stringify_called_class
-	 * @covers \Remove_Noreferrer\Base\Plugin::format_action
+	 * @covers ::init
+	 * @covers ::stringify_called_class
+	 * @covers ::format_action
+	 * @covers ::__construct
+	 * @covers Remove_Noreferrer\Frontend\Plugin::init
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -81,6 +91,6 @@ class Plugin_Test extends \PHPUnit\Framework\TestCase {
 }
 
 // phpcs:disable Generic.Files.OneObjectStructurePerFile.MultipleFound
-class Demo_Plugin extends Plugin {}
+class Demo_Plugin extends \Remove_Noreferrer\Base\Plugin {}
 // phpcs:enable Generic.Files.OneObjectStructurePerFile.MultipleFound
 

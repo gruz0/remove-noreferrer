@@ -12,11 +12,10 @@ namespace Remove_Noreferrer\Admin;
 /**
  * Test admin/class-plugin.php
  *
- * @coversDefaultClass \Remove_Noreferrer\Admin\Plugin
- * @covers \Remove_Noreferrer\Admin\Plugin::__construct
+ * @coversDefaultClass Remove_Noreferrer\Admin\Plugin
  * @group admin
  *
- * @uses \Remove_Noreferrer\Base\Plugin
+ * @uses Remove_Noreferrer\Base\Plugin
  */
 class Plugin_Test extends \WP_UnitTestCase {
 	/**
@@ -142,6 +141,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers ::__construct
 	 * @covers ::init
 	 *
 	 * @since 2.0.0
@@ -156,6 +156,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers ::__construct
 	 * @covers ::init
 	 *
 	 * @since 2.0.0
@@ -176,6 +177,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers ::__construct
 	 * @covers ::init
 	 *
 	 * @since 2.0.0
@@ -190,6 +192,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers ::__construct
 	 * @covers ::add_menu
 	 *
 	 * @since 2.0.0
@@ -222,6 +225,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers ::__construct
 	 * @covers ::add_menu
 	 *
 	 * @since 2.0.0
@@ -249,6 +253,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers ::__construct
 	 * @covers ::update_options
 	 *
 	 * @since 2.0.0
@@ -269,6 +274,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers ::__construct
 	 * @covers ::update_options
 	 *
 	 * @since 2.0.0
@@ -289,6 +295,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers ::__construct
 	 * @covers ::update_options
 	 *
 	 * @since 2.0.0
