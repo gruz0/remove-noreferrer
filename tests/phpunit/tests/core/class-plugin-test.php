@@ -155,19 +155,14 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_activate_creates_default_options_if_options_are_not_exist() {
+	public function test_activate_did_remove_noreferrer_options_created_action_if_options_are_not_exist() {
 		$admin_user = self::factory()->user->create( array( 'role' => 'administrator' ) );
 
 		wp_set_current_user( $admin_user );
 
 		$this->plugin->activate();
 
-		$expected = array(
-			GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array(),
-			GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY => '0',
-		);
-
-		$this->assertEquals( $expected, get_option( GRN_OPTION_KEY ) );
+		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_options_created' ) );
 
 		wp_delete_user( $admin_user );
 	}
@@ -180,21 +175,36 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_activate_does_not_change_existed_options() {
+	public function test_activate_did_not_remove_noreferrer_options_migrated_action_if_options_are_not_exist() {
 		$admin_user = self::factory()->user->create( array( 'role' => 'administrator' ) );
 
 		wp_set_current_user( $admin_user );
 
-		$options = array(
-			GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array( 'post' ),
-			GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY => '1',
-		);
+		$this->plugin->activate();
 
-		add_option( GRN_OPTION_KEY, $options );
+		$this->assertEquals( 0, did_action( 'remove_noreferrer_options_migrated' ) );
+
+		wp_delete_user( $admin_user );
+	}
+
+	/**
+	 * @covers ::activate
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_activate_did_remove_noreferrer_options_migrated_if_has_new_options() {
+		$admin_user = self::factory()->user->create( array( 'role' => 'administrator' ) );
+
+		wp_set_current_user( $admin_user );
+
+		add_option( GRN_OPTION_KEY, array( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array( 'post' ) ) );
 
 		$this->plugin->activate();
 
-		$this->assertEquals( $options, get_option( GRN_OPTION_KEY ) );
+		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_options_migrated' ) );
 
 		wp_delete_user( $admin_user );
 	}
@@ -287,10 +297,8 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_uninstall_removes_plugin_options() {
-		$option = array( GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY => '1' );
-
-		add_option( GRN_OPTION_KEY, $option );
+	public function test_uninstall_did_remove_noreferrer_options_deleted_action_if_administrator() {
+		add_option( GRN_OPTION_KEY, array( GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY => '1' ) );
 
 		$admin_user = self::factory()->user->create( array( 'role' => 'administrator' ) );
 
@@ -298,7 +306,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 		$this->plugin->uninstall();
 
-		$this->assertEquals( false, get_option( GRN_OPTION_KEY ) );
+		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_options_deleted' ) );
 
 		wp_delete_user( $admin_user );
 	}
@@ -311,10 +319,8 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_uninstall_does_not_remove_plugin_options() {
-		$option = array( GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY => '0' );
-
-		add_option( GRN_OPTION_KEY, $option );
+	public function test_uninstall_did_not_remove_noreferrer_options_deleted_action() {
+		add_option( GRN_OPTION_KEY, array( GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY => '0' ) );
 
 		$admin_user = self::factory()->user->create( array( 'role' => 'administrator' ) );
 
@@ -322,7 +328,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 		$this->plugin->uninstall();
 
-		$this->assertEquals( $option, get_option( GRN_OPTION_KEY ) );
+		$this->assertEquals( 0, did_action( 'remove_noreferrer_options_deleted' ) );
 
 		wp_delete_user( $admin_user );
 	}
