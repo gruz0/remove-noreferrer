@@ -27,10 +27,8 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 			return;
 		}
 
-		if ( false === get_option( GRN_OPTION_KEY ) ) {
-			$options = new Options();
-			$options->add_default_options();
-		}
+		$options = new Options();
+		$options->migrate_options();
 
 		do_action( 'remove_noreferrer_core_plugin_activated' );
 	}
