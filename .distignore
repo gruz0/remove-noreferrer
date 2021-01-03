@@ -16,9 +16,8 @@ package-lock.json
 phpcs.xml
 Makefile
 *.zip
-README.md
+*.md
 TODO
-CONTRIBUTING.md
 yarn.lock
 bin/
 build/

@@ -76,7 +76,7 @@ class Options_Validator {
 			array_filter(
 				array_map( 'trim', $input[ GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ] ),
 				function( $v ) {
-					return in_array( $v, \Remove_Noreferrer\grn_allowed_values(), true );
+					return in_array( $v, self::allowed_values(), true );
 				}
 			)
 		);
@@ -102,6 +102,26 @@ class Options_Validator {
 		}
 
 		return '1' === $input[ GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY ] ? '1' : '0';
+	}
+
+	/**
+	 * Allowed values
+	 *
+	 * @since 2.0.0
+	 * @access private
+	 * @static
+	 *
+	 * @return array
+	 */
+	private static function allowed_values() {
+		return array(
+			'post',
+			'posts_page',
+			'page',
+			'comments',
+			'text_widget',
+			'custom_html_widget',
+		);
 	}
 }
 

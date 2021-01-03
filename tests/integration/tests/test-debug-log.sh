@@ -14,7 +14,7 @@ curl -O $WP_HOST/wp-content/debug.log --silent > /dev/null
 FILESIZE=$(wc -c < "$DEBUG_LOG")
 
 if [ $FILESIZE -ne 0 ]; then
-	echo -e "${BANNER}: ${red}Must be empty${NC}"
+	echo -e "${BANNER}:          ${red}Must be empty${NC}"
 	echo
 	echo "Content of $DEBUG_LOG:"
 	cat $DEBUG_LOG

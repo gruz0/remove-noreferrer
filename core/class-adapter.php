@@ -62,5 +62,31 @@ class Adapter {
 	public function is_posts_page() {
 		return \is_home();
 	}
+
+	/**
+	 * Wraps WP's wp_verify_nonce
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @param string $value  Value.
+	 * @param string $action Action.
+	 * @return boolean
+	 */
+	public function wp_verify_nonce( $value, $action ) {
+		return \wp_verify_nonce( $value, $action );
+	}
+
+	/**
+	 * Wraps WP's wp_safe_redirect
+	 *
+	 * @param string  $location Location.
+	 * @param integer $status   Status.
+	 */
+	public function wp_safe_redirect( $location, $status ) {
+		\wp_safe_redirect( $location, $status );
+
+		exit();
+	}
 }
 

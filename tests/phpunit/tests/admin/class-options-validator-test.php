@@ -17,11 +17,11 @@ namespace Remove_Noreferrer\Admin;
  */
 class Options_Validator_Test extends \PHPUnit\Framework\TestCase {
 	/**
-	 * Remove_Noreferrer\Admin\Options_Validator instance
+	 * Options_Validator instance
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 * @var Remove_Noreferrer\Admin\Options_Validator $validator
+	 * @var Options_Validator $validator
 	 */
 	private $validator;
 
@@ -41,7 +41,7 @@ class Options_Validator_Test extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @covers ::call
 	 * @covers ::validate_where_should_the_plugin_work
-	 * @covers Remove_Noreferrer\grn_allowed_values
+	 * @covers ::allowed_values
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -75,6 +75,13 @@ class Options_Validator_Test extends \PHPUnit\Framework\TestCase {
 			'key "where_should_the_plugin_work" not found' => array(
 				array(),
 				array(),
+			),
+			'pass empty array' => array(
+				array(
+					'grn_tab' => 'general',
+					GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array(),
+				),
+				array( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array() ),
 			),
 			"pass string instead of array's values" => array(
 				array(

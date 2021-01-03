@@ -54,13 +54,31 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	const GRN_NONCE_ACTION = 'remove_noreferrer';
 
 	/**
-	 * Remove_Noreferrer\Core\Options instance
+	 * \Remove_Noreferrer\Core\Options instance
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 * @var Remove_Noreferrer\Core\Options $options
+	 * @var \Remove_Noreferrer\Core\Options $options
 	 */
 	private $options;
+
+	/**
+	 * \Remove_Noreferrer\Core\Adapter instance
+	 *
+	 * @since 2.0.0
+	 * @access private
+	 * @var \Remove_Noreferrer\Core\Adapter $adapter
+	 */
+	private $adapter;
+
+	/**
+	 * Options_Page instance
+	 *
+	 * @since 2.0.0
+	 * @access private
+	 * @var Options_Page $options_page
+	 */
+	private $options_page;
 
 	/**
 	 * Constructor
@@ -68,10 +86,20 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	 * @since 2.0.0
 	 * @access public
 	 *
-	 * @param \Remove_Noreferrer\Core\Options $options Options class.
+	 * @param \Remove_Noreferrer\Core\Options $options      Options class.
+	 * @param \Remove_Noreferrer\Core\Adapter $adapter      Adapter class.
+	 * @param Options_Page                    $options_page Options_Page class.
 	 */
-	public function __construct( \Remove_Noreferrer\Core\Options $options ) {
-		$this->options = $options;
+	public function __construct(
+		\Remove_Noreferrer\Core\Options $options,
+		\Remove_Noreferrer\Core\Adapter $adapter,
+		Options_Page $options_page
+	) {
+		$this->options      = $options;
+		$this->adapter      = $adapter;
+		$this->options_page = $options_page;
+
+		add_action( 'remove_noreferrer_admin_plugin_loaded', array( & $this, 'add_hooks' ) );
 
 		parent::__construct();
 	}
@@ -82,11 +110,11 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	 * @since 2.0.0
 	 * @access public
 	 */
-	public function init() {
+	public function add_hooks() {
 		add_action( 'admin_menu', array( & $this, 'add_menu' ) );
 		add_action( 'admin_post_remove_noreferrer_update_options', array( & $this, 'update_options' ) );
 
-		parent::init();
+		$this->do_action( 'hooks_added' );
 	}
 
 	/**
@@ -115,32 +143,36 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 			wp_die( 'Unauthorized user' );
 		}
 
+		// phpcs:disable WordPress.Security.NonceVerification.Missing
 		if ( empty( $_POST[ self::GRN_NONCE_VALUE ] ) ) {
 			wp_die( 'Nonce must be set' );
 		}
 
-		if ( ! wp_verify_nonce( $_POST[ self::GRN_NONCE_VALUE ], self::GRN_NONCE_ACTION ) ) {
+		if ( ! $this->adapter->wp_verify_nonce( $_POST[ self::GRN_NONCE_VALUE ], self::GRN_NONCE_ACTION ) ) {
 			wp_die( 'Invalid nonce' );
+		}
+
+		if ( empty( $_POST['remove_noreferrer'] ) ) {
+			wp_die( 'No options given' );
 		}
 
 		$options     = $this->options->get_options();
 		$new_options = array_merge( $options, $this->validate_options( $_POST['remove_noreferrer'] ) );
+		// phpcs:enable WordPress.Security.NonceVerification.Missing
 
-		update_option( GRN_OPTION_KEY, $new_options );
+		$this->options->update_options( $new_options );
 
-		wp_safe_redirect(
-			add_query_arg(
-				array(
-					'page'    => self::GRN_MENU_SLUG,
-					'updated' => true,
-					'tab'     => $this->get_current_tab(),
-				),
-				admin_url( self::GRN_PARENT_SLUG )
+		$args = add_query_arg(
+			array(
+				'page'    => self::GRN_MENU_SLUG,
+				'updated' => true,
+				'tab'     => $this->get_current_tab(),
 			),
-			303
+			admin_url( self::GRN_PARENT_SLUG )
 		);
 
-		exit;
+		// We use adapter to cover this case with tests.
+		$this->adapter->wp_safe_redirect( $args, 303 );
 	}
 
 	/**
@@ -151,20 +183,8 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	 */
 	public function render_options_page() {
 		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo $this->options_page()->render( $this->options->get_options(), $this->get_current_tab() );
+		echo $this->options_page->render( $this->options->get_options(), $this->get_current_tab() );
 		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
-	}
-
-	/**
-	 * Options Page class
-	 *
-	 * @since 1.1.0
-	 * @access private
-	 *
-	 * @return Remove_Noreferrer\Admin\Options_Page
-	 */
-	private function options_page() {
-		return new Options_Page();
 	}
 
 	/**
@@ -187,7 +207,7 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	 * @since 1.1.0
 	 * @access private
 	 *
-	 * @return Remove_Noreferrer\Admin\Options_Validator
+	 * @return Options_Validator
 	 */
 	private function options_validator() {
 		return new Options_Validator();

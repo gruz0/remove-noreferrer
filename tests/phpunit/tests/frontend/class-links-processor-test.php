@@ -17,11 +17,11 @@ namespace Remove_Noreferrer\Frontend;
  */
 class Links_Processor_Test extends \PHPUnit\Framework\TestCase {
 	/**
-	 * Remove_Noreferrer\Frontend\Links_Processor instance
+	 * Links_Processor instance
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 * @var Remove_Noreferrer\Frontend\Links_Processor $processor
+	 * @var Links_Processor $processor
 	 */
 	private $processor;
 
@@ -40,7 +40,7 @@ class Links_Processor_Test extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider data_call
 	 *
 	 * @covers ::call
-	 * @covers ::is_links_found
+	 * @covers ::are_links_found
 	 * @covers ::is_noreferrer_found
 	 * @covers ::remove_noreferrer
 	 * @covers ::remove_extra_spaces

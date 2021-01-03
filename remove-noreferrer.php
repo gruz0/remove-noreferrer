@@ -4,7 +4,7 @@
  *
  * @package           Remove_Noreferrer
  * @author            Alexander Kadyrov <alexander@kadyrov.dev>
- * @copyright         2019-2020 Alexander Kadyrov
+ * @copyright         2019-2021 Alexander Kadyrov
  * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
@@ -31,6 +31,13 @@ if ( ! defined( 'WPINC' ) ) {
 require_once plugin_dir_path( __FILE__ ) . '/inc/autoloader.php';
 
 /**
+ * Current plugin's version
+ *
+ * @since 2.0.0
+ */
+define( 'GRN_VERSION', '2.0.0' );
+
+/**
  * Plugin's option key
  *
  * @since 1.1.1
@@ -38,36 +45,25 @@ require_once plugin_dir_path( __FILE__ ) . '/inc/autoloader.php';
 define( 'GRN_OPTION_KEY', 'remove_noreferrer' );
 
 /**
- * Plugin's option key stores `where_should_the_plugin_work` values
+ * Stores `plugin_version` value
+ *
+ * @since 2.0.0
+ */
+define( 'GRN_PLUGIN_VERSION_KEY', 'plugin_version' );
+
+/**
+ * Stores `where_should_the_plugin_work` values
  *
  * @since 2.0.0
  */
 define( 'GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY', 'where_should_the_plugin_work' );
 
 /**
- * Plugin's option key stores `remove_settings_on_uninstall` value
+ * Stores `remove_settings_on_uninstall` value
  *
  * @since 2.0.0
  */
 define( 'GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY', 'remove_settings_on_uninstall' );
-
-/**
- * Allowed values
- *
- * @since 2.0.0
- *
- * @return array
- */
-function grn_allowed_values() {
-	return array(
-		'post',
-		'posts_page',
-		'page',
-		'comments',
-		'text_widget',
-		'custom_html_widget',
-	);
-}
 
 // Load plugin's core.
 add_action( 'plugins_loaded', 'Remove_Noreferrer\run_plugin' );
@@ -81,18 +77,13 @@ register_uninstall_hook( __FILE__, array( 'Remove_Noreferrer\Core\Plugin', 'unin
  *
  * @since 2.0.0
  *
- * @return Remove_Noreferrer\Admin\Plugin|Remove_Noreferrer\Frontend\Plugin
+ * @codeCoverageIgnore
  */
 function run_plugin() {
-	$options = new \Remove_Noreferrer\Core\Options();
-	$adapter = new \Remove_Noreferrer\Core\Adapter();
+	$options = new Core\Options();
+	$adapter = new Core\Adapter();
+	$plugin  = new Plugin( $options, $adapter );
 
-	if ( $adapter->is_admin() ) {
-		return new \Remove_Noreferrer\Admin\Plugin( $options );
-	}
-
-	$links_processor = new \Remove_Noreferrer\Frontend\Links_Processor();
-
-	return new \Remove_Noreferrer\Frontend\Plugin( $options, $links_processor, $adapter );
+	$plugin->run();
 }
 

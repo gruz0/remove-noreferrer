@@ -18,29 +18,29 @@ namespace Remove_Noreferrer\Frontend;
  */
 class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	/**
-	 * Remove_Noreferrer\Core\Options instance
+	 * \Remove_Noreferrer\Core\Options instance
 	 *
 	 * @since 1.1.1
 	 * @access private
-	 * @var Remove_Noreferrer\Core\Options $options
+	 * @var \Remove_Noreferrer\Core\Options $options
 	 */
 	private $options;
 
 	/**
-	 * Remove_Noreferrer\Frontend\Links_Processor instance
+	 * Links_Processor instance
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 * @var Remove_Noreferrer\Frontend\Links_Processor $links_processor
+	 * @var Links_Processor $links_processor
 	 */
 	private $links_processor;
 
 	/**
-	 * Remove_Noreferrer\Core\Adapter instance
+	 * \Remove_Noreferrer\Core\Adapter instance
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 * @var Remove_Noreferrer\Core\Adapter $adapter
+	 * @var \Remove_Noreferrer\Core\Adapter $adapter
 	 */
 	private $adapter;
 
@@ -59,18 +59,20 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	 * @since 1.1.0
 	 * @access public
 	 *
-	 * @param \Remove_Noreferrer\Core\Options             $options Options class.
-	 * @param \Remove_Noreferrer\Frontend\Links_Processor $links_processor Links_Processor class.
-	 * @param \Remove_Noreferrer\Core\Adapter             $adapter Adapter class.
+	 * @param \Remove_Noreferrer\Core\Options $options Options class.
+	 * @param Links_Processor                 $links_processor Links_Processor class.
+	 * @param \Remove_Noreferrer\Core\Adapter $adapter Adapter class.
 	 */
 	public function __construct(
 		\Remove_Noreferrer\Core\Options $options,
-		\Remove_Noreferrer\Frontend\Links_Processor $links_processor,
+		Links_Processor $links_processor,
 		\Remove_Noreferrer\Core\Adapter $adapter
 	) {
 		$this->options         = $options;
 		$this->links_processor = $links_processor;
 		$this->adapter         = $adapter;
+
+		add_action( 'remove_noreferrer_frontend_plugin_loaded', array( & $this, 'add_hooks' ) );
 
 		parent::__construct();
 	}
@@ -81,12 +83,12 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	 * @since 2.0.0
 	 * @access public
 	 */
-	public function init() {
+	public function add_hooks() {
 		add_filter( 'the_content', array( & $this, 'remove_noreferrer_from_content' ), 999 );
 		add_filter( 'comment_text', array( & $this, 'remove_noreferrer_from_comment' ), 20, 3 );
 		add_filter( 'widget_display_callback', array( & $this, 'remove_noreferrer_from_widgets' ), 10, 3 );
 
-		parent::init();
+		$this->do_action( 'hooks_added' );
 	}
 
 	/**
@@ -128,7 +130,7 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 			return $comment_text;
 		}
 
-		if ( ! $this->is_comments_processable( $options ) ) {
+		if ( ! $this->are_comments_processable( $options ) ) {
 			return $comment_text;
 		}
 
@@ -153,26 +155,7 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 			return $instance;
 		}
 
-		$class_name        = get_class( $widget_class );
-		$supported_widgets = array( 'WP_Widget_Text', 'WP_Widget_Custom_HTML' );
-
-		if ( ! in_array( $class_name, $supported_widgets, true ) ) {
-			return $instance;
-		}
-
-		$processable = false;
-
-		switch ( $class_name ) {
-			case 'WP_Widget_Text':
-				$processable = $this->is_widget_processable( $options, 'text_widget' );
-				break;
-
-			case 'WP_Widget_Custom_HTML':
-				$processable = $this->is_widget_processable( $options, 'custom_html_widget' );
-				break;
-		}
-
-		if ( ! $processable ) {
+		if ( ! $this->is_widget_processable( $options, $widget_class ) ) {
 			return $instance;
 		}
 
@@ -281,22 +264,44 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 	 * @param array $options Options array.
 	 * @return bool
 	 */
-	private function is_comments_processable( $options ) {
+	private function are_comments_processable( $options ) {
 		return in_array( 'comments', $options, true );
 	}
 
 	/**
-	 * Checks if array contains widgets' options
+	 * Checks is widget processable
 	 *
 	 * @since 2.0.0
 	 * @access private
 	 *
-	 * @param array  $options Options array.
-	 * @param string $key Option key.
+	 * @param array      $options      Options array.
+	 * @param \WP_Widget $widget_class The current widget instance.
 	 * @return bool
 	 */
-	private function is_widget_processable( $options, $key ) {
-		return in_array( $key, $options, true );
+	private function is_widget_processable( $options, \WP_Widget $widget_class ) {
+		$class             = get_class( $widget_class );
+		$supported_widgets = $this->supported_widgets_map();
+
+		if ( ! array_key_exists( $class, $supported_widgets ) ) {
+			return false;
+		}
+
+		return in_array( $supported_widgets[ $class ], $options, true );
+	}
+
+	/**
+	 * Returns map of supported widgets
+	 *
+	 * @since 2.0.0
+	 * @access private
+	 *
+	 * @return array
+	 */
+	private function supported_widgets_map() {
+		return array(
+			'WP_Widget_Text'        => 'text_widget',
+			'WP_Widget_Custom_HTML' => 'custom_html_widget',
+		);
 	}
 
 	/**
