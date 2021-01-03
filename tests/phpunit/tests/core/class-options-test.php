@@ -17,11 +17,11 @@ namespace Remove_Noreferrer\Core;
  */
 class Options_Test extends \WP_UnitTestCase {
 	/**
-	 * Remove_Noreferrer\Core\Options instance
+	 * Options instance
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 * @var Remove_Noreferrer\Core\Options $options
+	 * @var Options $options
 	 */
 	private $options;
 
@@ -38,18 +38,30 @@ class Options_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::get_options
+	 * @covers ::get_default_options
+	 * @covers ::set_options
 	 *
 	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
 	 */
-	public function test_get_options_returns_empty_array_if_options_are_not_exist() {
-		$this->assertEquals( array(), $this->options->get_options() );
+	public function test_get_options_returns_default_options_if_options_are_not_exist() {
+		delete_option( GRN_OPTION_KEY );
+
+		$options = array(
+			GRN_PLUGIN_VERSION_KEY               => GRN_VERSION,
+			GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array(),
+			GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY => '0',
+		);
+
+		$this->assertEquals( $options, $this->options->get_options() );
 	}
 
 	/**
 	 * @covers ::get_options
+	 * @covers ::get_default_options
+	 * @covers ::set_options
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -58,17 +70,17 @@ class Options_Test extends \WP_UnitTestCase {
 	 */
 	public function test_get_options_returns_existed_options() {
 		$options = array(
-			GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array(),
-			GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY => '0',
+			GRN_PLUGIN_VERSION_KEY               => '999.9.9',
+			GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array( 'some' => 'value' ),
+			GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY => '1',
 		);
 
-		add_option( GRN_OPTION_KEY, $options );
+		update_option( GRN_OPTION_KEY, $options );
 
 		$this->assertEquals( $options, $this->options->get_options() );
 	}
 
 	/**
-	 * @covers ::get_options
 	 * @covers ::get_option
 	 *
 	 * @since 2.0.0
@@ -76,22 +88,7 @@ class Options_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_get_option_executes_get_options_if_options_are_empty() {
-		$this->options->get_option( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY );
-
-		$this->assertEquals( array(), $this->options->get_options() );
-	}
-
-	/**
-	 * @covers ::get_option
-	 * @covers ::get_options
-	 *
-	 * @since 2.0.0
-	 * @access public
-	 *
-	 * @return void
-	 */
-	public function test_get_option_throws_invalid_argument_exception_if_key_is_not_exists() {
+	public function test_get_option_throws_invalid_argument_exception_if_key_is_not_allowed() {
 		$this->setExpectedException( '\InvalidArgumentException', 'Key some_key does not exist' );
 
 		$this->options->get_option( 'some_key' );
@@ -99,7 +96,8 @@ class Options_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::get_option
-	 * @covers ::get_options
+	 * @covers ::get_default_options
+	 * @covers ::set_options
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -107,9 +105,41 @@ class Options_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_get_option_returns_valid_option() {
-		add_option( GRN_OPTION_KEY, array( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array( 'page' ) ) );
+		update_option( GRN_OPTION_KEY, array( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array( 'page' ) ) );
 
 		$this->assertEquals( array( 'page' ), $this->options->get_option( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY ) );
+	}
+
+	/**
+	 * @covers ::update_options
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_update_options_did_remove_noreferrer_options_updated_action() {
+		$options = array( GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY => '1' );
+
+		$this->options->update_options( $options );
+
+		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_options_updated' ) );
+	}
+
+	/**
+	 * @covers ::update_options
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_update_options_updates_options() {
+		$options = array( GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY => '1' );
+
+		$this->options->update_options( $options );
+
+		$this->assertEquals( $options, get_option( GRN_OPTION_KEY ) );
 	}
 
 	/**
@@ -140,103 +170,6 @@ class Options_Test extends \WP_UnitTestCase {
 		$this->options->delete_options();
 
 		$this->assertEquals( false, get_option( GRN_OPTION_KEY ) );
-	}
-
-	/**
-	 * @covers ::migrate_options
-	 * @covers ::get_options
-	 * @covers ::add_default_options
-	 * @covers ::get_default_options
-	 *
-	 * @since 2.0.0
-	 * @access public
-	 *
-	 * @return void
-	 */
-	public function test_migrate_options_did_remove_noreferrer_options_created_action_if_options_are_not_exist() {
-		$this->options->migrate_options();
-
-		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_options_created' ) );
-	}
-
-	/**
-	 * @covers ::migrate_options
-	 * @covers ::get_options
-	 * @covers ::add_default_options
-	 * @covers ::get_default_options
-	 *
-	 * @since 2.0.0
-	 * @access public
-	 *
-	 * @return void
-	 */
-	public function test_migrate_options_did_not_remove_noreferrer_options_migrated_action_if_options_are_not_exist() {
-		$this->options->migrate_options();
-
-		$this->assertEquals( 0, did_action( 'remove_noreferrer_options_migrated' ) );
-	}
-
-	/**
-	 * @covers ::migrate_options
-	 * @covers ::get_options
-	 * @covers ::add_default_options
-	 * @covers ::get_default_options
-	 *
-	 * @since 2.0.0
-	 * @access public
-	 *
-	 * @return void
-	 */
-	public function test_migrate_options_creates_default_options_if_options_are_not_exist() {
-		$this->options->migrate_options();
-
-		$expected = array(
-			GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array(),
-			GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY => '0',
-		);
-
-		$this->assertEquals( $expected, get_option( GRN_OPTION_KEY ) );
-	}
-
-	/**
-	 * @covers ::migrate_options
-	 * @covers ::get_options
-	 * @covers ::migrate
-	 *
-	 * @since 2.0.0
-	 * @access public
-	 *
-	 * @return void
-	 */
-	public function test_migrate_options_did_remove_noreferrer_options_migrated_action_if_has_new_options() {
-		add_option( GRN_OPTION_KEY, array( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array( 'page' ) ) );
-
-		$this->options->migrate_options();
-
-		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_options_migrated' ) );
-	}
-
-	/**
-	 * @covers ::migrate_options
-	 * @covers ::get_options
-	 * @covers ::migrate
-	 *
-	 * @since 2.0.0
-	 * @access public
-	 *
-	 * @return void
-	 */
-	public function test_migrate_options_adds_new_options() {
-		add_option( GRN_OPTION_KEY, array( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array( 'page' ) ) );
-
-		$this->options->migrate_options();
-
-		$expected = array(
-			GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array( 'page' ),
-			GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY => '0',
-		);
-
-		$this->assertEquals( $expected, get_option( GRN_OPTION_KEY ) );
 	}
 }
 

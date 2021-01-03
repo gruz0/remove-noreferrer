@@ -12,6 +12,7 @@ export COMPOSER_ARGS="-f $BIN/../docker-compose/database.yml -f $BIN/../docker-c
 export WP_HOST="localhost:8000"
 
 export INSTALL_PLUGIN="docker-compose $COMPOSER_ARGS exec $TTY wordpress /docker/install-plugin.sh $PLUGIN_VERSION"
+export INSTALL_PLUGIN_1_2_0_FROM_WORDPRESS_REPO="docker-compose $COMPOSER_ARGS exec $TTY wordpress /docker/install-plugin-from-wordpress-repo.sh 1.2.0"
 export PLUGIN_IS_INSTALLED="docker-compose $COMPOSER_ARGS exec $TTY wordpress /docker/check-plugin-is-installed.sh"
 export UNINSTALL_PLUGIN="docker-compose $COMPOSER_ARGS exec $TTY wordpress /docker/uninstall-plugin.sh"
 

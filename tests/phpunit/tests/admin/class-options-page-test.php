@@ -21,7 +21,7 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 * @var Remove_Noreferrer\Admin\Options_Page $options_page
+	 * @var Options_Page $options_page
 	 */
 	private $options_page;
 
@@ -435,7 +435,6 @@ class Options_Page_Test extends \WP_UnitTestCase {
 	 *
 	 * @since 2.0.0
 	 * @access public
-	 * @group current
 	 *
 	 * @param mixed $input Function's result.
 	 * @param int   $expected Expected.
@@ -459,6 +458,25 @@ class Options_Page_Test extends \WP_UnitTestCase {
 			'checked remove settings'   => array( $this->find_checked_checkbox_remove_settings_on_uninstall(), 1 ),
 			'unchecked remove settings' => array( $this->find_unchecked_checkbox_remove_settings_on_uninstall(), 1 ),
 		);
+	}
+
+	/**
+	 * @covers ::render
+	 * @covers ::render_tabs
+	 * @covers ::render_support_tab
+	 * @covers ::render_buy_me_a_coffee
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_render_support_tab() {
+		$content = $this->options_page->render( $this->options, 'support' );
+
+		$found = preg_match( '/alexander@kadyrov.dev/', $content );
+
+		$this->assertEquals( 1, $found );
 	}
 
 	/**

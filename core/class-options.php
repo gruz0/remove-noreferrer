@@ -22,7 +22,7 @@ class Options {
 	 * @access private
 	 * @var array $options
 	 */
-	private $options = array();
+	private $options = null;
 
 	/**
 	 * Allowed options keys
@@ -32,6 +32,7 @@ class Options {
 	 * @var array $allowed_options_keys
 	 */
 	private $allowed_options_keys = array(
+		GRN_PLUGIN_VERSION_KEY,
 		GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY,
 		GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY,
 	);
@@ -45,7 +46,7 @@ class Options {
 	 * @return array
 	 */
 	public function get_options() {
-		$this->options = get_option( GRN_OPTION_KEY, array() );
+		$this->set_options();
 
 		return $this->options;
 	}
@@ -67,11 +68,23 @@ class Options {
 			throw new \InvalidArgumentException( "Key ${key} does not exist" );
 		}
 
-		if ( empty( $this->options ) ) {
-			$this->get_options();
-		}
+		$this->set_options();
 
 		return ( ! empty( $this->options[ $key ] ) ) ? $this->options[ $key ] : $default;
+	}
+
+	/**
+	 * Updates options
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @param mixed $new_options New options.
+	 */
+	public function update_options( $new_options ) {
+		update_option( GRN_OPTION_KEY, $new_options );
+
+		do_action( 'remove_noreferrer_options_updated' );
 	}
 
 	/**
@@ -87,66 +100,29 @@ class Options {
 	}
 
 	/**
-	 * Migrates options
-	 *
-	 * @since 2.0.0
-	 * @access public
-	 */
-	public function migrate_options() {
-		$options = $this->get_options();
-
-		if ( empty( $options ) ) {
-			$this->add_default_options();
-
-			return;
-		}
-
-		$this->migrate( $options );
-	}
-
-	/**
-	 * Adds default options
-	 *
-	 * @since 2.0.0
-	 * @access private
-	 */
-	private function add_default_options() {
-		add_option( GRN_OPTION_KEY, $this->get_default_options() );
-
-		do_action( 'remove_noreferrer_options_created' );
-	}
-
-	/**
 	 * Returns default options
 	 *
 	 * @since 2.0.0
-	 * @access private
+	 * @access public
 	 *
 	 * @return array
 	 */
-	private function get_default_options() {
+	public function get_default_options() {
 		return array(
+			GRN_PLUGIN_VERSION_KEY               => GRN_VERSION,
 			GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array(),
 			GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY => '0',
 		);
 	}
 
 	/**
-	 * Merges existing options with new options
+	 * Stores options from database in local variable
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 *
-	 * @param array $options Options.
 	 */
-	private function migrate( $options ) {
-		if ( ! isset( $options[ GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY ] ) ) {
-			$options[ GRN_REMOVE_SETTINGS_ON_UNINSTALL_KEY ] = '0';
-		}
-
-		update_option( GRN_OPTION_KEY, $options );
-
-		do_action( 'remove_noreferrer_options_migrated' );
+	private function set_options() {
+		$this->options = get_option( GRN_OPTION_KEY, $this->get_default_options() );
 	}
 }
 

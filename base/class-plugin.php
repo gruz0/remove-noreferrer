@@ -33,22 +33,20 @@ abstract class Plugin {
 	public function __construct() {
 		$this->stringified_class = $this->stringify_called_class();
 
-		add_action( 'init', array( & $this, 'init' ) );
-
-		// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
-		do_action( $this->format_action( 'loaded' ) );
-		// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
+		$this->do_action( 'loaded' );
 	}
 
 	/**
-	 * Initializes plugin
+	 * Fires required action depends on plugin's instance name
 	 *
 	 * @since 2.0.0
-	 * @access public
+	 * @access private
+	 *
+	 * @param string $name Action name.
 	 */
-	public function init() {
+	protected function do_action( $name ) {
 		// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
-		do_action( $this->format_action( 'initialized' ) );
+		do_action( $this->format_action( $name ) );
 		// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
 	}
 

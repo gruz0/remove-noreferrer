@@ -15,15 +15,15 @@ namespace Remove_Noreferrer\Core;
  * @coversDefaultClass Remove_Noreferrer\Core\Plugin
  * @group core
  *
- * @uses Remove_Noreferrer\Base\Plugin
+ * @uses \Remove_Noreferrer\Base\Plugin
  */
 class Plugin_Test extends \WP_UnitTestCase {
 	/**
-	 * Remove_Noreferrer\Core\Plugin instance
+	 * Plugin instance
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 * @var Remove_Noreferrer\Core\Plugin $plugin
+	 * @var Plugin $plugin
 	 */
 	private $plugin;
 
@@ -38,7 +38,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->plugin = new Plugin( new \Remove_Noreferrer\Core\Options() );
+		$this->plugin = new Plugin( new Options() );
 	}
 
 	/**
@@ -65,7 +65,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_plugin_extended_from_base_plugin() {
-		$this->assertInstanceOf( 'Remove_Noreferrer\Base\Plugin', $this->plugin );
+		$this->assertInstanceOf( '\Remove_Noreferrer\Base\Plugin', $this->plugin );
 	}
 
 	/**
@@ -76,42 +76,14 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 *
 	 * @return void
 	 */
-	public function test_construct_has_init_action() {
-		$this->assertEquals( 10, has_action( 'init', array( $this->plugin, 'init' ) ) );
-	}
-
-	/**
-	 * @covers ::__construct
-	 *
-	 * @since 2.0.0
-	 * @access public
-	 *
-	 * @return void
-	 */
-	public function test_construct_did_remove_noreferrer_core_plugin_loaded_action() {
+	public function test_did_remove_noreferrer_core_plugin_loaded_action() {
 		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_core_plugin_loaded' ) );
 	}
 
 	/**
-	 * @covers ::init
-	 *
-	 * @since 2.0.0
-	 * @access public
-	 *
-	 * @return void
-	 */
-	public function test_init_did_remove_noreferrer_core_plugin_initialized_action() {
-		$this->plugin->init();
-
-		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_core_plugin_initialized' ) );
-	}
-
-	/**
 	 * @covers ::activate
-	 * @covers Remove_Noreferrer\Core\Options::add_default_options
-	 * @covers Remove_Noreferrer\Core\Options::get_default_options
-	 * @covers Remove_Noreferrer\Core\Options::get_options
-	 * @covers Remove_Noreferrer\Core\Options::migrate_options
+	 * @covers \Remove_Noreferrer\Core\Options::get_default_options
+	 * @covers \Remove_Noreferrer\Core\Options::get_options
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -148,79 +120,6 @@ class Plugin_Test extends \WP_UnitTestCase {
 		$this->assertEquals( 0, did_action( 'remove_noreferrer_core_plugin_activated' ) );
 
 		wp_delete_user( $editor_user );
-	}
-
-	/**
-	 * @covers ::activate
-	 * @covers Remove_Noreferrer\Core\Options::add_default_options
-	 * @covers Remove_Noreferrer\Core\Options::get_default_options
-	 * @covers Remove_Noreferrer\Core\Options::get_options
-	 * @covers Remove_Noreferrer\Core\Options::migrate_options
-	 *
-	 * @since 2.0.0
-	 * @access public
-	 *
-	 * @return void
-	 */
-	public function test_activate_did_remove_noreferrer_options_created_action_if_options_are_not_exist() {
-		$admin_user = self::factory()->user->create( array( 'role' => 'administrator' ) );
-
-		wp_set_current_user( $admin_user );
-
-		$this->plugin->activate();
-
-		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_options_created' ) );
-
-		wp_delete_user( $admin_user );
-	}
-
-	/**
-	 * @covers ::activate
-	 * @covers Remove_Noreferrer\Core\Options::add_default_options
-	 * @covers Remove_Noreferrer\Core\Options::get_default_options
-	 * @covers Remove_Noreferrer\Core\Options::get_options
-	 * @covers Remove_Noreferrer\Core\Options::migrate_options
-	 *
-	 * @since 2.0.0
-	 * @access public
-	 *
-	 * @return void
-	 */
-	public function test_activate_did_not_remove_noreferrer_options_migrated_action_if_options_are_not_exist() {
-		$admin_user = self::factory()->user->create( array( 'role' => 'administrator' ) );
-
-		wp_set_current_user( $admin_user );
-
-		$this->plugin->activate();
-
-		$this->assertEquals( 0, did_action( 'remove_noreferrer_options_migrated' ) );
-
-		wp_delete_user( $admin_user );
-	}
-
-	/**
-	 * @covers ::activate
-	 * @covers Remove_Noreferrer\Core\Options::get_options
-	 * @covers Remove_Noreferrer\Core\Options::migrate_options
-	 * @covers Remove_Noreferrer\Core\Options::migrate
-	 *
-	 * @since 2.0.0
-	 * @access public
-	 *
-	 * @return void
-	 */
-	public function test_activate_did_remove_noreferrer_options_migrated_if_has_new_options() {
-		$admin_user = self::factory()->user->create( array( 'role' => 'administrator' ) );
-
-		wp_set_current_user( $admin_user );
-
-		add_option( GRN_OPTION_KEY, array( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY => array( 'post' ) ) );
-
-		$this->plugin->activate();
-
-		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_options_migrated' ) );
-
-		wp_delete_user( $admin_user );
 	}
 
 	/**
@@ -265,8 +164,10 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::uninstall
-	 * @covers Remove_Noreferrer\Core\Options::get_option
-	 * @covers Remove_Noreferrer\Core\Options::get_options
+	 * @covers \Remove_Noreferrer\Core\Options::get_option
+	 * @covers \Remove_Noreferrer\Core\Options::get_options
+	 * @covers \Remove_Noreferrer\Core\Options::get_default_options
+	 * @covers \Remove_Noreferrer\Core\Options::set_options
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -287,6 +188,8 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::uninstall
+	 * @covers \Remove_Noreferrer\Core\Options::get_default_options
+	 * @covers \Remove_Noreferrer\Core\Options::set_options
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -307,9 +210,11 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::uninstall
-	 * @covers Remove_Noreferrer\Core\Options::delete_options
-	 * @covers Remove_Noreferrer\Core\Options::get_option
-	 * @covers Remove_Noreferrer\Core\Options::get_options
+	 * @covers \Remove_Noreferrer\Core\Options::delete_options
+	 * @covers \Remove_Noreferrer\Core\Options::get_option
+	 * @covers \Remove_Noreferrer\Core\Options::get_options
+	 * @covers \Remove_Noreferrer\Core\Options::get_default_options
+	 * @covers \Remove_Noreferrer\Core\Options::set_options
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -332,8 +237,10 @@ class Plugin_Test extends \WP_UnitTestCase {
 
 	/**
 	 * @covers ::uninstall
-	 * @covers Remove_Noreferrer\Core\Options::get_option
-	 * @covers Remove_Noreferrer\Core\Options::get_options
+	 * @covers \Remove_Noreferrer\Core\Options::get_option
+	 * @covers \Remove_Noreferrer\Core\Options::get_options
+	 * @covers \Remove_Noreferrer\Core\Options::get_default_options
+	 * @covers \Remove_Noreferrer\Core\Options::set_options
 	 *
 	 * @since 2.0.0
 	 * @access public

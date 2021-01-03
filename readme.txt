@@ -4,7 +4,7 @@ Donate link: https://www.buymeacoffee.com/gruz0
 Tags: post, page, widgets, comments, noreferrer, affiliate, marketing
 Requires at least: 5.1
 Requires PHP: 5.6
-Tested up to: 5.5
+Tested up to: 5.6
 Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -59,7 +59,7 @@ This plugin is an open source project and we would love you to help us make it b
 * [Do not modify content if links or `noreferrer` attributes are not found](https://github.com/gruz0/remove-noreferrer/pull/37)
 * [Add notice after settings saved](https://github.com/gruz0/remove-noreferrer/pull/44)
 * [Remove plugin settings on uninstall](https://github.com/gruz0/remove-noreferrer/pull/52)
-* [Initialize plugin with default options on activation](https://github.com/gruz0/remove-noreferrer/pull/53)
+* [Migrate plugin settings to new version](https://github.com/gruz0/remove-noreferrer/pull/83)
 
 = 1.2.0 =
 

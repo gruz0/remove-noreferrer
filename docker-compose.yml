@@ -20,6 +20,7 @@ services:
     ports:
       - "8000:80"
     volumes:
+      - "./tests/integration/docker:/docker"
       - ".:/var/www/html/wp-content/plugins/remove-noreferrer/"
       - "/var/www/html/wp-content/plugins/remove-noreferrer/.data"
       - "/var/www/html/wp-content/plugins/remove-noreferrer/.git"

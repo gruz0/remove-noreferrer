@@ -27,9 +27,6 @@ class Plugin extends \Remove_Noreferrer\Base\Plugin {
 			return;
 		}
 
-		$options = new Options();
-		$options->migrate_options();
-
 		do_action( 'remove_noreferrer_core_plugin_activated' );
 	}
 

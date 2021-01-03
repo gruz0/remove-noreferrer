@@ -15,36 +15,36 @@ namespace Remove_Noreferrer\Frontend;
  * @coversDefaultClass Remove_Noreferrer\Frontend\Plugin
  * @group frontend
  *
- * @uses Remove_Noreferrer\Base\Plugin
+ * @uses \Remove_Noreferrer\Base\Plugin
  */
 class Plugin_Test extends \WP_UnitTestCase {
 	const CONTENT  = '<a href="link" rel="noreferrer nofollow">text</a>';
 	const EXPECTED = '<a href="link" rel="nofollow">text</a>';
 
 	/**
-	 * Remove_Noreferrer\Frontend\Plugin instance
+	 * Plugin instance
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 * @var Remove_Noreferrer\Frontend\Plugin $plugin
+	 * @var Plugin $plugin
 	 */
 	private $plugin;
 
 	/**
-	 * Remove_Noreferrer\Core\Options stubbed instance
+	 * \Remove_Noreferrer\Core\Options stubbed instance
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 * @var Remove_Noreferrer\Core\Options $stubbed_options
+	 * @var \Remove_Noreferrer\Core\Options $stubbed_options
 	 */
 	private $stubbed_options;
 
 	/**
-	 * Remove_Noreferrer\Core\Adapter stubbed instance
+	 * \Remove_Noreferrer\Core\Adapter stubbed instance
 	 *
 	 * @since 2.0.0
 	 * @access private
-	 * @var Remove_Noreferrer\Core\Adapter $stubbed_adapter
+	 * @var \Remove_Noreferrer\Core\Adapter $stubbed_adapter
 	 */
 	private $stubbed_adapter;
 
@@ -64,11 +64,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 		$this->stubbed_options = $this->createMock( \Remove_Noreferrer\Core\Options::class );
 		$this->stubbed_adapter = $this->createMock( \Remove_Noreferrer\Core\Adapter::class );
 
-		$this->plugin = new Plugin(
-			$this->stubbed_options,
-			new Links_Processor(),
-			$this->stubbed_adapter
-		);
+		$this->plugin = new Plugin( $this->stubbed_options, new Links_Processor(), $this->stubbed_adapter );
 	}
 
 	/**
@@ -95,91 +91,72 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_plugin_extended_from_base_plugin() {
-		$this->assertInstanceOf( 'Remove_Noreferrer\Base\Plugin', $this->plugin );
+		$this->assertInstanceOf( '\Remove_Noreferrer\Base\Plugin', $this->plugin );
 	}
 
 	/**
 	 * @covers ::__construct
+	 * @covers ::add_hooks
 	 *
 	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
 	 */
-	public function test_construct_has_init_action() {
-		$this->assertEquals( 10, has_action( 'init', array( $this->plugin, 'init' ) ) );
-	}
-
-	/**
-	 * @covers ::__construct
-	 *
-	 * @since 2.0.0
-	 * @access public
-	 *
-	 * @return void
-	 */
-	public function test_construct_did_remove_noreferrer_frontend_plugin_loaded_action() {
+	public function test_did_remove_noreferrer_frontend_plugin_loaded_action() {
 		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_frontend_plugin_loaded' ) );
 	}
 
 	/**
 	 * @covers ::__construct
-	 * @covers ::init
+	 * @covers ::add_hooks
 	 *
 	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
 	 */
-	public function test_init_has_the_content_filter() {
-		$this->plugin->init();
+	public function test_did_remove_noreferrer_frontend_plugin_hooks_added_action() {
+		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_frontend_plugin_hooks_added' ) );
+	}
 
+	/**
+	 * @covers ::__construct
+	 * @covers ::add_hooks
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_has_the_content_filter() {
 		$this->assertEquals( 999, has_filter( 'the_content', array( $this->plugin, 'remove_noreferrer_from_content' ) ) );
 	}
 
 	/**
 	 * @covers ::__construct
-	 * @covers ::init
+	 * @covers ::add_hooks
 	 *
 	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
 	 */
-	public function test_init_has_comment_text_filter() {
-		$this->plugin->init();
-
+	public function test_has_comment_text_filter() {
 		$this->assertEquals( 20, has_filter( 'comment_text', array( $this->plugin, 'remove_noreferrer_from_comment' ) ) );
 	}
 
 	/**
 	 * @covers ::__construct
-	 * @covers ::init
+	 * @covers ::add_hooks
 	 *
 	 * @since 2.0.0
 	 * @access public
 	 *
 	 * @return void
 	 */
-	public function test_init_has_widget_display_callback_filter() {
-		$this->plugin->init();
-
+	public function test_has_widget_display_callback_filter() {
 		$this->assertEquals( 10, has_filter( 'widget_display_callback', array( $this->plugin, 'remove_noreferrer_from_widgets' ) ) );
-	}
-
-	/**
-	 * @covers ::__construct
-	 * @covers ::init
-	 *
-	 * @since 2.0.0
-	 * @access public
-	 *
-	 * @return void
-	 */
-	public function test_init_did_remove_noreferrer_frontend_plugin_initialized_action() {
-		$this->plugin->init();
-
-		$this->assertGreaterThan( 0, did_action( 'remove_noreferrer_frontend_plugin_initialized' ) );
 	}
 
 	/**
@@ -187,6 +164,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @covers ::remove_noreferrer_from_content
 	 * @covers ::where_should_the_plugin_work
 	 * @covers ::get_option
+	 * @covers ::add_hooks
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -206,6 +184,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @covers ::remove_noreferrer_from_content
 	 * @covers ::where_should_the_plugin_work
 	 * @covers ::get_option
+	 * @covers ::add_hooks
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -224,15 +203,44 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @covers ::__construct
 	 * @covers ::remove_noreferrer_from_content
 	 * @covers ::where_should_the_plugin_work
+	 * @covers ::get_option
+	 * @covers ::add_hooks
+	 * @covers ::is_current_page_allowed
+	 * @covers ::is_single_processable
+	 * @covers ::is_page_processable
+	 * @covers ::is_posts_page_processable
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_remove_noreferrer_from_content_returns_original_if_current_page_is_not_allowed() {
+		$this->stub_get_option_key_with( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY, array( 'post' ) );
+
+		$this->stubbed_adapter->method( 'is_single' )->willReturn( false );
+		$this->stubbed_adapter->method( 'is_page' )->willReturn( false );
+		$this->stubbed_adapter->method( 'is_posts_page' )->willReturn( false );
+
+		$result = $this->plugin->remove_noreferrer_from_content( self::CONTENT );
+
+		$this->assertEquals( self::CONTENT, $result );
+	}
+
+	/**
+	 * @covers ::__construct
+	 * @covers ::remove_noreferrer_from_content
+	 * @covers ::where_should_the_plugin_work
 	 * @covers ::is_current_page_allowed
 	 * @covers ::is_single_processable
 	 * @covers ::get_option
 	 * @covers ::remove_noreferrer
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::call
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::is_links_found
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::is_noreferrer_found
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::remove_extra_spaces
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::remove_noreferrer
+	 * @covers ::add_hooks
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::call
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::are_links_found
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::is_noreferrer_found
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::remove_extra_spaces
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::remove_noreferrer
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -258,11 +266,12 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @covers ::is_single_processable
 	 * @covers ::get_option
 	 * @covers ::remove_noreferrer
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::call
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::is_links_found
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::is_noreferrer_found
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::remove_extra_spaces
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::remove_noreferrer
+	 * @covers ::add_hooks
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::call
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::are_links_found
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::is_noreferrer_found
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::remove_extra_spaces
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::remove_noreferrer
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -289,11 +298,12 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @covers ::is_page_processable
 	 * @covers ::is_single_processable
 	 * @covers ::remove_noreferrer
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::call
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::is_links_found
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::is_noreferrer_found
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::remove_extra_spaces
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::remove_noreferrer
+	 * @covers ::add_hooks
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::call
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::are_links_found
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::is_noreferrer_found
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::remove_extra_spaces
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::remove_noreferrer
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -315,6 +325,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @covers ::remove_noreferrer_from_comment
 	 * @covers ::where_should_the_plugin_work
 	 * @covers ::get_option
+	 * @covers ::add_hooks
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -334,6 +345,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @covers ::remove_noreferrer_from_comment
 	 * @covers ::where_should_the_plugin_work
 	 * @covers ::get_option
+	 * @covers ::add_hooks
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -352,14 +364,36 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @covers ::__construct
 	 * @covers ::remove_noreferrer_from_comment
 	 * @covers ::where_should_the_plugin_work
-	 * @covers ::is_comments_processable
+	 * @covers ::are_comments_processable
+	 * @covers ::get_option
+	 * @covers ::add_hooks
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_remove_noreferrer_from_comment_returns_original_if_comments_are_not_processable() {
+		$this->stub_get_option_key_with( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY, array( 'test' ) );
+
+		$result = $this->plugin->remove_noreferrer_from_comment( self::CONTENT );
+
+		$this->assertEquals( self::CONTENT, $result );
+	}
+
+	/**
+	 * @covers ::__construct
+	 * @covers ::remove_noreferrer_from_comment
+	 * @covers ::where_should_the_plugin_work
+	 * @covers ::are_comments_processable
 	 * @covers ::get_option
 	 * @covers ::remove_noreferrer
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::call
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::is_links_found
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::is_noreferrer_found
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::remove_extra_spaces
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::remove_noreferrer
+	 * @covers ::add_hooks
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::call
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::are_links_found
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::is_noreferrer_found
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::remove_extra_spaces
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::remove_noreferrer
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -379,6 +413,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @covers ::remove_noreferrer_from_widgets
 	 * @covers ::where_should_the_plugin_work
 	 * @covers ::get_option
+	 * @covers ::add_hooks
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -402,6 +437,7 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @covers ::remove_noreferrer_from_widgets
 	 * @covers ::where_should_the_plugin_work
 	 * @covers ::get_option
+	 * @covers ::add_hooks
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -424,14 +460,68 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @covers ::__construct
 	 * @covers ::remove_noreferrer_from_widgets
 	 * @covers ::where_should_the_plugin_work
+	 * @covers ::get_option
+	 * @covers ::add_hooks
+	 * @covers ::supported_widgets_map
+	 * @covers ::is_widget_processable
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_remove_noreferrer_from_widgets_returns_original_if_widget_is_not_supported() {
+		$this->stub_get_option_key_with( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY, array( 'text_widget' ) );
+
+		$instance = $this->get_text_widget_instance();
+		$widget   = new \WP_Widget_Meta();
+		$args     = $this->get_widget_default_args();
+
+		$result = $this->plugin->remove_noreferrer_from_widgets( $instance, $widget, $args );
+
+		$this->assertEquals( $instance, $result );
+	}
+
+	/**
+	 * @covers ::__construct
+	 * @covers ::remove_noreferrer_from_widgets
+	 * @covers ::where_should_the_plugin_work
+	 * @covers ::get_option
+	 * @covers ::add_hooks
+	 * @covers ::is_widget_processable
+	 * @covers ::supported_widgets_map
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return void
+	 */
+	public function test_remove_noreferrer_from_widgets_returns_original_if_widget_is_not_in_options() {
+		$this->stub_get_option_key_with( GRN_WHERE_SHOULD_THE_PLUGIN_WORK_KEY, array( 'custom_html_widget' ) );
+
+		$instance = $this->get_text_widget_instance();
+		$widget   = new \WP_Widget_Text();
+		$args     = $this->get_widget_default_args();
+
+		$result = $this->plugin->remove_noreferrer_from_widgets( $instance, $widget, $args );
+
+		$this->assertEquals( $instance, $result );
+	}
+
+	/**
+	 * @covers ::__construct
+	 * @covers ::remove_noreferrer_from_widgets
+	 * @covers ::where_should_the_plugin_work
 	 * @covers ::is_widget_processable
 	 * @covers ::get_option
 	 * @covers ::remove_noreferrer
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::call
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::is_links_found
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::is_noreferrer_found
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::remove_extra_spaces
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::remove_noreferrer
+	 * @covers ::add_hooks
+	 * @covers ::supported_widgets_map
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::call
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::are_links_found
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::is_noreferrer_found
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::remove_extra_spaces
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::remove_noreferrer
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -461,11 +551,13 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @covers ::is_widget_processable
 	 * @covers ::get_option
 	 * @covers ::remove_noreferrer
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::call
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::is_links_found
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::is_noreferrer_found
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::remove_extra_spaces
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::remove_noreferrer
+	 * @covers ::add_hooks
+	 * @covers ::supported_widgets_map
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::call
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::are_links_found
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::is_noreferrer_found
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::remove_extra_spaces
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::remove_noreferrer
 	 *
 	 * @since 2.0.0
 	 * @access public
@@ -495,11 +587,13 @@ class Plugin_Test extends \WP_UnitTestCase {
 	 * @covers ::is_widget_processable
 	 * @covers ::get_option
 	 * @covers ::remove_noreferrer
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::call
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::is_links_found
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::is_noreferrer_found
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::remove_extra_spaces
-	 * @covers Remove_Noreferrer\Frontend\Links_Processor::remove_noreferrer
+	 * @covers ::add_hooks
+	 * @covers ::supported_widgets_map
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::call
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::are_links_found
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::is_noreferrer_found
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::remove_extra_spaces
+	 * @covers \Remove_Noreferrer\Frontend\Links_Processor::remove_noreferrer
 	 *
 	 * @since 2.0.0
 	 * @access public

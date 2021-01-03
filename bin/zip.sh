@@ -21,6 +21,7 @@ mkdir -p $TARGET_DIR
 cp readme.txt $TARGET_DIR/
 cp index.php $TARGET_DIR/
 cp remove-noreferrer.php $TARGET_DIR/
+cp class-plugin.php $TARGET_DIR/
 cp -R admin $TARGET_DIR/
 cp -R base $TARGET_DIR/
 cp -R core $TARGET_DIR/
@@ -37,6 +38,8 @@ declare -a FilesArray=(
 	"readme.txt"
 	"index.php"
 	"remove-noreferrer.php"
+	"class-plugin.php"
+	"admin/class-options-migrator.php"
 	"admin/class-options-page.php"
 	"admin/class-options-validator.php"
 	"admin/class-plugin.php"

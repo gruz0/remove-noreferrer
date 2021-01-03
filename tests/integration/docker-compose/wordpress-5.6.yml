@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  wordpress:
+    image: wordpress:5.6
+    depends_on:
+      - database
+    links:
+      - database
+    ports:
+      - "8000:80"
+    volumes:
+      - "./../docker:/docker"
+      - "./../tests:/tests"
+      - "./../../../dist:/dist"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: database:3306
+      WORDPRESS_DB_PASSWORD: wordpress
